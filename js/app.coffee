@@ -1,6 +1,6 @@
 'use strict';
 
-/* App Module */
+# App Module
 
 app = angular.module('app', [
   'ngRoute',
@@ -10,6 +10,7 @@ app = angular.module('app', [
 ]);
 
 app.config(['$routeProvider', ($routeProvider) ->
+
 
   $routeProvider.when('/news', {
     templateUrl: 'news/newsView.html',
