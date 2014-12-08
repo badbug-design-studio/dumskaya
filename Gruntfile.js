@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         src: ['js/libs/**.js',
-              'js/app.js',
+              'js/common/**.js',
               'js/controllers/**.js',
               'js/views/**.js'
         ],

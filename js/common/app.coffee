@@ -3,12 +3,14 @@ define([
     'ionic',
     'uiRouter',
     'angularAnimate',
-    'angularIonic'
+    'angularIonic',
+    'angularResourse'
 ],  (angular) ->
     'use strict';
     return angular.module('iApp', [
         'ionic',
         'ngAnimate'
-        'ui.router'
+        'ui.router',
+        'ngResource'
     ]);
 );

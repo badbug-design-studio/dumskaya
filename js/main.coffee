@@ -6,15 +6,13 @@ require.config({
         'angular': './libs/angular.min'
         'ionic': './libs/ionic.min'
         'angularIonic': './libs/ionic-angular'
-
+        'app':'./common/app'
         'uiRouter':"./libs/angular-ui-router"
         'angularSanitize' : './libs/angular-sanitize',
         'angularAnimate' : './libs/angular-animate.min'
         'routes':""
-#        'ionic-bundle':"./libs/ionic.bundle.js"
 #        'touch':"./libs/angular-touch.min.js"
-#        'resourse':"./libs/angular-resource.min.js"
-    ,
+        'angularResourse':"./libs/angular-resource.min"
 
 #     angular does not support AMD out of the box, put it in a shim
     shim:
@@ -24,6 +22,8 @@ require.config({
         'uiRouter':
             deps:['angular']
 
+        'angularResourse':
+            deps:['angular']
 
         'angularAnimate' :
              deps : ['angular']
