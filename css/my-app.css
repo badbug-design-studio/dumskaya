@@ -1,0 +1,14 @@
+@import url("./reset.css");
+
+@import url("./animate.css");
+
+@import url("./font-awesome.css");
+
+@import url("./mobile.css");
+/*only screen
+and (min-width: 600px)
+and (max-aspect-ratio: 4/3),
+(min-width: 1024px)
+and (max-width: 1280px)
+and (min-height: 400px)
+and (min-aspect-ratio: 4/3);*/
