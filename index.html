@@ -11,16 +11,9 @@
     <link rel="stylesheet" href="css/my-app.css" />
 
 </head>
-<body >
-    <div class="bar bar-balanced">
-        <h1 class="title">Test!</h1>
-    </div>
-    <div class="bar bar-subheader">
-      <h2 class="title">Sub Header</h2>
-    </div>
-    <div class="content  has-subheader padding">
-    Content
-    </div>
+<body>
+    <div ui-view="header"></div>
+    <div ui-view="content"></div>
     <script src="./js/libs/require.js" data-main="./js/main.js"></script>
 
     <!--<script src="./js/libs/ionic.bundle.js"></script>-->
