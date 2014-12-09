@@ -8,7 +8,7 @@ require.config({
         'angularIonic': './libs/ionic-angular'
         'app':'./common/app'
         'uiRouter':"./libs/angular-ui-router"
-        'angularSanitize' : './libs/angular-sanitize',
+        'angularSanitize' : './libs/angular-sanitize.min',
         'angularAnimate' : './libs/angular-animate.min'
         'routes':""
 #        'touch':"./libs/angular-touch.min.js"
