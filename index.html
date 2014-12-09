@@ -15,13 +15,15 @@
     <main-menu></main-menu>
     <div ui-view="header">
     </div>
-    <ion-content  class="content has-subheader" padding="true">
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-          <ion-slide ui-view="news"></ion-slide>
-          <ion-slide ui-view="blogs"></ion-slide>
-        </ion-slide-box>
-    </ion-content>
+    <div  class="wrapper content has-subheader" ui-view>
+        <ion-content  class="" padding="true" >
+            <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+              <ion-slide ui-view="news"></ion-slide>
+              <ion-slide ui-view="blogs"></ion-slide>
+            </ion-slide-box>
+        </ion-content>
+    </div>
     <script src="./js/libs/require.js" data-main="./js/main.js"></script>
 
     <!--<script src="./js/libs/ionic.bundle.js"></script>-->
