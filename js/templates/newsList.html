@@ -1,3 +1,8 @@
-<a href="#/news/1">Test go 1 news item!</a>
+<div class="list" ng-init="items=[{name:'Pretty Hate Machine',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:1},{name:'Bad Hate Machine',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:2},{name:'OLOLO',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:3}]">
+    <a class="item item-thumbnail-left" href="#/news/{{item.id}}" ng-repeat="item in items">
+        <img  ng-src="{{item.img}}">
+        <h2>{{item.name}}</h2>
+        <p>Nine Inch Nails</p>
+    </a>
 
-<div class="box blue"><h1>NEWS</h1></div>
+</div>
