@@ -10,11 +10,14 @@ define([
         keys=Object.keys(states)
         for key in keys
           state=states[key]
-          $stateProvider.state(key, {
+          config=
                   url: state.url
-                  views: state.views
+          if state.views #if complex view (layout)
+            config.views=state.views
+          else config.templateUrl=state.templateUrl
 
-                })
+
+          $stateProvider.state(key,config)
           if(state.default)
             $urlRouterProvider.otherwise(state.url);
   );

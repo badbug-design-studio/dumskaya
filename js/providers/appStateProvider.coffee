@@ -17,6 +17,9 @@ define([
                    templateUrl:  './js/templates/blogList.html'
                    controller:($scope,$ionicSlideBoxDelegate) ->
                         $ionicSlideBoxDelegate.show-pager=false
+          newsItem:
+             url:'/news/:id'
+             templateUrl: "./js/templates/newsItemTemplate.html"
 
 
 

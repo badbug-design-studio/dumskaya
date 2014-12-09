@@ -15,7 +15,7 @@
     <main-menu></main-menu>
     <div ui-view="header">
     </div>
-    <div  class="content has-subheader">
+    <div  class="content has-subheader" ui-view>
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
           <ion-slide ui-view="news"></ion-slide>
           <ion-slide ui-view="blogs"></ion-slide>
