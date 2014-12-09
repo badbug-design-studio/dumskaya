@@ -10,9 +10,11 @@ require.config({
         'uiRouter':"./libs/angular-ui-router"
         'angularSanitize' : './libs/angular-sanitize.min',
         'angularAnimate' : './libs/angular-animate.min'
-        'routes':""
+        'routes':"./common/routes"
 #        'touch':"./libs/angular-touch.min.js"
-        'angularResourse':"./libs/angular-resource.min"
+        'angularResourse':"./libs/angular-resource.min",
+        'appStateProvider':"./providers/appStateProvider",
+        'mainMenuDirective':'./directives/mainMenuDirective'
 
 #     angular does not support AMD out of the box, put it in a shim
     shim:
@@ -21,6 +23,9 @@ require.config({
 
         'uiRouter':
             deps:['angular']
+
+        'routes':
+            deps:['angular','appStateProvider']
 
         'angularResourse':
             deps:['angular']
@@ -37,6 +42,10 @@ require.config({
                  'angularSanitize',
                  'uiRouter'
              ]
+        'routes':
+             deps:['uiRouter']
+
+
 
 #    kick start application
     deps: ['./bootstrap']

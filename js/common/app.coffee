@@ -12,5 +12,5 @@ define([
         'ngAnimate'
         'ui.router',
         'ngResource'
-    ]);
+    ])
 );
