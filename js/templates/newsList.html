@@ -1,8 +1,15 @@
-<div class="list" ng-init="items=[{name:'Pretty Hate Machine',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:1},{name:'Bad Hate Machine',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:2},{name:'OLOLO',img:'http://code.ionicframework.com/assets/img/app_icon.png',id:3}]">
-    <a class="item item-thumbnail-left" href="#/news/{{item.id}}" ng-repeat="item in items">
-        <img  ng-src="{{item.img}}">
-        <h2>{{item.name}}</h2>
-        <p>Nine Inch Nails</p>
-    </a>
-
-</div>
+<!-- Top Navbar-->
+      <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left">
+                <!-- Right link contains only icon - additional "icon-only" class-->
+                <a href="#" class="link icon-only open-panel"><i class="icon menu fa fa-navicon"></i></a>
+            </div>
+            <!-- We have home navbar without left link-->
+            <div class="center sliding">Awesome app</div>
+            <div class="right">
+                <!-- Right link contains only icon - additional "icon-only" class-->
+                Гайка
+            </div>
+        </div>
+      </div>

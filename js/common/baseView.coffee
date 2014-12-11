@@ -1,8 +1,11 @@
 define ['_'],
 (_)->
-  class BaseController
+  class BaseView
     $: Framework7.$
-    @model: {}
+    template:null
+    model: {}
+    container:()->
+       return @$(baseApplication.mainLayout.selector)
     ###
       animatePages: true
       domCache: false
@@ -13,7 +16,7 @@ define ['_'],
       swipeBackPageBoxShadow: true
       swipeBackPageThreshold: 0
     ###
-    @viewParams: {}
+    viewParams: {}
 
     constructor: (query)->
       if(query && query.model)
@@ -21,22 +24,18 @@ define ['_'],
       if(query && query.viewParams)
         @viewParams = query.viewParams
 
-    onPageInit: ()->
-      console.log("onPageInit")
+    onRender:()->
+        console.log("ON RENDER!")
 
-    onPageBeforeInit: ()->
-      console.log "onPageBeforeInit"
+    render:()->
+      if !@template
+        console.error "in current view #{@constructor.name} template was missed"
+        return
 
-    onPageBeforeAnimation: ()->
-      console.log "onPageBeforeAnimation"
-
-    onPageAfterAnimation: ()->
-      console.log "onPageAfterAnimation"
-
-
-    onPageBeforeRemove: ()->
-      console.log "onPageBeforeRemove"
+      compile=_.template(@template)
+      @container().append(compile(@model))
+      @onRender()
 
 
 
-  return BaseController
+  return BaseView

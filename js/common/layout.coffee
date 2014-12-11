@@ -2,8 +2,8 @@ define([
     'app',
 ],  (app) ->
     'use strict';
-    console.log app
-    return  app.addView('.view-main', {
+    selector='.view-main'
+    return  app.addView(selector, {
           dynamicNavbar: true,
     #      animatePages:false
         })

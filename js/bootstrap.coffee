@@ -1,10 +1,11 @@
 define([
     'require',
+    '_'
     'f7'
     'app',
     'routes',
     'layout'
-],  (require, f7, app,Routes,layout)->
+],  (require,_, f7, app,Routes,layout)->
     'use strict';
   #  document.addEventListener('deviceready', onDeviceReady);
     onDevieReady =  (document)->
@@ -13,12 +14,15 @@ define([
             mainLayout: layout
             router: new Routes,
       }
+      #now in template use {{variable}}
+      _.templateSettings = {
+        interpolate: /\{\{(.+?)\}\}/g
+      };
+#      what view render by default
+      baseApplication.router.loadPage('newsList', {model:{},viewParams:{swipeBackPage:false}})
 
-      baseApplication.router.loadPage('index', {model:{},viewParams:{swipeBackPage:false}})
 
-
-    require(['domReady!'],
-      console.log('dom ready!')
+    require(['domReady!'],()->
       onDevieReady(document)
     );
 

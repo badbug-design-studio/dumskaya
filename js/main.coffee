@@ -8,17 +8,17 @@ require.config({
         app:'./common/app'
         layout:'./common/layout'
         routes:"./common/routes"
-        baseController:"./common/baseController"
+        baseView:"./common/baseView"
 
 #     angular does not support AMD out of the box, put it in a shim
     shim:
        f7:
          exports: 'Framework7'
-       underscore:
+       _:
          exports: '_'
 
        routes:
-        deps:["f7"]
+        deps:["f7","_"]
 
        app:
         deps:["f7"]

@@ -11,7 +11,6 @@ define ['_'],
 #        @loadPage(page.name, page.query)
 
     loadPage:(controllerName, query)->
-      require ['./controllers/'+ controllerName + 'Controller'], (Controller)->
-        baseApplication.currentController = new Controller(query)
-        baseApplication.currentController.initPage()
+      require ['./views/'+ controllerName + 'View'], (View)->
+        baseApplication.currentView = new View(query)
 
