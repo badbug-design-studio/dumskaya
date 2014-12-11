@@ -2,48 +2,31 @@ require.config({
     urlArgs : 'antichache'
 # alias libraries paths
     paths:
-        'domReady': './libs/domReady'
-        'angular': './libs/angular.min'
-        'ionic': './libs/ionic.min'
-        'angularIonic': './libs/ionic-angular'
-        'app':'./common/app'
-        'uiRouter':"./libs/angular-ui-router"
-        'angularSanitize' : './libs/angular-sanitize.min',
-        'angularAnimate' : './libs/angular-animate.min'
-        'routes':"./common/routes"
-#        'touch':"./libs/angular-touch.min.js"
-        'angularResourse':"./libs/angular-resource.min",
-        'appStateProvider':"./providers/appStateProvider",
-        'mainMenuDirective':'./directives/mainMenuDirective'
+        domReady: './libs/domReady'
+        f7: './libs/framework7'
+        _: './libs/underscore'
+        app:'./common/app'
+        layout:'./common/layout'
+        routes:"./common/routes"
+        baseController:"./common/baseController"
 
 #     angular does not support AMD out of the box, put it in a shim
     shim:
-        'angular':
-            exports: 'angular',
+       f7:
+         exports: 'Framework7'
+       underscore:
+         exports: '_'
 
-        'uiRouter':
-            deps:['angular']
+       routes:
+        deps:["f7"]
 
-        'routes':
-            deps:['angular','appStateProvider']
+       app:
+        deps:["f7"]
 
-        'angularResourse':
-            deps:['angular']
+       layout:
+        deps:["app"]
 
-        'angularAnimate' :
-             deps : ['angular']
 
-        'angularSanitize' :
-             deps : ['angular']
-
-        'angularIonic' :
-             deps : [
-                 'angularAnimate',
-                 'angularSanitize',
-                 'uiRouter'
-             ]
-        'routes':
-             deps:['uiRouter']
 
 
 

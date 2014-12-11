@@ -1,25 +1,17 @@
-define([
-        'app',
-        'appStateProvider'
-],  (app)->
-  'use strict';
+define ['_'],
+(_)->
+  class Routes
 
-  return app.config(($stateProvider,$urlRouterProvider,appStateProvider)->
+    $: null
 
-        states=appStateProvider.getAllStates()
-        keys=Object.keys(states)
-        for key in keys
-          state=states[key]
-          config=
-                  url: state.url
-          if state.views #if complex view (layout)
-            config.views=state.views
-          else config.templateUrl=state.templateUrl
+    init:->
+      @$ = Framework7.$
+#      @$(document).on 'pageBeforeInit', (e)=>
+#        page = e.detail.page
+#        @loadPage(page.name, page.query)
 
+    loadPage:(controllerName, query)->
+      require ['./controllers/'+ controllerName + 'Controller'], (Controller)->
+        baseApplication.currentController = new Controller(query)
+        baseApplication.currentController.initPage()
 
-          $stateProvider.state(key,config)
-          if(state.default)
-            $urlRouterProvider.otherwise(state.url);
-  );
-
-);

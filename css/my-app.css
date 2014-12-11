@@ -4,6 +4,10 @@
 
 @import url("./font-awesome.css");
 
+@import url("./framework7.css");
+
+@import url("./framework7.themes.css");
+
 @import url("./mobile.css");
 /*only screen
 and (min-width: 600px)
