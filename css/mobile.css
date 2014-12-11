@@ -22,3 +22,29 @@ body, html {
 .slider {
     height: 100%;
 }
+.logo {
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
+ }
+.fa-camera {
+    float: right;
+    font-size: 20px;
+    line-height: 34px;
+}
+.bar.bar-header {
+    border-bottom: 1px solid #e8e8ea;
+}
+.menu {
+    width: 100%;
+    display: block;
+}
+.menu li {
+    float: left;
+    font-size: 21px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.menu li:last-child {
+    margin-right: 0;
+}
