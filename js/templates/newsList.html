@@ -1,5 +1,5 @@
 <!-- Top Navbar-->
-<div class="navbar transparent">
+<div class="navbar">
     <div class="navbar-inner">
         <div class="left">
             <!-- Right link contains only icon - additional "icon-only" class-->
@@ -15,7 +15,8 @@
         <div class="right">
             <!--&lt;!&ndash; Right link contains only icon - additional "icon-only" class&ndash;&gt;-->
             <!--<a href="#" onclick="baseApplication.pagesRouter.loadPage('map',{model:{},viewParams:{swipeBackPage:false}})" class="close-panel link icon-only"><i class="icon location fa fa-map-marker"></i></a>-->
-        <!--</div>-->
+            <!--</div>-->
+        </div>
     </div>
 </div>
 <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -24,31 +25,33 @@
     <div data-page="index" class="page">
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div id="blur" class="img-blur"></div>
-            <!--<img class="fountain-screen full-scren-size fixed"/>-->
+            <div class="buttons-row">
+                <a href="#tab1" class="tab-link active button">Tab 1</a>
+                <a href="#tab2" class="tab-link button">Tab 2</a>
+                <a href="#tab3" class="tab-link button">Tab 3</a>
+            </div>
+            <div class="tabs-animated-wrap">
+                <div class="tabs">
+                    <div id="tab1" class="tab active">
+                        <div class="content-block">
+                            <p>This is tab 1 content</p>
+                            <p class="">Lorem ipsum dolor sit amet1.</p>
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <div class="content-block">
+                            <p>This is tab 2 content</p>
+                            <p>Ut ac lobortis lacus, non pellentesque arcu2.</p>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab">
+                        <div class="content-block">
+                            <p>This is tab 3 content</p>
+                            <p>Nulla gravida libero eget lobortis iaculis3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Bottom Toolbar-->
-               <div class="toolbar custom-bg open-popup">
-                   <div class="toolbar-inner">
-                       <a href="" data-popup=".popup-about" class="open-popup open-schedule"></a>
-                       <div class="list-block today-list">
-                           <ul>
-                               <li class="accordion-item">
-                                   <a href="#" class="item-content item-link">
-                                       <div class="item-inner">
-                                           <div class="item-title">???????????</div>
-                                           <div class="item-after">
-                                               <span class="times">
-                                                   <span class="from-to">? 14:00 ?? 22:00</span>
-                                               </span>
-                                           </div>
-                                           <i class="slide-up-arrow fa fa-angle-up"></i>
-                                       </div>
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
     </div>
 </div>

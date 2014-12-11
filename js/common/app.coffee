@@ -6,6 +6,7 @@ define([
             modalTitle: 'City',
             swipePanel: 'left',
             animateNavBackIcon: true
+            pushState: true
             #     Hide and show indicator during ajax requests
             onAjaxStart: (xhr) ->
               app.showIndicator();
