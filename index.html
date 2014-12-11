@@ -11,28 +11,25 @@
     <link rel="stylesheet" href="css/my-app.css" />
 
 </head>
-<body>
+<body class="">
 <div class="preloader-indicator-overlay modal-overlay-visible"></div>
-<div class="preloader-indicator-modal"><span class="preloader preloader-white"></span></div>
+<div class="preloader-indicator-modal">
+    <span class="preloader "></span>
+</div>
+<!-- Status bar overlay for fullscreen mode-->
+<div class="statusbar-overlay"></div>
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
 
 
-<!-- Status bar overlay for full screen mode (PhoneGap) -->
-   <div class="statusbar-overlay"></div>
-   <!-- Panels overlay-->
-   <div class="panel-overlay"></div>
-   <!-- Left panel with reveal effect-->
-   <div class="panel panel-left panel-reveal">
-     <div class="content-block">
-       <p>Left panel content goes here</p>
-     </div>
-   </div>
-   <!-- Views -->
+<!-- Views-->
 <div class="views">
     <!-- Your main view, should have "view-main" class-->
     <div class="view view-main hidden-toolbar">
         <!-- Top Navbar-->
         <div class="navbar">
 
+            </div>
         </div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-fixed transparent">
@@ -48,6 +45,7 @@
     </div>
 </div>
 
+<div class="popup-overlay"></div>
     <script src="./js/libs/require.js" data-main="./js/main.js"></script>
 
 <!--framework 7-->

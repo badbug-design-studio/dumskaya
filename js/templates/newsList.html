@@ -1,15 +1,54 @@
 <!-- Top Navbar-->
-      <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left">
-                <!-- Right link contains only icon - additional "icon-only" class-->
-                <a href="#" class="link icon-only open-panel"><i class="icon menu fa fa-navicon"></i></a>
-            </div>
-            <!-- We have home navbar without left link-->
-            <div class="center sliding">Awesome app</div>
-            <div class="right">
-                <!-- Right link contains only icon - additional "icon-only" class-->
-                Гайка
+<div class="navbar transparent">
+    <div class="navbar-inner">
+        <div class="left">
+            <!-- Right link contains only icon - additional "icon-only" class-->
+            <a href="#" class="link icon-only open-panel"><i class="icon menu fa fa-navicon"></i></a>
+        </div>
+        <!-- We have home navbar without left link-->
+        <div class="center sliding">
+            <div class="webkitbox title-time">
+                <span class="title">{{name}}</span>
+                <span id="time" class="time"></span>
             </div>
         </div>
-      </div>
+        <div class="right">
+            <!--&lt;!&ndash; Right link contains only icon - additional "icon-only" class&ndash;&gt;-->
+            <!--<a href="#" onclick="baseApplication.pagesRouter.loadPage('map',{model:{},viewParams:{swipeBackPage:false}})" class="close-panel link icon-only"><i class="icon location fa fa-map-marker"></i></a>-->
+        </div>
+    </div>
+</div>
+<!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+<div class="pages navbar-through toolbar-fixed">
+    <!-- Page, data-page contains page name-->
+    <div data-page="index" class="page">
+        <!-- Scrollable page content-->
+        <div class="page-content">
+            <div id="blur" class="img-blur"></div>
+            <!--<img class="fountain-screen full-scren-size fixed"/>-->
+        </div>
+        <!-- Bottom Toolbar-->
+               <div class="toolbar custom-bg open-popup">
+                   <div class="toolbar-inner">
+                       <a href="" data-popup=".popup-about" class="open-popup open-schedule"></a>
+                       <div class="list-block today-list">
+                           <ul>
+                               <li class="accordion-item">
+                                   <a href="#" class="item-content item-link">
+                                       <div class="item-inner">
+                                           <div class="item-title">Понедельник</div>
+                                           <div class="item-after">
+                                               <span class="times">
+                                                   <span class="from-to">с 14:00 по 22:00</span>
+                                               </span>
+                                           </div>
+                                           <i class="slide-up-arrow fa fa-angle-up"></i>
+                                       </div>
+                                   </a>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+    </div>
+</div>

@@ -48,3 +48,7 @@ body, html {
 .menu li:last-child {
     margin-right: 0;
 }
+.preloader-indicator-overlay
+{
+    background: #f7f7f8;
+}

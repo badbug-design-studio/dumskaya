@@ -1,8 +1,10 @@
 define ['_','baseView','text!templates/newsList.html'],
   (_, BaseView,template)->
 
-        class IndexView extends BaseView
+        class NewsListView extends BaseView
           template:template
+          model:
+            name:"Awesome"
 
           constructor:(query)->
             super
@@ -13,4 +15,4 @@ define ['_','baseView','text!templates/newsList.html'],
             console.log("onPageBeforeAnimation")
 
 
-        return IndexView
+        return NewsListView

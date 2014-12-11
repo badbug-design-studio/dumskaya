@@ -3,19 +3,22 @@ define ['_'],
   class BaseView
     $: Framework7.$
     template:null
-    model: {}
+    isAnimate:true
     container:()->
        return @$(baseApplication.mainLayout.selector)
-    ###
-      animatePages: true
-      domCache: false
-      dynamicNavbar: true
-      linksView: undefined
-      swipeBackPage: true
-      swipeBackPageActiveArea: 30
-      swipeBackPageBoxShadow: true
-      swipeBackPageThreshold: 0
-    ###
+
+    addEventListeners:()->
+          @mainListeners() if @mainListeners
+          if _.isEmpty(@events)
+            return true
+
+          _.each @events, (handler, actionToElement)=>
+            elementObj = actionToElement.split(" ")
+            event = elementObj[0]
+            elementObj.shift()
+            elementObj = elementObj.join(" ")
+            @$(elementObj).on(event, @[handler])
+
     viewParams: {}
 
     constructor: (query)->
@@ -31,9 +34,10 @@ define ['_'],
       if !@template
         console.error "in current view #{@constructor.name} template was missed"
         return
-
       compile=_.template(@template)
-      @container().append(compile(@model))
+      baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
+#      @container().append(compile(@model)) it  so for layout
+      @addEventListeners()
       @onRender()
 
 

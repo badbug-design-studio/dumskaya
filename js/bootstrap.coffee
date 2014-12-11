@@ -19,7 +19,7 @@ define([
         interpolate: /\{\{(.+?)\}\}/g
       };
 #      what view render by default
-      baseApplication.router.loadPage('newsList', {model:{},viewParams:{swipeBackPage:false}})
+      baseApplication.router.loadPage('newsList')
 
 
     require(['domReady!'],()->
