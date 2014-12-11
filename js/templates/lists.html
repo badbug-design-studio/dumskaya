@@ -8,7 +8,7 @@
         <!-- We have home navbar without left link-->
         <div class="center sliding">
             <div class="webkitbox title-time">
-                <span class="title">Awesome</span>
+                <span class="title"><%=name%></span>
                 <span id="time" class="time"></span>
             </div>
         </div>
@@ -26,30 +26,19 @@
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="buttons-row">
-                <a href="#tab1" class="tab-link active button">Tab 1</a>
-                <a href="#tab2" class="tab-link button">Tab 2</a>
-                <a href="#tab3" class="tab-link button">Tab 3</a>
+                <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+tab.id+'" class="tab-link '+active+' button">'+tab.name+'</a>')}) %>
             </div>
             <div class="tabs-animated-wrap">
                 <div class="tabs">
-                    <div id="tab1" class="tab active">
-                        <div class="content-block">
-                            <p>This is tab 1 content</p>
-                            <p class="">Lorem ipsum dolor sit amet1.</p>
-                        </div>
-                    </div>
-                    <div id="tab2" class="tab">
-                        <div class="content-block">
-                            <p>This is tab 2 content</p>
-                            <p>Ut ac lobortis lacus, non pellentesque arcu2.</p>
-                        </div>
-                    </div>
-                    <div id="tab3" class="tab">
-                        <div class="content-block">
-                            <p>This is tab 3 content</p>
-                            <p>Nulla gravida libero eget lobortis iaculis3.</p>
-                        </div>
-                    </div>
+                    <% _.each(tabs,function(tab,i){ %>
+                    <%var active=(i+1)==currentTab?'active':'';%>
+                    <div id="<%=tab.id%>" class="tab <%=active%>">
+                                           <div class="content-block">
+                                               <p>This is  <%=tab.name%> content</p>
+                                               <p class="">Loading.</p>
+                                           </div>
+                                       </div>
+                    <%}) %>
                 </div>
             </div>
         </div>

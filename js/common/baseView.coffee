@@ -26,6 +26,8 @@ define ['_'],
         @model = query.model
       if(query && query.viewParams)
         @viewParams = query.viewParams
+      @render()
+      @addEventListeners()
 
     onRender:()->
         console.log("ON RENDER!")
@@ -37,7 +39,7 @@ define ['_'],
       compile=_.template(@template)
       baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
 #      @container().append(compile(@model)) it  so for layout
-      @addEventListeners()
+
       @onRender()
 
 

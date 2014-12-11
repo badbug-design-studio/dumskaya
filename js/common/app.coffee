@@ -4,7 +4,7 @@ define([
     'use strict';
     app=new F7(
             modalTitle: 'City',
-            swipePanel: 'left',
+#            swipePanel: 'left',
             animateNavBackIcon: true
             pushState: true
             #     Hide and show indicator during ajax requests

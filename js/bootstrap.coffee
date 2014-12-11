@@ -15,11 +15,11 @@ define([
             router: new Routes,
       }
       #now in template use {{variable}}
-      _.templateSettings = {
-        interpolate: /\{\{(.+?)\}\}/g
-      };
+#      _.templateSettings = {
+#        interpolate: /\{\{(.+?)\}\}/g
+#      };
 #      what view render by default
-      baseApplication.router.loadPage('newsList')
+      baseApplication.router.loadPage('lists')
 
 
     require(['domReady!'],()->

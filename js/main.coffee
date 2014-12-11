@@ -4,12 +4,13 @@ require.config({
     paths:
         domReady: './libs/domReady'
         f7: './libs/framework7'
+        hammer:"./libs/hammer"
         _: './libs/underscore'
+
         app:'./common/app'
         layout:'./common/layout'
         routes:"./common/routes"
         baseView:"./common/baseView"
-
 #     angular does not support AMD out of the box, put it in a shim
     shim:
        f7:
