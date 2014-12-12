@@ -6,7 +6,7 @@ define ['_','baseView','text!templates/lists.html','hammer'],
           domTabsObj:{}
           model:
             currentTab:1
-            name:"Awesome"
+            name:"Dumskaya"
             tabs:[
              {id:'tab1',name:'News',onShowComplete:()->}
              {id:'tab2',name:'Blogs',onShowComplete:()->}
