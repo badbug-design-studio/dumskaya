@@ -1,7 +1,10 @@
 <div class="list-block media-list">
    <ul>
-        <% _.each(items,function(item,index){%>
-       <li><a href="#" class="item-link item-content">
+        <% _.each(items,function(item,index){
+
+       var onclick = baseApplication.router.loadPage('oneItemNews',{model: item })
+       %>
+       <li><a href="#" class="item-link item-content" onclick="<%=onclick%>" >
                         <div class="item-inner">
                             <div class="item-title-row">
                                 <div class="item-title"><%=item.name%></div>
