@@ -62,5 +62,4 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
             triangle.style.transform = "translate3d(#{shift}px, 0, 0)";
 
-
         return ListView
