@@ -86,11 +86,10 @@ body, html {
 .tab-link.button.active {
     background: none;
 }
-.tab-link.active:after {
+.triangle {
     content: "";
     position: absolute;
     top: 100%;
-    left: 50%;
     margin-left: -5px;
     width: 0;
     height: 0;

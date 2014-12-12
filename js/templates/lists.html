@@ -24,6 +24,7 @@
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="buttons-row theme-bg">
+                <span class="triangle"></span>
                 <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+tab.id+'" class="tab-link '+active+' button">'+tab.name+'</a>')}) %>
             </div>
             <div class="tabs-animated-wrap">

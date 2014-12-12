@@ -20,8 +20,10 @@ define ['_','baseView','text!templates/lists.html','hammer'],
 
           onRender:()->
             @elTabs=@$('.tabs')[0]
+            @tabsLinkWidth = 100/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
+            @changePositionTriagle()
 
           handleTabs:()->
             _.each(@model.tabs,(tab,i)=>
@@ -33,6 +35,7 @@ define ['_','baseView','text!templates/lists.html','hammer'],
                 tab.onShowComplete()
               );
             )
+
 
           swipeTabsHandle:()->
             Hammer(@elTabs).on("swipeleft", ()=>
@@ -57,8 +60,8 @@ define ['_','baseView','text!templates/lists.html','hammer'],
             console.log("onPageBeforeAnimation")
 
           changePositionTriagle:()->
-
-
-
+            triangle= @$('.buttons-row .triangle')[0]
+            shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2
+            triangle.style.left = shift+"%"
 
         return ListView
