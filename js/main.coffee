@@ -11,6 +11,8 @@ require.config({
         layout:'./common/layout'
         routes:"./common/routes"
         baseView:"./common/baseView"
+        sync:"./common/sync"
+
 #     angular does not support AMD out of the box, put it in a shim
     shim:
        f7:
@@ -22,7 +24,10 @@ require.config({
         deps:["f7","_"]
 
        app:
-        deps:["f7"]
+         deps:["f7","_"]
+
+       sync:
+         deps:["f7","_"]
 
        layout:
         deps:["app"]

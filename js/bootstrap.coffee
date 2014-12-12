@@ -5,7 +5,8 @@ define([
     'app',
     'routes',
     'layout'
-],  (require,_, f7, app,Routes,layout)->
+    'sync'
+],  (require,_, f7, app,Routes,layout,SyncServices)->
     'use strict';
   #  document.addEventListener('deviceready', onDeviceReady);
     onDevieReady =  (document)->
@@ -13,6 +14,7 @@ define([
             f7app: app,
             mainLayout: layout
             router: new Routes,
+            sync: new SyncServices
       }
       #now in template use {{variable}}
 #      _.templateSettings = {
@@ -20,6 +22,10 @@ define([
 #      };
 #      what view render by default
       baseApplication.router.loadPage('list')
+#      baseApplication.sync.request('http://dumskaya.net/rsstv/').then(
+#        (result)->
+#          console.log result
+#      )
 
 
     require(['domReady!'],()->
