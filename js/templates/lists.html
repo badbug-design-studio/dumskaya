@@ -31,11 +31,21 @@
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
                     <div id="<%=tab.id%>" class="tab <%=active%>">
-                                           <div class="content-block">
-                                               <p>This is  <%=tab.name%> content</p>
-                                               <p class="">Loading.</p>
-                                           </div>
-                                       </div>
+                        <div class="list-block media-list">
+                            <ul>
+                                <li><a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Facebook</div>
+                                            <div class="item-after">17:14</div>
+                                        </div>
+                                        <div class="item-subtitle">New messages from John Doe</div>
+                                        <div class="item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus.</div>
+                                    </div></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <%}) %>
                 </div>
             </div>
