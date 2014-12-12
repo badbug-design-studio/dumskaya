@@ -12,6 +12,7 @@ require.config({
         routes:"./common/routes"
         baseView:"./common/baseView"
         sync:"./common/sync"
+        mainTabs:"./common/tabs"
 
 #     angular does not support AMD out of the box, put it in a shim
     shim:

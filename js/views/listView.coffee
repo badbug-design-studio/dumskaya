@@ -1,5 +1,5 @@
-define ['_','baseView','text!templates/lists.html','hammer'],
-  (_, BaseView,template,Hammer)->
+define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
+  (_, BaseView,template,Tabs, Hammer)->
 
         class ListView extends BaseView
           template:template
@@ -7,38 +7,21 @@ define ['_','baseView','text!templates/lists.html','hammer'],
           model:
             currentTab:1
             name:"Dumskaya"
-            tabs:[
-              {id:'tab1',name:'News',onShowComplete:()->
-                  renderNews=(data)->
-#                    its hust for test!!!
-                    data={}
-                    data.items=[{name:'Facebook'},{name:'Twitter'},{name:'Gmail'}]
-#                    !!!!
-                    baseApplication.currentView.appendCompiledTemplate('templates/news.html',data).bind(this)
-                  baseApplication.sync.request('http://google.com').then((data)->
-                      renderNews(data)
-                    ,(data)=>
-                      renderNews(data)
-                    )
-              }
-              {id:'tab2',name:'Blogs',onShowComplete:()->}
-              {id:'tab3',name:'Photos',onShowComplete:()->}
-              {id:'tab4',name:'Video',onShowComplete:()->}
-            ]
+            tabs:Tabs
 
           constructor:(query)->
             super
 
 
           onRender:()->
+            console.log Tabs
             @elTabsDom7=@$('.tabs')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
             @changePositionTriagle()
-            index=@model.currentTab-1
-            @model.tabs[index].onShowComplete()
+            @showCurrentTab()
 
           handleTabs:()->
             _.each(@model.tabs,(tab,i)=>
@@ -55,19 +38,20 @@ define ['_','baseView','text!templates/lists.html','hammer'],
             Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
-                @showCurrentTab()
+                @showCurrentTab(true)
 
             );
             Hammer(@elTabsDom7[0]).on("swiperight", ()=>
               if(@model.currentTab>1)
                  @model.currentTab--
-                 @showCurrentTab()
+                 @showCurrentTab(true)
             );
-           showCurrentTab:()->
-              baseApplication.f7app.showTab('#tab'+@model.currentTab)
+           showCurrentTab:(needWebTranlate)->
+              baseApplication.f7app.showTab('#tab'+@model.currentTab) if needWebTranlate
               @changePositionTriagle()
               index=@model.currentTab-1
-              @model.tabs[index].onShowComplete()
+              tab=@model.tabs[index]
+              tab.onShowComplete() if tab
 
 
           onPageBeforeAnimation:()->

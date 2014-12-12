@@ -46,7 +46,6 @@ define ['require','_'],
       require(['text!'+url],(template)=>
         compile= _.template(template)
         result=compile(data)
-        console.log @domTabsObj[cT-1]
         @domTabsObj[cT-1].html(result)
         callback() if callback
       );
