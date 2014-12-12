@@ -9,13 +9,13 @@ define ['_','baseView','text!templates/lists.html','hammer'],
             name:"Dumskaya"
             tabs:[
               {id:'tab1',name:'News',onShowComplete:()->
-                  renderNews=()->
+                  renderNews=(data)->
 #                    its hust for test!!!
                     data={}
                     data.items=[{name:'Facebook'},{name:'Twitter'},{name:'Gmail'}]
 #                    !!!!
                     baseApplication.currentView.appendCompiledTemplate('templates/news.html',data).bind(this)
-                    baseApplication.sync.request('http://google.com').then((data)->
+                  baseApplication.sync.request('http://google.com').then((data)->
                       renderNews(data)
                     ,(data)=>
                       renderNews(data)
