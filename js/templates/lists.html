@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="right">
-            <a href="#" class="link icon-only"><i class="icon fa fa-camera"></i></a>
+            <a href="#" onclick="baseApplication.router.loadPage('sendPhotos',{model:{},viewParams:{swipeBackPage:true}})" class="link item-link icon-only"><i class="icon fa fa-camera"></i></a>
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
                 <div class="tabs">
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
-                    <div id="<%=tab.id%>" class="tab <%=active%>">
+                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll">
                         <div style="text-align:center; margin-left: 0;" class="content-block-inner">
                             <span class="preloader"></span>
                         </div>

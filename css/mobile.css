@@ -41,10 +41,6 @@ body, html {
 .bar.bar-header {
     border-bottom: 1px solid #e8e8ea;
 }
-.menu {
-    width: 100%;
-    display: block;
-}
 .menu li {
     float: left;
     font-size: 21px;
@@ -62,7 +58,8 @@ body, html {
     background: #fff;
 }
 .tabs-animated-wrap {
-    height: calc(100% - 29px);
+    /*height: calc(100% - 25px);*/
+    height: auto;
 }
 /*------------header------------*/
 .navbar {
@@ -76,8 +73,11 @@ body, html {
 .buttons-row.theme-bg .tab-link {
     color: rgba(255,255,255,0.8);
 }
-.buttons-row {
-    position: relative;
+.buttons-row.theme-bg {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    top: 35px;
 }
 .tab-link.button {
     overflow: visible;
@@ -86,7 +86,7 @@ body, html {
     border-radius: 0;
     border: none;
 }
-.tab-link.button.active {
+.buttons-row.theme-bg .tab-link.button.active {
     background: none;
     color: rgba(255,255,255,1);
 }
@@ -120,7 +120,8 @@ body, html {
 }
 .toolbar-through .page-content, .toolbar-fixed .page-content, .tabbar-through .page-content, .tabbar-fixed .page-content,
 .navbar-through .page-content, .navbar-fixed .page-content {
-    padding: 35px 0;
+    margin: 60px 0 0;
+    padding: 0;
 }
 .navbar a.link, .toolbar a.link, .navbar .center {
     line-height: 35px;
@@ -128,9 +129,6 @@ body, html {
 }
 .navbar a.icon-only, .toolbar a.icon-only {
     min-width: 35px;
-}
-.navbar .icon-only {
-    color: #fff;
 }
 .inner {
     -webkit-box-sizing: border-box;
@@ -163,9 +161,6 @@ body, html {
 .tab .list-block ul:first-child {
     border-top: none;
 }
-
-
-
-a.color-white, a.color-white i{
-  color: #ffffff;
+.file-uploader {
+    width: 100%;
 }
