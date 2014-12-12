@@ -11,7 +11,6 @@ define ['_'],
         xmlHttp.onreadystatechange = ()->
          if (xmlHttp.readyState != 4) then return
          if(xmlHttp.status == 200)
-           alert('good');
            resolve(xmlHttp.responseText);
          else
             console.error "xmlHttpRequest error status #{xmlHttp.status} and url #{url}"

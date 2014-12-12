@@ -3,32 +3,47 @@ define ['_','baseView','text!templates/lists.html','hammer'],
 
         class ListView extends BaseView
           template:template
-          domTabsObj:{}
+          domTabsObj:[]
           model:
             currentTab:1
             name:"Dumskaya"
             tabs:[
-             {id:'tab1',name:'News',onShowComplete:()->}
-             {id:'tab2',name:'Blogs',onShowComplete:()->}
-             {id:'tab3',name:'Photos',onShowComplete:()->}
-             {id:'tab4',name:'Video',onShowComplete:()->}
-           ]
+              {id:'tab1',name:'News',onShowComplete:()->
+                  renderNews=()->
+#                    its hust for test!!!
+                    data={}
+                    data.items=[{name:'Facebook'},{name:'Twitter'},{name:'Gmail'}]
+#                    !!!!
+                    baseApplication.currentView.appendCompiledTemplate('templates/news.html',data).bind(this)
+                  baseApplication.sync.request('http://google.com').then((data)->
+                    renderNews(data)
+                  ,(data)=>
+                    renderNews(data)
+                  )
+              }
+              {id:'tab2',name:'Blogs',onShowComplete:()->}
+              {id:'tab3',name:'Photos',onShowComplete:()->}
+              {id:'tab4',name:'Video',onShowComplete:()->}
+            ]
 
           constructor:(query)->
             super
 
 
           onRender:()->
+            @elTabsDom7=@$('.tabs')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
             @changePositionTriagle()
+            index=@model.currentTab-1
+            @model.tabs[index].onShowComplete()
 
           handleTabs:()->
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
-              @domTabsObj[tab.id]=tabDom
+              @domTabsObj.push(tabDom)
               tabDom.on('show',  () =>
                 @model.currentTab=(i+1)
                 @changePositionTriagle()
@@ -36,23 +51,22 @@ define ['_','baseView','text!templates/lists.html','hammer'],
               );
             )
 
-
           swipeTabsHandle:()->
-            Hammer(@elTabs).on("swipeleft", ()=>
+            Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 @showCurrentTab()
 
             );
-            Hammer(@elTabs).on("swiperight", ()=>
+            Hammer(@elTabsDom7[0]).on("swiperight", ()=>
               if(@model.currentTab>1)
                  @model.currentTab--
                  @showCurrentTab()
             );
            showCurrentTab:()->
               baseApplication.f7app.showTab('#tab'+@model.currentTab)
-              index=@model.currentTab-1
               @changePositionTriagle()
+              index=@model.currentTab-1
               @model.tabs[index].onShowComplete()
 
 
