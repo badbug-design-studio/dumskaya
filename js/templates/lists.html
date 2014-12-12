@@ -32,7 +32,9 @@
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
                     <div id="<%=tab.id%>" class="tab <%=active%>">
-                       Preloader
+                        <div style="text-align:center; margin-left: 0;" class="content-block-inner">
+                            <span class="preloader"></span>
+                        </div>
                     </div>
                     <%}) %>
                 </div>
