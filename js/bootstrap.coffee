@@ -19,7 +19,7 @@ define([
 #        interpolate: /\{\{(.+?)\}\}/g
 #      };
 #      what view render by default
-      baseApplication.router.loadPage('lists')
+      baseApplication.router.loadPage('list')
 
 
     require(['domReady!'],()->
