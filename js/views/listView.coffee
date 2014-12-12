@@ -29,7 +29,7 @@ define ['_','baseView','text!templates/lists.html','hammer'],
               @domTabsObj[tab.id]=tabDom
               tabDom.on('show',  () =>
                 @model.currentTab=(i+1)
-                console.log @model.currentTab
+                @changePositionTriagle()
                 tab.onShowComplete()
               );
             )
@@ -49,11 +49,16 @@ define ['_','baseView','text!templates/lists.html','hammer'],
            showCurrentTab:()->
               baseApplication.f7app.showTab('#tab'+@model.currentTab)
               index=@model.currentTab-1
+              @changePositionTriagle()
               @model.tabs[index].onShowComplete()
 
 
           onPageBeforeAnimation:()->
             console.log("onPageBeforeAnimation")
+
+          changePositionTriagle:()->
+
+
 
 
         return ListView
