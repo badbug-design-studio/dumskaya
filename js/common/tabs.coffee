@@ -4,13 +4,13 @@ define([
       tabs= [
                     {id:'tab1',name:'News',onShowComplete:()->
                         renderNews=(data)->
-      #                    its hust for test!!!
-                          data={}
-                          data.items=[{name:'Facebook'},{name:'Twitter'},{name:'Gmail'}]
-                          baseApplication.currentView.appendCompiledTemplate('templates/news.html',data)
+                          result={}
+                          result.items=data.channel.item
+                          console.log(data)
+                          baseApplication.currentView.appendCompiledTemplate('templates/news.html',result)
 
 
-                        baseApplication.sync.request('http://google.com').then((data)->
+                        baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true).then((data)->
                             renderNews(data)
                           ,(data)=>
                             renderNews(data)

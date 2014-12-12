@@ -6,6 +6,7 @@ require.config({
         f7: './libs/framework7'
         hammer:"./libs/hammer"
         _: './libs/underscore'
+        xml2json: './libs/xml2json'
 
         app:'./common/app'
         layout:'./common/layout'
@@ -28,7 +29,7 @@ require.config({
          deps:["f7","_"]
 
        sync:
-         deps:["f7","_"]
+         deps:["f7","_",'xml2json']
 
        layout:
         deps:["app"]
