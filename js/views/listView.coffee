@@ -15,11 +15,11 @@ define ['_','baseView','text!templates/lists.html','hammer'],
                     data.items=[{name:'Facebook'},{name:'Twitter'},{name:'Gmail'}]
 #                    !!!!
                     baseApplication.currentView.appendCompiledTemplate('templates/news.html',data).bind(this)
-                  baseApplication.sync.request('http://google.com').then((data)->
-                    renderNews(data)
-                  ,(data)=>
-                    renderNews(data)
-                  )
+                    baseApplication.sync.request('http://google.com').then((data)->
+                      renderNews(data)
+                    ,(data)=>
+                      renderNews(data)
+                    )
               }
               {id:'tab2',name:'Blogs',onShowComplete:()->}
               {id:'tab3',name:'Photos',onShowComplete:()->}
