@@ -20,7 +20,7 @@ define ['_','baseView','text!templates/lists.html','hammer'],
 
           onRender:()->
             @elTabs=@$('.tabs')[0]
-            @tabsLinkWidth = 100/@model.tabs.length
+            @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
             @changePositionTriagle()
@@ -61,7 +61,8 @@ define ['_','baseView','text!templates/lists.html','hammer'],
 
           changePositionTriagle:()->
             triangle= @$('.buttons-row .triangle')[0]
-            shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2
-            triangle.style.left = shift+"%"
+            shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
+            console.log triangle.style.transform = "translate3d(#{shift}px, 0, 0)";
+
 
         return ListView
