@@ -41,11 +41,13 @@ define ['require','_'],
            baseApplication.mainLayout.params[key] = param
       if @isAppendOnly
         @container().append(compile(@model))
-      baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
+      else
+        baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
 #      @container().append(compile(@model)) it  so for layout
       @onRender()
 
     appendCompiledTemplate:(url,data,callback)->
+      console.log @model
       cT=@.model.currentTab
       require(['text!'+url],(template)=>
         compile= _.template(template)
