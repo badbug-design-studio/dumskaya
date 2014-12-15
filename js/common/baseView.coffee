@@ -36,7 +36,7 @@ define ['require','_'],
         console.error "in current view #{@constructor.name} template was missed"
         return
       compile=_.template(@template)
-      _.each @.viewParams, (param, key)=>
+      _.each @viewParams, (param, key)=>
            baseApplication.mainLayout.params[key] = param
       baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
 #      @container().append(compile(@model)) it  so for layout

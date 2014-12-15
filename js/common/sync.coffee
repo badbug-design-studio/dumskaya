@@ -20,12 +20,12 @@ define ['_','xml2json'],
         return "http://dumskaya.net/"
       else return "./rss/"
 
-    request:(url,isXML)->
+    request:(url,isXML,onSuccess,onError)->
       self=@;
       xmlHttp=new XMLHttpRequest();
       xmlHttp.open('GET', url, true);
-      promise = new Promise((resolve, reject)->
-        xmlHttp.onreadystatechange = ()->
+#      promise = new Promise((resolve, reject)->
+      xmlHttp.onreadystatechange = ()->
          if (xmlHttp.readyState != 4) then return
          if(xmlHttp.status == 200)
            response=xmlHttp.responseText
@@ -33,13 +33,15 @@ define ['_','xml2json'],
             response= xmlHttp.responseText.replace(/\<\?xml.+\?\>/,"")
             response=self.x2js.xml_str2json(response);
             response=response.rss
-           resolve(response);
+#           resolve(response);
+            onSuccess(response)
          else
             console.error "xmlHttpRequest error status #{xmlHttp.status} and url #{url}"
-            reject(xmlHttp.statusText) if reject
-        xmlHttp.send()
-      );
-      return promise
+            onError(xmlHttp.statusText) if onError
+#            reject(xmlHttp.statusText) if reject
+      xmlHttp.send()
+#      );
+#      return promise
 
 
 #xmlhttp.send(null);

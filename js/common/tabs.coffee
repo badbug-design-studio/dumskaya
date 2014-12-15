@@ -10,9 +10,11 @@ define([
                           baseApplication.currentView.appendCompiledTemplate('templates/news.html',result)
 
 
-                        baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true).then((data)->
+                        baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true,(data)->
+                            alert('promise true')
                             renderNews(data)
                           ,(data)=>
+                            alert('promise false')
                             renderNews(data)
                           )
                     }
