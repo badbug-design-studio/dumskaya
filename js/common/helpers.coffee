@@ -51,7 +51,6 @@ define ['f7','_'],
 
     getShortItemDate:(dateString)->
      date=new Date(dateString)
-     console.log(date)
      day=date.getDate()
      month=date.getMonth()
      monthName=@getMonthName(date.getMonth(),true)
