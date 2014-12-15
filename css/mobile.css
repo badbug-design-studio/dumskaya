@@ -25,6 +25,9 @@ body, html {
   height: 100%;
   overflow: hidden;
 }
+.panel {
+    background: #efeff4;
+}
 .page, .pages {
     background: #fff;
 }
@@ -126,6 +129,11 @@ body, html {
     margin: 60px 0 0;
     padding: 0;
 }
+.toolbar-through .page-content.standard, .toolbar-fixed .page-content.standard, .tabbar-through .page-content.standard, .tabbar-fixed .page-content.standard,
+.navbar-through .page-content.standard, .navbar-fixed .page-content.standard {
+    margin: 0px 0 0;
+    padding: 35px 0 0;
+}
 .navbar a.link, .toolbar a.link, .navbar .center {
     line-height: 35px;
     height: 35px;
@@ -167,16 +175,31 @@ body, html {
 .file-uploader {
     width: 100%;
 }
+.news-list ul {
+    border-bottom: none;
+    padding-bottom: 25px;
+}
 .news-list li {
     border-bottom: 1px solid #c8c7cc;
 }
 .news-list.list-block .item-inner {
     border: none;
 }
-
+.list-block.news-list .item-title {
+    font-size: 14px;
+}
+.list-block.news-list .item-text {
+    font-size: 12px;
+}
 .item-content a {
     color: #8a1020;
 }
 .list-block .item-after {
     margin-left: 0;
+}
+.send-photo, .send-button {
+    width: 100%;
+}
+.list-block.send-photo-form .item-inner {
+    padding-right: 0;
 }

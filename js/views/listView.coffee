@@ -8,7 +8,7 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             currentTab:1
             name:"Dumskaya"
             tabs:Tabs
-
+          delay: 450
           constructor:(query)->
             super
 
@@ -30,7 +30,9 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
               tabDom.on('show',  () =>
                 @model.currentTab=(i+1)
                 @changePositionTriagle()
-                tab.onShowComplete()
+                setTimeout(()=>
+                  tab.onShowComplete() if tab
+                ,@delay)
               );
             )
 
@@ -51,7 +53,9 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
-              tab.onShowComplete() if tab
+              setTimeout(()=>
+                     tab.onShowComplete() if tab
+              ,@delay)
 
 
           onPageBeforeAnimation:()->
