@@ -6,7 +6,8 @@ define([
     'routes',
     'layout'
     'sync'
-],  (require,_, f7, app,Routes,layout,SyncServices)->
+    'helpers'
+],  (require,_, f7, app,Routes,layout,SyncServices,Helpers)->
     'use strict';
   #  document.addEventListener('deviceready', onDeviceReady);
     onDevieReady =  (document)->
@@ -15,6 +16,7 @@ define([
             mainLayout: layout
             router: new Routes,
             sync: new SyncServices
+            helpers: new Helpers
       }
       #now in template use {{variable}}
 #      _.templateSettings = {

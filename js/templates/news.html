@@ -8,7 +8,7 @@
            <div class="item-inner">
                <div class="item-title-row">
                    <div class="item-title"><%=oneItem.title%></div>
-                   <div class="item-after"><%=oneItem.pubDate%></div>
+                   <div class="item-after"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
                </div>
                <div class="item-text"><%=oneItem.description.__cdata%></div>
            </div>
