@@ -24,6 +24,7 @@ define([
 #      };
 #      what view render by default
       baseApplication.router.loadPage('list')
+      baseApplication.router.loadPage('menu')
 #      baseApplication.sync.request('http://dumskaya.net/rsstv/').then(
 #        (result)->
 #          console.log result
