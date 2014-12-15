@@ -1,19 +1,17 @@
 <div class="list-block media-list news-list">
    <ul>
-       <% _.each(items,function(oneItem,index){ console.log(oneItem) %>
-       <li>
-           <a href="#" class="item-link item-content" onclick="baseApplication.router.loadPage('oneItemNews') " >
-               <% if(oneItem.enclosure._url){ %>
-               <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="44" /></div>
-               <% } %>
-               <div class="item-inner">
-                   <div class="item-title-row">
-                       <div class="item-title"><%=oneItem.title%></div>
-                       <div class="item-after"><%=oneItem.pubDate%></div>
-                   </div>
-                   <div class="item-text"><%=oneItem.description.__cdata%></div>
+       <% _.each(items,function(oneItem,index){ %>
+       <li class="item-link item-content" onclick="baseApplication.router.loadPage('oneItemNews') ">
+           <% if(oneItem.enclosure._url){ %>
+           <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="44" /></div>
+           <% } %>
+           <div class="item-inner">
+               <div class="item-title-row">
+                   <div class="item-title"><%=oneItem.title%></div>
+                   <div class="item-after"><%=oneItem.pubDate%></div>
                </div>
-           </a>
+               <div class="item-text"><%=oneItem.description.__cdata%></div>
+           </div>
        </li>
        <% }) %>
    </ul>
