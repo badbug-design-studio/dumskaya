@@ -1,7 +1,7 @@
 <div class="list-block media-list news-list">
    <ul>
        <% _.each(items,function(oneItem,index){ %>
-       <li class="item-link item-content" onclick="baseApplication.router.loadPage('oneItemNews') ">
+       <li class="item-content" onclick="baseApplication.router.loadPage('oneItemNews') ">
            <% if(oneItem.enclosure._url){ %>
            <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="44" /></div>
            <% } %>
