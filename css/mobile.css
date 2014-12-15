@@ -196,9 +196,10 @@ body, html {
 }
 .list-block.news-list .item-text {
     font-size: 12px;
-    height: 24px;
-    line-height: 12px;
+    height: 41px;
+    line-height: 14px;
     margin-top: 3px;
+    -webkit-line-clamp: 3;
 }
 .list-block.news-list .item-after {
     font-size: 9px;
