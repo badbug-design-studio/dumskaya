@@ -3,6 +3,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+p {
+    margin: 0;
+}
 .theme-bg {
     background: #8A1020;
 }
@@ -163,4 +166,10 @@ body, html {
 }
 .file-uploader {
     width: 100%;
+}
+.news-list li {
+    border-bottom: 1px solid #c8c7cc;
+}
+.news-list.list-block .item-inner {
+    border: none;
 }
