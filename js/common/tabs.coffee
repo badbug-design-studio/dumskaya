@@ -8,6 +8,8 @@ define([
                           result.items=data.channel.item
                           console.log(data)
                           baseApplication.currentView.appendCompiledTemplate('templates/news.html',result)
+                          baseApplication.router.loadPage('menu')
+
 
 
                         baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true,(data)->

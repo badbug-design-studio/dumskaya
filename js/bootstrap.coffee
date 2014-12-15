@@ -23,8 +23,8 @@ define([
 #        interpolate: /\{\{(.+?)\}\}/g
 #      };
 #      what view render by default
-      baseApplication.router.loadPage('menu')
       baseApplication.router.loadPage('list')
+
 #      baseApplication.sync.request('http://dumskaya.net/rsstv/').then(
 #        (result)->
 #          console.log result
