@@ -9,6 +9,7 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             name:"Dumskaya"
             tabs:Tabs
           delay: 450
+          items:{}
           constructor:(query)->
             super
 
@@ -19,7 +20,6 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
-            @changePositionTriagle()
             @showCurrentTab()
 
 
@@ -28,6 +28,7 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
               tabDom=@$('#'+tab.id)
               @domTabsObj.push(tabDom)
               tabDom.on('show',  () =>
+                @model.currentTab=(i+1)
                 @showCurrentTab()
               );
             )
@@ -36,16 +37,15 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
-                @showCurrentTab(true)
-
+                baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
             Hammer(@elTabsDom7[0]).on("swiperight", ()=>
               if(@model.currentTab>1)
                  @model.currentTab--
-                 @showCurrentTab(true)
+                 baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
            showCurrentTab:(needWebTranlate)->
-              baseApplication.f7app.showTab('#tab'+@model.currentTab) if needWebTranlate
+
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
