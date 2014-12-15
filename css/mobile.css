@@ -173,3 +173,10 @@ body, html {
 .news-list.list-block .item-inner {
     border: none;
 }
+
+.item-content a {
+    color: #8a1020;
+}
+.list-block .item-after {
+    margin-left: 0;
+}
