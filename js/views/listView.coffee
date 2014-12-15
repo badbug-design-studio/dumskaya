@@ -1,5 +1,5 @@
-define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
-  (_, BaseView,template,Tabs, Hammer)->
+define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
+  (_, BaseView,app,template,Tabs, Hammer)->
 
         class ListView extends BaseView
           template:template
@@ -10,6 +10,8 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             tabs:Tabs
           delay: 450
           items:{}
+          events:
+            "refresh .pull-to-refresh-content":"ptrContent"
           constructor:(query)->
             super
 
@@ -61,5 +63,10 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             triangle= @$('.buttons-row .triangle')[0]
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
             @$(triangle).transform("translate3d(#{shift}px, 0, 0)")
+
+          ptrContent: ()->
+            setTimeout(()=>
+              app.pullToRefreshDone();
+            ,2000)
 
         return ListView
