@@ -64,7 +64,6 @@ body, html {
     background: #fff;
 }
 .tabs-animated-wrap {
-    /*height: calc(100% - 25px);*/
     height: auto;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(0,0,0);
@@ -72,12 +71,12 @@ body, html {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 800;
     -webkit-transform-style: preserve-3d;
+    min-height: 100%;
 }
 /*------------header------------*/
 .navbar {
     -webkit-transition: all 300ms ease;
     transition: all 300ms ease;
-    /*height: 35px;*/
 }
 
 .navbar.theme-bg {
@@ -129,22 +128,9 @@ body, html {
     line-height: 24px;
     height: 25px;
 }
-.toolbar-through .page-content, .toolbar-fixed .page-content, .tabbar-through .page-content, .tabbar-fixed .page-content,
 .navbar-through .page-content, .navbar-fixed .page-content {
-    margin: 69px 0 0;
-    padding: 0;
-}
-.toolbar-through .page-content.standard, .toolbar-fixed .page-content.standard, .tabbar-through .page-content.standard, .tabbar-fixed .page-content.standard,
-.navbar-through .page-content.standard, .navbar-fixed .page-content.standard {
-    margin: 0px 0 0;
-    /*padding: 35px 0 0;*/
-}
-.navbar a.link, .toolbar a.link, .navbar .center {
-    /*line-height: 35px;*/
-    /*height: 35px;*/
-}
-.navbar a.icon-only, .toolbar a.icon-only {
-    /*min-width: 35px;*/
+    padding-top: 69px;
+    padding-bottom: 0;
 }
 .inner {
     -webkit-box-sizing: border-box;
@@ -175,7 +161,7 @@ body, html {
 }
 /*------------content------------*/
 .tab .list-block {
-    margin-top: 10px;
+    margin-top: 0;
 }
 .tab .list-block ul:first-child {
     border-top: none;
@@ -185,7 +171,6 @@ body, html {
 }
 .news-list ul {
     border-bottom: none;
-    padding-bottom: 25px;
 }
 .news-list li {
     border-bottom: 1px solid #c8c7cc;
@@ -239,6 +224,15 @@ body, html {
 }
 .list-block.send-photo-form .item-inner {
     padding-right: 0;
+}
+.infinite-scroll-preloader {
+    margin-top:-20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.infinite-scroll-preloader .preloader {
+    width:34px;
+    height:34px;
 }
 /*------------settings------------*/
 .settings-page .list-block, .settings-page .item-detail {
