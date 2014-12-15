@@ -23,16 +23,19 @@
     <div data-page="index" class="page">
         <!-- Scrollable page content-->
         <div class="page-content infinite-scroll">
+            <!-- Default pull to refresh layer-->
+
             <div class="buttons-row theme-bg">
                 <span class="triangle"></span>
                 <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+tab.id+'" class="tab-link '+active+' button" >'+tab.name+'</a>')}) %>
 
             </div>
+
             <div class="tabs-animated-wrap">
                 <div class="tabs">
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
-                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll">
+                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll  pull-to-refresh-content">
                         <div style="text-align:center; margin-left: 0;" class="content-block-inner">
                             <span class="preloader"></span>
                         </div>
