@@ -11,6 +11,5 @@ define ['_','baseView', 'text!templates/menu.html'],
             super
 
           onRender:()->
-            console.log "Menu"
 
         return MenuView

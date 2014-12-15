@@ -14,7 +14,6 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
 
 
           onRender:()->
-            console.log Tabs
             @elTabsDom7=@$('.tabs')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
@@ -23,16 +22,13 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
             @changePositionTriagle()
             @showCurrentTab()
 
+
           handleTabs:()->
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
               @domTabsObj.push(tabDom)
               tabDom.on('show',  () =>
-                @model.currentTab=(i+1)
-                @changePositionTriagle()
-                setTimeout(()=>
-                  tab.onShowComplete() if tab
-                ,@delay)
+                @showCurrentTab()
               );
             )
 
@@ -54,7 +50,7 @@ define ['_','baseView','text!templates/lists.html','mainTabs', 'hammer'],
               index=@model.currentTab-1
               tab=@model.tabs[index]
               setTimeout(()=>
-                     tab.onShowComplete() if tab
+                     tab.onShowComplete.apply(@) if tab
               ,@delay)
 
 

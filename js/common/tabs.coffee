@@ -3,14 +3,10 @@ define([
 ],  () ->
       tabs= [
                     {id:'tab1',name:'News',onShowComplete:()->
-                        renderNews=(data)->
+                        renderNews=(data)=>
                           result={}
                           result.items=data.channel.item
-                          console.log(data)
-                          baseApplication.currentView.appendCompiledTemplate('templates/news.html',result)
-                          baseApplication.router.loadPage('menu')
-
-
+                          @appendCompiledTemplate('templates/news.html',result)
 
                         baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true,(data)->
                             renderNews(data)

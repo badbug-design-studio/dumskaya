@@ -47,7 +47,6 @@ define ['require','_'],
       @onRender()
 
     appendCompiledTemplate:(url,data,callback)->
-      console.log @model
       cT=@.model.currentTab
       require(['text!'+url],(template)=>
         compile= _.template(template)
