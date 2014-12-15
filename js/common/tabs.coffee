@@ -11,10 +11,8 @@ define([
 
 
                         baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true,(data)->
-                            alert('promise true')
                             renderNews(data)
                           ,(data)=>
-                            alert('promise false')
                             renderNews(data)
                           )
                     }
