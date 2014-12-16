@@ -2,23 +2,19 @@ define([
     'f7'
 ],  () ->
       tabs= [
-                    {id:'tab1',name:'News',onShowComplete:()->
-                        renderNews=(data)=>
+                    {id:'tab1',name:'News',updateItems:(pullToRefreshCallback)->
+                        console.log arguments
+                        console.log pullToRefreshCallback
+                        onDownloaded=(data)=>
                           result={}
                           result.items=data.channel.item
-                          @items.news=data.channel.item
                           @appendCompiledTemplate('templates/news.html',result)
-                        if !@items.news
-                          baseApplication.sync.request(baseApplication.sync.getNewsRssUrl(),true,(data)->
-                              console.log 1
-                              renderNews(data)
-                            ,(data)=>
-                              renderNews(data)
-                            )
+
+                        baseApplication.cache.getNews(onDownloaded, pullToRefreshCallback)
                     }
-                    {id:'tab2',name:'Blogs',onShowComplete:()->}
-                    {id:'tab3',name:'Photos',onShowComplete:()->}
-                    {id:'tab4',name:'Video',onShowComplete:()->}
+                    {id:'tab2',name:'Blogs',updateItems:()->}
+                    {id:'tab3',name:'Photos',updateItems:()->}
+                    {id:'tab4',name:'Video',updateItems:()->}
       ]
       return tabs
 );

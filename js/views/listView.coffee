@@ -11,7 +11,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           delay: 450
           items:{}
           events:
-            "refresh .pull-to-refresh-content":"ptrContent"
+            "refresh .pull-to-refresh-content":"updateCurrentTab"
           constructor:(query)->
             super
 
@@ -46,15 +46,20 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                  @model.currentTab--
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
-           showCurrentTab:(needWebTranlate)->
+          showCurrentTab:(needWebTranlate)->
 
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
               setTimeout(()=>
-                     tab.onShowComplete.apply(@) if tab
+                     console.log tab
+                     tab.updateItems.apply(@) if tab
               ,@delay)
 
+          updateCurrentTab:()=>
+            index=@model.currentTab-1
+            tab=@model.tabs[index]
+            tab.updateItems.call(@,()->app.pullToRefreshDone()) if tab
 
           onPageBeforeAnimation:()->
             console.log("onPageBeforeAnimation")
@@ -64,9 +69,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
             @$(triangle).transform("translate3d(#{shift}px, 0, 0)")
 
-          ptrContent: ()->
-            setTimeout(()=>
-              app.pullToRefreshDone();
-            ,2000)
+
 
         return ListView
