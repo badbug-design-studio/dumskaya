@@ -46,7 +46,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                  @model.currentTab--
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
-          showCurrentTab:(needWebTranlate)->
+          showCurrentTab:()->
 
               @changePositionTriagle()
               index=@model.currentTab-1
