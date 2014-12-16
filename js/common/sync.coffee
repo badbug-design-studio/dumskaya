@@ -10,10 +10,22 @@ define ['_','xml2json'],
 
     getNewsRssUrl:()=>
         ext='/'
-        console.log @
         if !@isProd
           ext='.xml'
         return @getRoot()+"rssios"+ext
+
+    getBlogsRssUrl:()=>
+        ext='/'
+        if !@isProd
+          ext='.xml'
+        return @getRoot()+"rssblogs"+ext
+
+
+    getTVRssUrl:()=>
+        ext='/'
+        if !@isProd
+          ext='.xml'
+        return @getRoot()+"rsstv"+ext
 
     getRoot:()->
       if @isProd

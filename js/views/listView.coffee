@@ -52,7 +52,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               index=@model.currentTab-1
               tab=@model.tabs[index]
               setTimeout(()=>
-                     console.log tab
                      tab.updateItems.apply(@) if tab
               ,@delay)
 
