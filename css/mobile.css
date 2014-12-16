@@ -279,3 +279,9 @@ body, html {
 .settings-page .content-block-inner {
     margin-left: 0;
 }
+.about-block p {
+    margin-bottom: 5px;
+}
+.about-block a{
+    color: #8A1020;;
+}
