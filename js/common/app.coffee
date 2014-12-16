@@ -6,7 +6,7 @@ define([
             modalTitle: 'Dumskaya',
 #            swipePanel: 'left',
             animateNavBackIcon: true
-            pushState: true
+            pushState: false
             #     Hide and show indicator during ajax requests
             onAjaxStart: (xhr) ->
               app.showIndicator();

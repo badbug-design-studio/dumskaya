@@ -7,7 +7,8 @@ define([
     return  app.addView(selector, {
           dynamicNavbar: true,
           domCache: true
-    #      animatePages:false
+          #fastClicks: false
+          #animatePages:false
         })
 
 );
