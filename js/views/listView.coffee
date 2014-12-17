@@ -18,6 +18,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           onRender:()->
             @elTabsDom7=@$('.tabs')
+            @navBarDom= @$('#main-navbar .buttons-row')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()

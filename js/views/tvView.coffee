@@ -18,8 +18,7 @@ define ['_','categoryView','text!templates/tv.html'],
             console.log "infinite"
 
           openOneItem:(event)=>
-             @$('#main-navbar .buttons-row').removeClass("navbar-fade-in")
-             @$('#main-navbar .buttons-row').addClass("navbar-fade-out")
+             @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
              baseApplication.router.loadPage('oneItemNews')
 
 
