@@ -166,7 +166,7 @@ body, html {
     -webkit-transform-style: preserve-3d;
 }
 .tab .list-block {
-    margin-top: 0;
+    margin: 0;
 }
 .tab .list-block ul:first-child {
     border-top: none;
@@ -234,7 +234,6 @@ body, html {
     text-align: center;
     height: 35px;
     position: relative;
-    bottom: 33px;
 }
 .infinite-scroll-preloader .preloader {
     width:30px;
