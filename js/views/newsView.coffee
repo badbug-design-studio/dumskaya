@@ -13,15 +13,8 @@ define ['_','categoryView','text!templates/news.html'],
           onRender:()->
 
           openOneItem:(event)=>
+            index=@$(event.target).parents('.item-content').data('index')
             baseApplication.router.loadPage('oneItemNews')
-            console.log event
-            console.log @$(event.target)[0]
-
-
-
-
-
-
 
 
         return NewsView
