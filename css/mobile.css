@@ -231,13 +231,14 @@ body, html {
     padding-right: 0;
 }
 .infinite-scroll-preloader {
-    margin-top:-20px;
-    margin-bottom: 10px;
     text-align: center;
+    height: 35px;
+    position: relative;
+    bottom: 33px;
 }
 .infinite-scroll-preloader .preloader {
-    width:34px;
-    height:34px;
+    width:30px;
+    height:30px;
 }
 .infinite-scroll-preloader .preloader.infinite{
     -webkit-transform-origin: 50%;
