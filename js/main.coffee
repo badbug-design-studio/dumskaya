@@ -12,6 +12,7 @@ require.config({
         layout:'./common/layout'
         routes:"./common/routes"
         baseView:"./common/baseView"
+        categoryView:"./common/categoryView"
         sync:"./common/sync"
         mainTabs:"./common/tabs"
         helpers:"./common/helpers"
@@ -35,6 +36,9 @@ require.config({
 
        layout:
         deps:["app"]
+
+       categoryView:
+        deps:["baseView"]
 
 
 

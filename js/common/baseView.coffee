@@ -43,17 +43,8 @@ define ['require','_'],
         @container().append(compile(@model))
       else
         baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
-#      @container().append(compile(@model)) it  so for layout
       @onRender()
 
-    appendCompiledTemplate:(url,data,callback)->
-      cT=@.model.currentTab
-      require(['text!'+url],(template)=>
-        compile= _.template(template)
-        result=compile(data)
-        @domTabsObj[cT-1].html(result)
-        callback() if callback
-      );
 
 
 
