@@ -234,6 +234,13 @@ body, html {
     width:34px;
     height:34px;
 }
+.infinite-scroll-preloader .preloader.infinite{
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-animation: preloader-spin 1s step-end infinite;
+    animation: preloader-spin 1s step-end infinite;
+}
+
 /*------------settings------------*/
 .settings-page .list-block, .settings-page .item-detail {
     margin: 0 0px 15px;
