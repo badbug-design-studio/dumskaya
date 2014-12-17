@@ -12,7 +12,21 @@ define ['_','categoryView','text!templates/tv.html'],
 
 
           onRender:()->
-            @$('.infinite-scroll').on('infinite',  @infiniteStart.bind(@))
+            @initInfinitScroll()
+
+
+          initInfinitScroll:()->
+             cT=@model.listView.model.currentTab-1
+             loading = false;
+             @model.listView.domTabsObj[cT].on('infinite',  ()->
+               if (loading) then return;
+               console.log 'infinite'
+ #              // Set loading flag
+               loading = true;
+               setTimeout(()->
+                 loading=false
+               ,1000)
+             )
 
           infiniteStart: ()->
             console.log "infinite"

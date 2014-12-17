@@ -12,11 +12,25 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           onRender:()->
-            @$('.infinite-scroll').on('infinite',  @infiniteStart.bind(@))
+            @initInfinitScroll()
+
+
+          initInfinitScroll:()->
+             cT=@model.listView.model.currentTab-1
+             loading = false;
+             @model.listView.domTabsObj[cT].on('infinite',  ()->
+               if (loading) then return;
+               console.log 'infinite'
+ #              // Set loading flag
+               loading = true;
+               setTimeout(()->
+                 loading=false
+               ,1000)
+             )
 
           openOneItem:(event)=>
-             @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
-             baseApplication.router.loadPage('oneItemNews')
+            @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
+            baseApplication.router.loadPage('oneItemNews')
 
           infiniteStart: ()->
             console.log "infinite"
