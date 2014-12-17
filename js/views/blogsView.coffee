@@ -1,11 +1,12 @@
 define ['_','categoryView','text!templates/blogs.html'],
   (_, CategoryView,template)->
 
-        class NewsView extends CategoryView
+        class BlogsView extends CategoryView
           template:template
-          events:
-            "click .item-content":"openOneItem"
-#            "refresh .pull-to-refresh-content":"updateCurrentTab"
+          cacheClass:"blogs"
+          itemSelector:".item-content"
+#          events:
+#            "click .blogs-list .item-content":"openOneItem"
 
           constructor:(query)->
             super
@@ -13,28 +14,12 @@ define ['_','categoryView','text!templates/blogs.html'],
 
           onRender:()->
             @initInfinitScroll()
+            @handleOnClickItem()
 
-
-          initInfinitScroll:()->
-             cT=@model.listView.model.currentTab-1
-             loading = false;
-             @model.listView.domTabsObj[cT].on('infinite',  ()->
-               if (loading) then return;
-               console.log 'infinite'
- #              // Set loading flag
-               loading = true;
-               setTimeout(()->
-                 loading=false
-               ,1000)
-             )
-
-          openOneItem:(event)=>
-            @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
-            baseApplication.router.loadPage('oneItemNews')
 
           infiniteStart: ()->
             console.log "infinite"
 
 
 
-        return NewsView
+        return BlogsView

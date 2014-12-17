@@ -12,5 +12,6 @@ define ['_'],
 
     loadPage:(controllerName, query)->
       require ['./views/'+ controllerName + 'View'], (View)->
+        delete baseApplication['currentView']
         baseApplication.currentView = new View(query)
 

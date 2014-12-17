@@ -16,6 +16,27 @@ define ['_','baseView'],
             @render()
 
 
+          initInfinitScroll:()->
+             cT=@model.listView.model.currentTab-1
+             loading = false;
+             @model.listView.domTabsObj[cT].on('infinite',  ()=>
+               if (loading) then return;
+               @infiniteStart()
+       #              // Set loading flag
+               loading = true;
+               setTimeout(()->
+                 loading=false
+               ,1000)
+             )
+
+          handleOnClickItem:()->
+            cT=@model.listView.model.currentTab-1
+            @model.listView.domTabsObj[cT].on('click',@itemSelector,()=>
+              @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
+              index=@$(event.target).parents('.item-content').data('index')
+              baseApplication.router.loadPage('oneItemNews',{model:baseApplication.cache.items[@cacheClass][index]})
+            )
+
 
 
 
