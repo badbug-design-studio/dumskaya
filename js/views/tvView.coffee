@@ -11,8 +11,10 @@ define ['_','categoryView','text!templates/tv.html'],
 
 
           onRender:()->
+            @$('.infinite-scroll').on('infinite',  @infiniteStart.bind(@))
 
-
+          infiniteStart: ()->
+            console.log "infinite"
 
 
 

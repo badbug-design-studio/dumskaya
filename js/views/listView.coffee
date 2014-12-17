@@ -24,7 +24,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @swipeTabsHandle()
             @showCurrentTab()
 
-
           handleTabs:()->
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
@@ -67,7 +66,5 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             triangle= @$('.buttons-row .triangle')[0]
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
             @$(triangle).transform("translate3d(#{shift}px, 0, 0)")
-
-
 
         return ListView

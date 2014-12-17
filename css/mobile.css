@@ -297,3 +297,13 @@ body, html {
 .about-block a{
     color: #8A1020;;
 }
+
+.navbar-fade-out {
+  -webkit-animation: navbarElementFadeOut 400ms forwards;
+  animation: navbarElementFadeOut 400ms forwards;
+
+}
+.navbar-fade-in {
+    -webkit-animation: navbarElementFadeIn 400ms forwards;
+     animation: navbarElementFadeIn 400ms forwards;
+}

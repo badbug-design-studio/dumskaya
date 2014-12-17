@@ -11,11 +11,11 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           onRender:()->
+            @$('.infinite-scroll').on('infinite',  @infiniteStart.bind(@))
 
 
-
-
-
+          infiniteStart: ()->
+            console.log "infinite"
 
 
 
