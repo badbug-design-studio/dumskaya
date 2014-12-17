@@ -7,6 +7,7 @@ define([
 #            swipePanel: 'left',
             animateNavBackIcon: true
             pushState: false
+            fastClicks: false
 #            ajaxLinks: "ajax"
             #     Hide and show indicator during ajax requests
             onAjaxStart: (xhr) ->

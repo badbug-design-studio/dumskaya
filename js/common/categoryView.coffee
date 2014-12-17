@@ -3,7 +3,7 @@ define ['_','baseView'],
 
         class CategoryView extends BaseView
           template:null
-          isAppendOnly:true
+          isInjectedOnly:true
 
           constructor:(query)->
             if(query && query.model)
