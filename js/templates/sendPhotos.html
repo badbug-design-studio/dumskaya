@@ -14,36 +14,68 @@
             <div class="content-block">
                 <div class="content-block-title">Send photo</div>
                 <div class="list-block send-photo-form">
-                    <ul>
-                        <li>
-                            <div class="item-inner">
-                                <div class="item-title label">Name</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="Your name">
+                    <form action="http://dumskaya.net/mobilesendphoto//send/" enctype="multipart/form-data" method="post" id="form">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
+                        <ul>
+                            <li>
+                                <div class="item-inner">
+                                    <!--<div class="item-title label">Name</div>-->
+                                    <div class="item-input">
+                                        <input type="text" name="name" placeholder="Your name">
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-inner">
-                                <div class="item-title label">Description</div>
-                                <div class="item-input">
-                                    <input type="text" placeholder="Your name">
+                            </li>
+                            <li>
+                                <div class="item-inner">
+                                    <!--<div class="item-title label">Description</div>-->
+                                    <div class="item-input">
+                                        <textarea name="text" placeholder="Description"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-inner">
-                                <input class="send-photo" type="file" name="img" accept="image/jpeg,image/png,image/gif" />
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-inner">
-                                <a href="#" class="button button-big button-fill send-button">Big Fill Button </a>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                            <!--<li>-->
+                                <!--<div class="item-inner">-->
+                                    <!--<input class="send-photo" type="file" multiple="true" name="pictures[]" accept="image/*;capture=camera" id="files" capture="" />-->
+                                    <!--<input class="send-photo" type="file" name="img" accept="image/jpeg,image/png,image/gif" />-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <li>
+                                <div class="item-inner">
+                                    <input class="send-photo" type="file" name="picture" accept="image/*;capture=camera" id="file" capture="camera">
+                                    <!--<input class="send-photo" type="file" name="img" accept="image/jpeg,image/png,image/gif" />-->
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-inner">
+                                    <button class="button button-big button-fill send-button">Send Photo</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+    <!--<input type="hidden" name="MAX_FILE_SIZE" value="1000000000">-->
+
+
+
+    <!--<div id="form1" style="text-align:center;">-->
+        <!--<center>Представьтесь: <input type="text" name="name" style="width:190px; font-size:16px;"><br>-->
+            <!--Пару слов о фото:-->
+
+            <!--<textarea name="text" style="width:300px; height:60px; margin-bottom:5px; font-size:16px; display:block;"></textarea>-->
+
+            <!--<button style="font-size:20px; width:300px; height:60px; margin-bottom:10px;  display:block;" onclick="g('file').click(); return false;">Снять фотографию</button>-->
+            <!--<button style="font-size:20px; width:300px; height:60px;  display:block;" onclick="g('files').click(); return false;">Выбрать фотографии из галереи</button><br>-->
+        <!--</center>-->
+        <!--<div style="visibility:hidden;">-->
+            <!--<input type="file" multiple="true" name="pictures[]" accept="image/*;capture=camera" id="files" style="display:block;width:1px; height:1px;" onchange="send()" capture="">-->
+            <!--<input type="file" name="picture" accept="image/*;capture=camera" id="file" style="display:block; width:1px; height:1px;" onchange="send()" capture="camera">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="form2" style="text-align:center;display:none; font-size:20px; margin-top:50px; margin-bottom:50px;">Фото отправляется в редакцию. Пожалуйста, подождите.</div>-->
+    <!--<div id="form3" style="text-align:center;display:none; font-size:20px; margin-top:50px; margin-bottom:50px;">Ваше устройство не поддерживает эту функцию.-->
+        <!--Вам нужна ОС  iOS 6.0 либо Android 3.0 и выше.</div>-->

@@ -1,6 +1,7 @@
 *, *:after, *:before {
     -webkit-touch-callout:none;
     -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 p {
@@ -64,14 +65,8 @@ body, html {
     background: #fff;
 }
 .tabs-animated-wrap {
-    height: auto;
-    -webkit-overflow-scrolling: touch;
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 800;
-    -webkit-transform-style: preserve-3d;
-    min-height: 100%;
+    height: -webkit-calc(100% - 69);
+    overflow: hidden;
 }
 /*------------header------------*/
 .navbar {
@@ -131,6 +126,7 @@ body, html {
 .navbar-through .page-content, .navbar-fixed .page-content {
     padding-top: 69px;
     padding-bottom: 0;
+    overflow: hidden;
 }
 .inner {
     -webkit-box-sizing: border-box;
@@ -160,6 +156,15 @@ body, html {
     font-size: 22px;
 }
 /*------------content------------*/
+.tabs-animated-wrap > .tabs > .tab {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
+}
 .tab .list-block {
     margin-top: 0;
 }
