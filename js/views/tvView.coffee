@@ -3,7 +3,8 @@ define ['_','categoryView','text!templates/tv.html'],
 
         class NewsView extends CategoryView
           template:template
-#          events:
+          events:
+            "click .item-content":"openOneItem"
 #            "refresh .pull-to-refresh-content":"updateCurrentTab"
 
           constructor:(query)->
@@ -16,7 +17,10 @@ define ['_','categoryView','text!templates/tv.html'],
           infiniteStart: ()->
             console.log "infinite"
 
-
+          openOneItem:(event)=>
+             @$('#main-navbar .buttons-row').removeClass("navbar-fade-in")
+             @$('#main-navbar .buttons-row').addClass("navbar-fade-out")
+             baseApplication.router.loadPage('oneItemNews')
 
 
 
