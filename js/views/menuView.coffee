@@ -3,7 +3,7 @@ define ['_','baseView', 'text!templates/menu.html'],
 
         class MenuView extends BaseView
           template:template
-          isAppendOnly: true
+          isInjectedOnly: true
           container:()->
             return @$('.settings-page')
 

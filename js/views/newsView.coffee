@@ -15,6 +15,7 @@ define ['_','categoryView','text!templates/news.html'],
 
 
           openOneItem:(event)=>
+            index=@$(event.target).parents('.item-content').data('index')
             @$('#main-navbar .buttons-row').removeClass("navbar-fade-in")
             @$('#main-navbar .buttons-row').addClass("navbar-fade-out")
             baseApplication.router.loadPage('oneItemNews')

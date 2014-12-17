@@ -55,13 +55,29 @@ define ['f7','_'],
      month=date.getMonth()
      monthName=@getMonthName(date.getMonth(),true)
      year=date.getFullYear()
-     time=date.getHours()+":"+date.getMinutes()
+     minutes = date.getMinutes()
+     if (minutes<10)
+        minutes = "0" + minutes
+     time=date.getHours()+":"+ minutes
      if((day==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
        return "Сегодня "+time
      else if(((day+1)==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
        return "Вчера "+time
      else
-       return day+" "+monthName+" "+year+", "+time
+       return day+" "+monthName+" "+year
+
+    getTime: (dateString)->
+      date=new Date(dateString)
+      minutes = date.getMinutes()
+      if (minutes<10)
+        minutes = "0" + minutes
+      time=date.getHours()+":"+ minutes
+      return time
+
+    compareTwoDates: (dateString1, dateString2) ->
+      date1 = new Date(dateString1)
+      date2 = new Date(dateString2)
+      return date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate()
 
   return Helpers
 

@@ -6,7 +6,7 @@ define ['require','_'],
     isAnimate:true
     container:()->
        return @$(baseApplication.mainLayout.selector)
-    isAppendOnly: false
+    isInjectedOnly: false
 
     addEventListeners:()->
           @mainListeners() if @mainListeners
@@ -38,8 +38,8 @@ define ['require','_'],
       compile=_.template(@template)
       _.each @viewParams, (param, key)=>
            baseApplication.mainLayout.params[key] = param
-      if @isAppendOnly
-        @container().append(compile(@model))
+      if @isInjectedOnly
+        @container().html(compile(@model))
       else
         baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
       @addEventListeners()

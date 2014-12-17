@@ -1,23 +1,36 @@
-<div class="list-block media-list blog-list">
+<div class="list-block media-list news-list">
     <ul>
-         <% _.each(items,function(oneItem,index){ %>
-         <%if (index<limit){%>
-         <li class="item-content" onclick="baseApplication.router.loadPage('oneItemNews') ">
-             <% if(oneItem.enclosure._url){ %>
-             <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="84" height="52"/></div>
-             <% } %>
-             <div class="item-inner">
-                 <div class="item-title-row">
-                     <div class="item-title"><%=oneItem.title%></div>
-                 </div>
-                 <div class="item-text"><%=oneItem.description.__cdata%></div>
-                 <div class="item-after"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
-             </div>
-         </li>
-         <%}%>
-         <% }) %>
-     </ul>
+        <% var lastIndex = items.length - 1; %>
+        <% _.each(items,function(oneItem,index){ %>
+        <%if (index<limit){%>
+        <% if(index == 0) { %>
+        <li class="list-wrap">
+            <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
+            <% } %>
+            <% if(index >1 && !baseApplication.helpers.compareTwoDates(oneItem.pubDate, items[index-1].pubDate)) { %>
+        </li>
+        <li class="list-wrap">
+            <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
+            <% } %>
+            <div class="item-content" onclick="baseApplication.router.loadPage('oneItemNews') " data-index="<%=index%>">
+                <% if(oneItem.enclosure._url){ %>
+                <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="84" height="52"/></div>
+                <% } %>
+                <div class="item-inner">
+                    <div class="item-title-row">
+                        <div class="item-title"><%=oneItem.title%></div>
+                    </div>
+                    <div class="item-text"><%=oneItem.description.__cdata%></div>
+                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div>
+                </div>
+            </div>
+            <% if(index == lastIndex) { %>
+        </li>
+        <% } %>
+        <%}%>
+        <% }) %>
+    </ul>
 </div>
 <div class="infinite-scroll-preloader">
-   <div class="preloader infinite"></div>
- </div>
+    <div class="preloader infinite"></div>
+</div>

@@ -57,6 +57,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           updateCurrentTab:()=>
             index=@model.currentTab-1
             tab=@model.tabs[index]
+            console.log tab
             tab.updateItems.call(@,()->app.pullToRefreshDone()) if tab
 
           onPageBeforeAnimation:()->
