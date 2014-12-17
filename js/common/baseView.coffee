@@ -27,7 +27,6 @@ define ['require','_'],
       if(query && query.viewParams)
         @viewParams = query.viewParams
       @render()
-      @addEventListeners()
 
     onRender:()->
         console.log("ON RENDER!")
@@ -43,6 +42,7 @@ define ['require','_'],
         @container().append(compile(@model))
       else
         baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
+      @addEventListeners()
       @onRender()
 
 

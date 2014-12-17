@@ -14,7 +14,6 @@ define ['_','baseView'],
               ct= @model.listView.model.currentTab
               return @model.listView.domTabsObj[ct-1]
             @render()
-            @addEventListeners()
 
 
 
