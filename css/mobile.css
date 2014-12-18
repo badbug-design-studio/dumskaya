@@ -313,12 +313,80 @@ body, html {
     color: #8A1020;;
 }
 
+/*.navbar-from-left-to-center .buttons-row, .navbar-from-right-to-center .buttons-row {
+    -webkit-animation: navbarElementFadeIn 400ms forwards;
+    animation: navbarElementFadeIn 400ms forwards;
+    opacity: 1;
+}
+.navbar-from-center-to-right .buttons-row,  .navbar-from-center-to-left .buttons-row {
+  -webkit-animation: navbarElementFadeOut 400ms forwards;
+  animation: navbarElementFadeOut 400ms forwards;
+  opacity: 0;
+}*/
+
+
+
 .navbar-fade-out {
   -webkit-animation: navbarElementFadeOut 400ms forwards;
   animation: navbarElementFadeOut 400ms forwards;
 
 }
+
 .navbar-fade-in {
     -webkit-animation: navbarElementFadeIn 400ms forwards;
      animation: navbarElementFadeIn 400ms forwards;
+}
+
+/* One Itam */
+
+.item-page.page-content{
+    padding-top: 54px;
+}
+.item-page-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+.item-wrap {
+    display: flex;
+    height: 100%;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+.item-page .item-title {
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0 7px;
+    margin-bottom: 15px;
+}
+.item-page .item-text {
+    font-size: 15px;
+    line-height: 15px;
+    color: #8e8e93;
+    padding: 0 7px 10px;
+}
+
+.item-page .item-text p {
+    margin-bottom: 15px;
+}
+.item-page .item-text p:last-child {
+    margin-bottom: 0;
+}
+.item-page .item-media img {
+    width: 100%;
+    height: 100%;
+}
+.navbar a.link.comments-link {
+    background: url("../img/icon-comments.png")no-repeat center 7px;
+    background-size: 90%;
+}
+.item-page .item-inner{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
 }

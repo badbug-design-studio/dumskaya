@@ -6,6 +6,7 @@
                  <div class="left"><a href="#" class="back link color-white"><i class="icon icon-back"></i><span>Головна</span></a></div>
              </div>
              <div class="right">
+                 <a href="#" class="link item-link icon-only comments-link"><span><%=commentscount %></span></a>
                 <a href="#" class="share link item-link icon-only"><i class="icon fa fa-share-alt"></i></a>
             </div>
          </div>
@@ -13,8 +14,20 @@
 
 <div class="view view-main left-view">
   <div class="page" data-page="about-right">
-      <div class="page-content">
-<div>dfnvglksfndbda</div>
+      <div class="page-content item-page ">
+          <div class="item-page-wrap">
+              <div class="item-wrap">
+              <div class="item-inner">
+                   <div class="item-title-row">
+                       <div class="item-title"><%=title%></div>
+                   </div>
+                  <% if(enclosure&&enclosure._url){ %>
+                      <div class="item-media"><img src="<%=enclosure._url %>" width="84" height="52"/></div>
+                  <% } %>
+                   <div class="item-text"><%=description.__cdata%></div>
+               </div>
+               </div>
+          </div>
       </div>
   </div>          
 </div>

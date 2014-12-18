@@ -13,6 +13,7 @@ define ['_','baseView','app', 'text!templates/oneItemNews.html'],
 
           onRender:()->
             console.log @model.title if @model
+            console.log @model
 
           shareLink: ->
             buttons1 = [
