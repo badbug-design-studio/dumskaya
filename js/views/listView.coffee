@@ -18,7 +18,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           onRender:()->
             @elTabsDom7=@$('.tabs')
-            @navBarDom= @$('#main-navbar .buttons-row')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
@@ -47,7 +46,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
           showCurrentTab:()->
-
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
@@ -58,7 +56,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           updateCurrentTab:()=>
             index=@model.currentTab-1
             tab=@model.tabs[index]
-            console.log tab
             tab.updateItems.call(@,()->app.pullToRefreshDone()) if tab
 
           onPageBeforeAnimation:()->

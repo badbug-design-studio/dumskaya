@@ -15,3 +15,6 @@ define ['_'],
         delete baseApplication['currentView']
         baseApplication.currentView = new View(query)
 
+
+  return new Routes()
+

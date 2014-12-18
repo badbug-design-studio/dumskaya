@@ -10,9 +10,7 @@ define([
                               model.listView=@
                               new NewsView({model:model})
 
-                      if(!pullToRefreshCallback&&typeof baseApplication.cache.items.news!='undefined')
-                          return
-                      baseApplication.cache.getNews(onDownloaded, pullToRefreshCallback)
+                      baseApplication.cache.getList('news',onDownloaded, pullToRefreshCallback)
                     }
                     {id:'tab2',name:'Блоги',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data)=>
@@ -22,9 +20,7 @@ define([
                             model.listView=@
                             new BlogsView({model:model})
 
-                      if(!pullToRefreshCallback&&typeof baseApplication.cache.items.blogs!='undefined')
-                        return
-                      baseApplication.cache.getBlogs(onDownloaded, pullToRefreshCallback)
+                      baseApplication.cache.getList('blogs',onDownloaded, pullToRefreshCallback)
                     }
                     {id:'tab3',name:'ТВ',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data)=>
@@ -34,9 +30,7 @@ define([
                            model.listView=@
                            new TVView({model:model})
 
-                      if(!pullToRefreshCallback&&typeof baseApplication.cache.items.tv!='undefined')
-                       return
-                      baseApplication.cache.getTV(onDownloaded, pullToRefreshCallback)
+                      baseApplication.cache.getList('tv',onDownloaded, pullToRefreshCallback)
                     }
                     {id:'tab4',name:'Статьи',updateItems:()->}
       ]

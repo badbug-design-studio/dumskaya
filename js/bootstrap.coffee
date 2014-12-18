@@ -8,30 +8,22 @@ define([
     'sync'
     'helpers'
     'cache'
-],  (require,_, f7, app,Routes,layout,SyncServices,Helpers,Cache)->
+],  (require,_, f7, app,routes,layout,SyncServices,Helpers,Cache)->
     'use strict';
   #  document.addEventListener('deviceready', onDeviceReady);
     onDevieReady =  (document)->
       window.baseApplication = {
             f7app: app,
             mainLayout: layout
-            router: new Routes,
+            router: routes,
             sync: new SyncServices
             helpers: new Helpers
-            cache: new Cache
+            cache: new Cache(()->
+              routes.loadPage('list')
+              routes.loadPage('menu')
+              app.hideIndicator();
+            )
       }
-      #now in template use {{variable}}
-#      _.templateSettings = {
-#        interpolate: /\{\{(.+?)\}\}/g
-#      };
-#      what view render by default
-      baseApplication.router.loadPage('list')
-      baseApplication.router.loadPage('menu')
-
-#      baseApplication.sync.request('http://dumskaya.net/rsstv/').then(
-#        (result)->
-#          console.log result
-#      )
 
 
     require(['domReady!'],()->

@@ -28,6 +28,7 @@ define ['require','_'],
         @viewParams = query.viewParams
       @render()
 
+
     onRender:()->
         console.log("ON RENDER!")
 
@@ -35,15 +36,16 @@ define ['require','_'],
       if !@template
         console.error "in current view #{@constructor.name} template was missed"
         return
-      compile=_.template(@template)
       _.each @viewParams, (param, key)=>
            baseApplication.mainLayout.params[key] = param
+      compiledHtml=baseApplication.cache.getCompiledHtml('key',@template,@model)
       if @isInjectedOnly
-        @container().html(compile(@model))
+        @container().html(compiledHtml) #just insert in container
       else
-        baseApplication.mainLayout.loadContent(compile(@model),@isAnimate)
+        baseApplication.mainLayout.loadContent(compiledHtml,@isAnimate) #f7 new page comes
       @addEventListeners()
       @onRender()
+
 
 
 

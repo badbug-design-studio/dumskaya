@@ -16,6 +16,5 @@ define([
               app.hideIndicator();
 
     )
-    app.hideIndicator();
     return app
 );
