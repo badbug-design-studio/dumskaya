@@ -13,7 +13,7 @@
                     <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>
              <% } %>
                  <div class="item-content"  data-index="<%=index%>">
-                     <% if(oneItem.enclosure._url){ %>
+                     <% if(oneItem.enclosure&&oneItem.enclosure._url){ %>
                         <div class="item-media"><img src="<%=oneItem.enclosure._url %>" width="84" height="52"/></div>
                      <% } %>
                      <div class="item-inner">

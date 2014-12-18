@@ -3,7 +3,7 @@ define ['_','xml2json'],
   class SyncServices
 
     $: Framework7.$
-    isProd:true
+    isProd:false
 
     constructor:()->
        @x2js = new X2JS();
