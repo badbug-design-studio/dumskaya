@@ -5,12 +5,12 @@
          <%if (index<limit){%>
              <% if(index == 0) { %>
                 <li class="list-wrap">
-                    <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
+                    <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>
              <% } %>
              <% if(index >1 && !baseApplication.helpers.compareTwoDates(oneItem.pubDate, items[index-1].pubDate)) { %>
                 </li>
                 <li class="list-wrap">
-                    <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
+                    <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>
              <% } %>
                  <div class="item-content"  data-index="<%=index%>">
                      <% if(oneItem.enclosure._url){ %>

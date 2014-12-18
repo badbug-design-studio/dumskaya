@@ -49,7 +49,7 @@ define ['f7','_'],
       prop='shortName' if isShort
       return @months[index][prop]
 
-    getShortItemDate:(dateString)->
+    getShortItemDate:(dateString,isShort)->
      date=new Date(dateString)
      day=date.getDate()
      month=date.getMonth()
@@ -58,7 +58,7 @@ define ['f7','_'],
      minutes = date.getMinutes()
      if (minutes<10)
         minutes = "0" + minutes
-     time=date.getHours()+":"+ minutes
+     time=if isShort then '' else date.getHours()+":"+ minutes
      if((day==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
        return "Сегодня "+time
      else if(((day+1)==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
