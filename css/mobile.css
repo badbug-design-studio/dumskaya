@@ -366,7 +366,9 @@ body, html {
     color: #8e8e93;
     padding: 0 7px 10px;
 }
-
+.item-page .item-text a {
+    color: #8A1020;
+}
 .item-page .item-text p {
     margin-bottom: 15px;
 }
