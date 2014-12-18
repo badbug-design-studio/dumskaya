@@ -6,14 +6,13 @@ define ['_','baseView','app', 'text!templates/oneItemNews.html'],
           domTabsObj:[]
           events:
                 "click .share":"shareLink"
-                "click .back.link": "navbarFadeIn"
 
           constructor:(query)->
             super
 
 
           onRender:()->
-            console.log @model.title
+            console.log @model.title if @model
 
           shareLink: ->
             buttons1 = [
@@ -43,7 +42,5 @@ define ['_','baseView','app', 'text!templates/oneItemNews.html'],
             groups = [buttons1, buttons2];
             app.actions(groups)
 
-          navbarFadeIn: ()=>
-            @$('#main-navbar .buttons-row').addClass("navbar-fade-in")
 
         return OneItamNewsView

@@ -3,7 +3,7 @@ define ['_','xml2json'],
   class SyncServices
 
     $: Framework7.$
-    isProd:false
+    isProd:true
 
     constructor:()->
        @x2js = new X2JS();
@@ -29,12 +29,13 @@ define ['_','xml2json'],
 
     getRoot:()->
       if @isProd
-        return "http://dumskaya.net/"
+        return " http://www.corsproxy.com/dumskaya.net/"
       else return "./rss/"
 
     request:(url,isXML,onSuccess,onError)->
       self=@;
       xmlHttp=new XMLHttpRequest();
+
       xmlHttp.open('GET', url, true);
 #      promise = new Promise((resolve, reject)->
       xmlHttp.onreadystatechange = ()->

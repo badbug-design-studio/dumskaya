@@ -32,7 +32,6 @@ define ['_','baseView'],
           handleOnClickItem:()->
             cT=@model.listView.model.currentTab-1
             @model.listView.domTabsObj[cT].on('click',@itemSelector,()=>
-              @model.listView.navBarDom.removeClass("navbar-fade-in").addClass("navbar-fade-out")
               index=@$(event.target).parents('.item-content').data('index')
               baseApplication.router.loadPage('oneItemNews',{model:baseApplication.cache.items[@cacheClass][index]})
             )
