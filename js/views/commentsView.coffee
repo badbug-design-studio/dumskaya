@@ -12,9 +12,9 @@ define ['_','baseView', 'text!templates/comments.html'],
           onRender:()->
             baseApplication.sync.getComments(@model.commentsUrl,
             (data)=>
-#              console.log data
-              @$('.comments-page').append(data)
-              @$('.preloader-indicator-modal').hide()
+              data=data.toString().split('</style>')
+              if(data.length>1) then  html=data[1] else html=data[0]
+              @$('.comments-page').html(html)
             )
 
 

@@ -44,10 +44,10 @@ define ['f7','_'],
 
 
     getCompiledHtml:(key,template,model)->
-      console.log key
-      console.log template
-      console.log model
-      console.log '----------------'
+#      console.log key
+#      console.log template
+#      console.log model
+#      console.log '----------------'
       cachedHtml=@getCachedHtml(key)
       if cachedHtml
         compiledHtml=cachedHtml
