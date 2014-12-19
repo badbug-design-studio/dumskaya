@@ -28,16 +28,12 @@
                        <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+tab.id+'" class="tab-link '+active+' button" >'+tab.name+'</a>')}) %>
                    </div>
         <!-- Scrollable page content-->
-        <div class="page-content  pull-to-refresh-content">
-            <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
-            </div>
+        <div class="page-content">
             <div class="tabs-animated-wrap">
                 <div class="tabs">
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
-                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll">
+                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll page-content  pull-to-refresh-content">
 
                     </div>
                     <%}) %>
