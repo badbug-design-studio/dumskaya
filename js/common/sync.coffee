@@ -47,7 +47,7 @@ define ['_','xml2json'],
             response=self.x2js.xml_str2json(response);
             response=response.rss
 #           resolve(response);
-            onSuccess(response)
+           onSuccess(response)
          else
             console.error "xmlHttpRequest error status #{xmlHttp.status} and url #{url}"
             onError(xmlHttp.statusText) if onError
@@ -55,7 +55,10 @@ define ['_','xml2json'],
       xmlHttp.send()
 #      );
 #      return promise
-
+    getComments: (url, callback) ->
+      if /http:\D{2}/.test url
+        url = url.replace(/http:\D{2}/, "http://www.corsproxy.com/")
+      @request(url, false, callback, ()-> alert "Error")
 
 #xmlhttp.send(null);
 

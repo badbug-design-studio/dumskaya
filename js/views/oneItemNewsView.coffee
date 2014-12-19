@@ -6,6 +6,7 @@ define ['_','baseView','app', 'text!templates/oneItemNews.html'],
           domTabsObj:[]
           events:
                 "click .share":"shareLink"
+                "click .comments-link":"commentsOpen"
 
           constructor:(query)->
             super
@@ -43,5 +44,7 @@ define ['_','baseView','app', 'text!templates/oneItemNews.html'],
             groups = [buttons1, buttons2];
             app.actions(groups)
 
+          commentsOpen: =>
+            baseApplication.router.loadPage("comments",{model:{commentsUrl: @model.comments},viewParams:{swipeBackPage:true}})
 
         return OneItamNewsView
