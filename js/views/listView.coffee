@@ -6,7 +6,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           domTabsObj:[]
           model:
             currentTab:1
-            name:"Dumskaya"
+            name:"Думская"
             tabs:Tabs
           delay: 450
           items:{}

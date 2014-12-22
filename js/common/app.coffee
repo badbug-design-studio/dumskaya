@@ -3,7 +3,7 @@ define([
 ],  (F7) ->
     'use strict';
     app=new F7(
-            modalTitle: 'Dumskaya',
+            modalTitle: 'Думская',
 #            swipePanel: 'left',
             animateNavBackIcon: true
             pushState: false
