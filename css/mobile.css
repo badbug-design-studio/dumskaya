@@ -411,8 +411,9 @@ body, html {
     height: 100%;
 }
 .navbar a.link.comments-link {
-    background: url("../img/icon-comments.png")no-repeat center 7px;
-    background-size: 90%;
+    background: url("../img/icon-comments.png")no-repeat center 9px;
+    background-size: 80%;
+    font-size: 12px;
 }
 .item-page-wrap {
     overflow: auto;
@@ -424,6 +425,78 @@ body, html {
     -webkit-transform-style: preserve-3d;
 }
 
-.comments-page .item-wrap>div {
+
+/*comments*/
+.page-content.comments-page {
+    padding-top: 44px;
+}
+.comments-page .item-page-wrap>div {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+.comments-page .item-page-wrap>div.preloader-indicator-modal{
+    border-bottom: none
+}
+.comments-page .pb10 {
+
+}
+.comments-page .comtd1 {
+    float: left;
+    width: 35px;
+    height: 35px;
+
+}
+.comments-page .comtd2 {
+    font-size: 13px;
+    overflow: hidden;
     width: 100%;
 }
+.comments-page .comtd2>table{
+    float: left;
+}
+
+.comments-page .user{
+
+    color: #8A1020;
+}
+.comments-page .comdate {
+    font-size: 11px;
+    color: #999;
+    margin: 0;
+    display: block;
+}
+
+
+.comments-page .comtd2>div {
+    padding: 5px;
+    white-space: normal;
+    font-size: 14px;
+    line-height: 15px;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+}
+.comments-page .comtd2>div img {
+    width: 100%;
+}
+.comments-page  .comtd4 img{
+    width: 18px;;
+    display: inline-block;
+    vertical-align: top;
+}
+.comments-page  .comtd5 {
+    float: right;
+    color: #540710;
+}
+
+
+.comments-page>.item-page-wrap>div>.comansd {
+    padding-left: 20px;
+}
+/*.comments-page .item-wrap>div {*/
+    /*width: 100%;*/
+/*}*/
