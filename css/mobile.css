@@ -437,6 +437,9 @@ body, html {
     border-bottom: 1px solid #ccc;
     margin-bottom: 8px;
 }
+.comments-page .item-page-wrap>div:last-child {
+    border: none;
+}
 .comments-page .item-page-wrap>div.preloader-indicator-modal{
     border-bottom: none
 }
