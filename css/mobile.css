@@ -132,7 +132,7 @@ body, html {
     overflow: hidden;
 }
 .navbar-through .page-content.item-page , .navbar-fixed .page-content.item-page  {
-    padding-top: 69px;
+    padding-top: 44px;
     overflow: auto;
 }
 .inner {
@@ -414,7 +414,7 @@ body, html {
     background: url("../img/icon-comments.png")no-repeat center 7px;
     background-size: 90%;
 }
-.item-page .item-inner{
+.item-page-wrap {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(0,0,0);
