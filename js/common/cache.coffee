@@ -6,7 +6,8 @@ define ['f7','_'],
     items:{}
     dbName:"dumskayaDB"
     constructor:(callback)->
-      @initCache(callback)
+      callback()
+      #@initCache(callback)
 
     getList:(cacheKey,callback,need2Update)->
       if(!need2Update&&typeof @items[cacheKey]!='undefined')
@@ -60,6 +61,7 @@ define ['f7','_'],
       return false
 
     getCachedData:(cacheKey,callback)->
+      return false
       transaction = @db.transaction(['data'], 'readwrite');
       store = transaction.objectStore('data');
       request = store.get(cacheKey);
