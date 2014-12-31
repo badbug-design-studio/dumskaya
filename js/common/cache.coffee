@@ -5,9 +5,13 @@ define ['f7','_'],
     date:new Date()
     items:{}
     dbName:"dumskayaDB"
+    tableName: null
+    tableData: null
+    db: null
     constructor:(callback)->
       callback()
       #@initCache(callback)
+      @initDatabase()
 
     getList:(cacheKey,callback,need2Update)->
       if(!need2Update&&typeof @items[cacheKey]!='undefined')
@@ -23,9 +27,12 @@ define ['f7','_'],
         return false #dont do any request
 
       url=@getUrl(cacheKey)
+      @tableName = cacheKey
       baseApplication.sync.request(url,true,(data)=>
         if(!@items[cacheKey]||(@items[cacheKey].length!=data.channel.item.length))
           @items[cacheKey]=data.channel.item
+          @tableData=data.channel.item
+          @setTableData()
           setTimeout(()->
             callback(data)
             need2Update() if need2Update
@@ -104,6 +111,56 @@ define ['f7','_'],
     databaseError:(e)->
       console.error('An IndexedDB error has occurred', e);
 
+    initDatabase: () ->
+      dbName = 'dumskaya';
+      version = '1.0';
+      displayName = 'Web SQL Storage Dumskaya Database';
+      maxSize = 20*1024*1024;
+      if window.openDatabase
+        @db = openDatabase(dbName, version, displayName, maxSize);
+        @db.transaction(@createDbTables, @errorHandler);
+      else
+        console.error("It seems your browser does not have support for WebSQL.")
+
+    createDbTables:(tx)=>
+      tx.executeSql("CREATE TABLE IF NOT EXISTS news (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
+      tx.executeSql("CREATE TABLE IF NOT EXISTS blogs (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
+      tx.executeSql("CREATE TABLE IF NOT EXISTS tv (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
+      tx.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
+
+    errorHandler: (error)->
+      console.error(error)
+      return false;
+
+    setTableData: ()=>
+      @db.transaction((tx)=>
+        tx.executeSql("INSERT INTO #{@tableName} (data, created) VALUES (?,?)", [ JSON.stringify(@tableData),  new Date().getTime()]
+          (tx, resultSet) ->
+            if (!resultSet.rowsAffected)
+              alert('No rows affected!');
+              return false;
+        )
+      ,@errorHandler, @getDataFromTable()
+      );
+
+    getDataFromTable: () =>
+      @db.transaction((tx)=>
+        tx.executeSql("SELECT * FROM #{@tableName}", [], (tx,result)->
+          for item in [0...result.rows.length]
+            news = result.rows.item(item);
+            console.info(news)
+        ,@errorHandler, @querySuccess())
+      )
+
+    querySuccess: () =>
+      console.log true
+
+    dropTables: () =>
+      @db.transaction((tx) =>
+        tx.executeSql("DROP TABLE #{@tableName}",[],(tx,results)->
+          console.log("Successfully Dropped")
+        );
+      )
 
   return Cache
 
