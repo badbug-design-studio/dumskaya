@@ -14,30 +14,21 @@ define ['f7','_'],
     getList:(cacheKey,callback,need2Update)->
       delay=0
       delay=1000 if need2Update
-      alert cacheKey
       @getDataFromTable(cacheKey,(cachedData)=>
-
-        if(!cachedData)
-          alert "First time app run"
-
         if(cachedData&&!need2Update)#if we had cache work wit it
-          alert 'Already cached'
           console.log cachedData
           setTimeout(()=>
             if !@itemsRender[cacheKey]
-              alert 'render'
               @itemsRender[cacheKey]=true
               callback(JSON.parse(cachedData.data))
             need2Update() if need2Update
           ,delay)
           return false #dont do any request
 
-        alert 'Lets cache'
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
           console.log data
           if(data&&data.channel)
-            alert 'if true'
             @itemsRender[cacheKey]=true
             @setTableData(cacheKey,data)
             setTimeout(()->
@@ -45,7 +36,6 @@ define ['f7','_'],
               need2Update() if need2Update
             ,delay)
           else
-            alert 'else'
             setTimeout(()->
               need2Update() if need2Update
             ,delay)
