@@ -3,7 +3,7 @@ define ['f7','_'],
   class Cache
     $: Framework7.$
     date:new Date()
-    itemsRender:{}
+    items:{}
     dbName:"dumskayaDB"
     version: '1.0';
     i:0
@@ -18,18 +18,19 @@ define ['f7','_'],
         if(cachedData&&!need2Update)#if we had cache work wit it
           console.log cachedData
           setTimeout(()=>
-            if !@itemsRender[cacheKey]
-              @itemsRender[cacheKey]=true
-              callback(JSON.parse(cachedData.data))
+            if !@items[cacheKey]
+              parsedData=JSON.parse(cachedData.data)
+              @items[cacheKey]=parsedData.channel.item
+              callback(parsedData)
             need2Update() if need2Update
           ,delay)
           return false #dont do any request
 
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
-          console.log data
           if(data&&data.channel)
-            @itemsRender[cacheKey]=true
+            parsedData=JSON.parse(cachedData.data)
+            @items[cacheKey]=parsedData.channel.item
             @setTableData(cacheKey,data)
             setTimeout(()->
               callback(data)
