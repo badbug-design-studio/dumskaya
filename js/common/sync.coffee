@@ -36,7 +36,7 @@ define ['_','xml2json'],
       self=@;
       xmlHttp=new XMLHttpRequest();
 
-      xmlHttp.open('GET', url, true);
+      xmlHttp.open('GET', url+"?#{Date.now()}", true);
 #      promise = new Promise((resolve, reject)->
       xmlHttp.onreadystatechange = ()->
          if (xmlHttp.readyState != 4) then return
