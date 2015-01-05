@@ -15,6 +15,9 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           onRender:()->
             console.log @model.title if @model
             console.log @model
+            if !+(@model.commentscount)
+              @$(".comments-link").addClass("no-comments")
+
 
           shareLink: ->
             buttons1 = [

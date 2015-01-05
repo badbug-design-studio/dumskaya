@@ -18,15 +18,17 @@
             <% } %>
             <div class="item-content"  data-index="<%=index%>">
                 <% if(oneItem.smallImg){ %>
-                <div class="item-media"><img src="<%=oneItem.smallImg %>" width="84" height="52"/></div>
+                <div class="item-media"><img src="<%=oneItem.smallImg %>" width="84" height="62"/>
+                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div></div>
                 <% } %>
                 <div class="item-inner">
                     <div class="item-title-row">
                         <div class="item-title"><%=oneItem.title%></div>
                     </div>
                     <div class="item-text"><%=oneItem.shortDescription%></div>
-                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div>
+
                 </div>
+
             </div>
             <% if(index == lastIndex) { %>
         </li>
