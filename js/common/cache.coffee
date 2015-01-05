@@ -16,7 +16,6 @@ define ['f7','_'],
       delay=1000 if need2Update
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
-          console.log cachedData
           setTimeout(()=>
             if !@items[cacheKey]
               parsedData=JSON.parse(cachedData.data)
@@ -29,8 +28,7 @@ define ['f7','_'],
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
           if(data&&data.channel)
-            parsedData=JSON.parse(cachedData.data)
-            @items[cacheKey]=parsedData.channel.item
+            @items[cacheKey]=data.channel.item
             @setTableData(cacheKey,data)
             setTimeout(()->
               callback(data)

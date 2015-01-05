@@ -3,7 +3,7 @@ define ['_','xml2json'],
   class SyncServices
 
     $: Framework7.$
-    isProd:false
+    isProd:true
 
     constructor:()->
        @x2js = new X2JS();
@@ -29,10 +29,10 @@ define ['_','xml2json'],
 
     getRoot:()->
       if @isProd
-        return " http://www.corsproxy.com/dumskaya.net/"
+        return "http://dumskaya.net/"
       else return "./rss/"
 
-    request:(url,isXML,onSuccess,onError)->
+    request:(url,isXML,onSuccess)->
       self=@;
       xmlHttp=new XMLHttpRequest();
 
@@ -50,15 +50,15 @@ define ['_','xml2json'],
            onSuccess(response)
          else
             console.error "xmlHttpRequest error status #{xmlHttp.status} and url #{url}"
-            onError(xmlHttp.statusText) if onError
+            onSuccess(false,xmlHttp.statusText) if onSuccess
 #            reject(xmlHttp.statusText) if reject
       xmlHttp.send()
 #      );
 #      return promise
     getComments: (url, callback) ->
-      if /http:\D{2}/.test url
-        url = url.replace(/http:\D{2}/, "http://www.corsproxy.com/")
-      @request(url, false, callback, ()-> alert "Error")
+#      if /http:\D{2}/.test url
+#        url = url.replace(/http:\D{2}/, "http://www.corsproxy.com/")
+      @request(url, false, callback, ()-> console.error('comments get error'))
 
 #xmlhttp.send(null);
 

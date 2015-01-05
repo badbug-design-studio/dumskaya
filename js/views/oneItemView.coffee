@@ -1,4 +1,4 @@
-define ['_','baseView','app', 'text!templates/oneItemNews.html'],
+define ['_','baseView','app', 'text!templates/oneItem.html'],
   (_, BaseView, app, template)->
 
         class OneItamNewsView extends BaseView

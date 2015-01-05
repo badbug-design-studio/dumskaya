@@ -21,8 +21,8 @@
                    <div class="item-title-row">
                        <div class="item-title"><%=title%></div>
                    </div>
-                  <% if(enclosure&&enclosure._url){ %>
-                      <div class="item-media"><img src="<%=enclosure._url %>" width="100%" /></div>
+                  <% if(smallImg){ %>
+                      <div class="item-media"><img src="<%=smallImg%>" width="100%" /></div>
                   <% } %>
                    <div class="item-text"><%=description.__cdata%></div>
                </div>

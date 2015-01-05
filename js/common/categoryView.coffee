@@ -33,7 +33,7 @@ define ['_','baseView'],
             cT=@model.listView.model.currentTab-1
             @model.listView.domTabsObj[cT].on('click',@itemSelector,()=>
               index=@$(event.target).parents('.item-content').data('index')
-              baseApplication.router.loadPage('oneItemNews',{model:baseApplication.cache.items[@cacheClass][index]})
+              baseApplication.router.loadPage('oneItem',{model:baseApplication.cache.items[@cacheClass][index]})
             )
 
 
