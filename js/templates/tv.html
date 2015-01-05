@@ -20,10 +20,14 @@
             <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
             <% } %>
             <div class="item-content"  data-index="<%=index%>">
-                <% if(oneItem.smallImg){ %>
-                <div class="item-media"><img src="<%=oneItem.smallImg %>" width="84" height="52"/>
-                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div></div>
-                <% } %>
+                <div class="item-media with-img">
+                    <% if(oneItem.smallImg){ %>
+                    <img src="<%=oneItem.smallImg %>" width="84" height="52"/>
+                    <% } else { %>
+                    <img src="./img/no_image_available.png" height="52" />
+                    <% } %>
+                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div>
+                </div>
                 <div class="item-inner">
                     <div class="item-title-row">
                         <div class="item-title"><%=oneItem.title%></div>
