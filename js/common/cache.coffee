@@ -27,21 +27,18 @@ define ['f7','_'],
 
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
-          if(data&&data.channel)
+          if(data&&data.channel) #set new info if we got it from server
             @items[cacheKey]=data.channel.item
             @setTableData(cacheKey,data)
-            setTimeout(()->
+
+          setTimeout(()->
+            if data&&data.channel #do rerender only if we got new info
               callback(data)
-              need2Update() if need2Update
-            ,delay)
-          else
-            setTimeout(()->
-              need2Update() if need2Update
-            ,delay)
+            else if !cachedData #if we dont have new data and cached info for current tab do render anywhere,because we must show something
+              callback(data)
+            need2Update() if need2Update
+          ,delay)
         )
-
-
-
       )
 
 

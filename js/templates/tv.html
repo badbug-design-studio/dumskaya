@@ -5,8 +5,11 @@
 <div class="list-block media-list news-list">
     <ul>
         <% var lastIndex = items.length - 1; %>
+        <%if (!items.length){%>
+                    <li>Нет информации</li>
+                <%}%>
         <% _.each(items,function(oneItem,index){ %>
-        <%if (index<limit){%>
+        <%if (index>=listView.indexes.news&&index<limit){%>
         <% if(index == 0) { %>
         <li class="list-wrap">
             <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>

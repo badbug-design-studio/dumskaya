@@ -183,6 +183,8 @@ body, html {
     /*-webkit-backface-visibility: hidden;*/
     /*-webkit-perspective: 800;*/
     /*-webkit-transform-style: preserve-3d;*/
+    min-height: 100%;
+    min-width: 100%;
 }
 .tab .list-block {
     margin: 0;

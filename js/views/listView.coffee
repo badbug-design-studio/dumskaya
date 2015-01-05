@@ -10,6 +10,14 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             tabs:Tabs
           delay: 450
           items:{}
+          isUpdating:false
+          indexes:
+            news:0
+            blogs:0
+            tv:0
+            articles:0
+          infiniteTabsEventOn:[false,false,false,false]
+
           events:
             "refresh .pull-to-refresh-content":"updateCurrentTab"
           constructor:(query)->
@@ -36,11 +44,15 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           swipeTabsHandle:()->
             Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
+              if @isUpdating
+                return
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
             Hammer(@elTabsDom7[0]).on("swiperight", ()=>
+              if @isUpdating
+                 return
               if(@model.currentTab>1)
                  @model.currentTab--
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
@@ -49,14 +61,20 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
+              console.log tab
               setTimeout(()=>
                      tab.updateItems.apply(@) if tab
               ,@delay)
 
           updateCurrentTab:()=>
+            @isUpdating=true
             index=@model.currentTab-1
             tab=@model.tabs[index]
-            tab.updateItems.call(@,()->app.pullToRefreshDone()) if tab
+            console.log tab
+            tab.updateItems.call(@,()=>
+              app.pullToRefreshDone()
+              @isUpdating=false
+            ) if tab
 
           onPageBeforeAnimation:()->
             console.log("onPageBeforeAnimation")
