@@ -3,7 +3,7 @@
          <div class="navbar-inner">
              <div class="left">
                  <!-- Right link contains only icon - additional "icon-only" class-->
-                 <div class="left"><a href="#" class="back link color-white"><i class="icon icon-back"></i><span>Головна</span></a></div>
+                 <div class="left"><a href="#" class="back link color-white ajax"><i class="icon icon-back"></i><span>Головна</span></a></div>
              </div>
              <div class="right">
                  <a href="#" class="link item-link icon-only comments-link"><span><%=commentscount %></span></a>
@@ -24,7 +24,7 @@
                   <% if(smallImg){ %>
                       <div class="item-media"><img src="<%=smallImg%>" width="100%" /></div>
                   <% } %>
-                   <div class="item-text"><%=description.__cdata%></div>
+                   <div class="item-text external"><%=description.__cdata%></div>
                </div>
                </div>
           </div>

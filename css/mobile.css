@@ -40,7 +40,7 @@ body, html {
     background: #efeff4;
 }
 .page, .pages {
-    background: #fff;
+    /*background: #fff;*/
 }
 .slider {
     height: 100%;
@@ -138,9 +138,14 @@ body, html {
     padding-bottom: 0;
     overflow: hidden;
 }
+.navbar-through .page-content.standard, .navbar-fixed .page-content.standard {
+    padding-top: 44px;
+}
+
 .navbar-through .page-content.item-page , .navbar-fixed .page-content.item-page  {
     padding-top: 44px;
     overflow: auto;
+    background: #fff;
 }
 .inner {
     -webkit-box-sizing: border-box;
@@ -249,8 +254,13 @@ body, html {
 .send-photo, .send-button {
     width: 100%;
 }
+.send-photo-form {
+    /*margin: 0 10px;*/
+}
 .list-block.send-photo-form .item-inner {
     padding-right: 0;
+    margin: 0 7px;
+    width: auto;
 }
 .infinite-scroll-preloader {
     text-align: center;

@@ -1,7 +1,7 @@
 <div class="navbar">
     <div class="navbar-inner">
-        <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-        <div class="center sliding">About</div>
+        <div class="left"><a href="#" class="back link ajax"> <i class="icon icon-back"></i><span>Назад</span></a></div>
+        <div class="center sliding"></div>
         <div class="right">
             <a href="#" class="link icon-only open-panel"><i class="icon menu fa fa-navicon"></i></a>
         </div>
@@ -12,8 +12,8 @@
     <div data-page="sendPhotos" class="page">
         <div class="page-content standard">
             <div class="content-block">
-                <div class="content-block-title">Send photo</div>
-                <div class="list-block send-photo-form">
+                <div class="content-block-title">Отправить фотографию в редакцию</div>
+                <div class="list-block send-photo-form inset">
                     <form action="http://dumskaya.net/mobilesendphoto//send/" enctype="multipart/form-data" method="post" id="form">
                         <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
                         <ul>
@@ -21,7 +21,7 @@
                                 <div class="item-inner">
                                     <!--<div class="item-title label">Name</div>-->
                                     <div class="item-input">
-                                        <input type="text" name="name" placeholder="Your name">
+                                        <input type="text" name="name" placeholder="Представтесь">
                                     </div>
                                 </div>
                             </li>
@@ -29,7 +29,7 @@
                                 <div class="item-inner">
                                     <!--<div class="item-title label">Description</div>-->
                                     <div class="item-input">
-                                        <textarea name="text" placeholder="Description"></textarea>
+                                        <textarea name="text" placeholder="Пвру слов о фото"></textarea>
                                     </div>
                                 </div>
                             </li>
@@ -47,7 +47,7 @@
                             </li>
                             <li>
                                 <div class="item-inner">
-                                    <button class="button button-big button-fill send-button">Send Photo</button>
+                                    <button class="button button-big button-fill send-button">Отправить</button>
                                 </div>
                             </li>
                         </ul>
