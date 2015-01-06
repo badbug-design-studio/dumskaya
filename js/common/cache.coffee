@@ -6,7 +6,6 @@ define ['f7','_'],
     items:{}
     dbName:"dumskayaDB"
     version: '1.0';
-    i:0
     db: null
     constructor:(callback)->
       @initDatabase(callback)
@@ -14,13 +13,15 @@ define ['f7','_'],
     getList:(cacheKey,callback,need2Update)->
       delay=0
       delay=1000 if need2Update
+      console.log '---------------------'
+      console.log @
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
             if !@items[cacheKey]
               parsedData=JSON.parse(cachedData.data)
               @items[cacheKey]=parsedData.channel.item
-              callback(parsedData)
+              callback(parsedData,cacheKey)
             need2Update() if need2Update
           ,delay)
           return false #dont do any request
@@ -33,9 +34,9 @@ define ['f7','_'],
 
           setTimeout(()->
             if data&&data.channel #do rerender only if we got new info
-              callback(data)
+              callback(data,cacheKey)
             else if !cachedData #if we dont have new data and cached info for current tab do render anywhere,because we must show something
-              callback(data)
+              callback(data,cacheKey)
             need2Update() if need2Update
           ,delay)
         )
@@ -51,11 +52,7 @@ define ['f7','_'],
 
 
     getCompiledHtml:(key,template,model)->
-#      console.log key
-#      console.log template
-#      console.log model
-#      console.log '----------------'
-      cachedHtml=@getCachedHtml(key)
+      cachedHtml=@getCachedHtml(key) #on the future
       if cachedHtml
         compiledHtml=cachedHtml
       else
@@ -63,6 +60,7 @@ define ['f7','_'],
         compiledHtml=compile(model)
       return compiledHtml
 
+#    @TODO
     getCachedHtml:(cacheKey)->
       return false
 
@@ -79,6 +77,7 @@ define ['f7','_'],
 
       request.onerror = @databaseError;
 
+#    @TODO
     setCachedHtml:(cacheKey,data)->
 
 

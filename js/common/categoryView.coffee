@@ -1,21 +1,21 @@
-define ['_','baseView'],
-  (_, BaseView)->
+define ['_','baseView','text!templates/items.html'],
+  (_, BaseView,itemsTemplate)->
 
         class CategoryView extends BaseView
           template:null
           isInjectedOnly:true
           container:()->
-              console.log @index
-              return @model.listView.domTabsObj[@index]
+              return @model.listView.domTabsObj[@tabIndex]
 
           constructor:(query)->
             if(query && query.model)
               @model = query.model
+              @model.renderList=@renderList
             if(query && query.viewParams)
               @viewParams = query.viewParams
 
-            if(query && typeof query.index !='undefined')
-              @index=query.index
+            if(query && typeof query.tabIndex !='undefined')
+              @tabIndex=query.tabIndex
             @render()
 
 
@@ -27,11 +27,21 @@ define ['_','baseView'],
              @model.listView.infiniteTabsEventOn[cT]=true
              @model.listView.domTabsObj[cT].on('infinite',  ()=>
                if (loading) then return;
-               @infiniteStart()
-       #              // Set loading flag
+       #       Set loading flag
                loading = true;
-               setTimeout(()->
-                 loading=false
+               setTimeout(()=>
+                  loading=false
+                  index=@model.cacheKey
+                  itemLength=baseApplication.cache.items[index].length
+                  @model.listView.indexes[index]+=@model.limit
+                  renderedCount=@model.listView.indexes[index]
+
+                  if(renderedCount==itemLength)
+#                       baseApplication.f7app.detachInfiniteScroll(@$('.infinite-scroll'));
+                       @infiniteScrollSelector().remove()
+                       @model.listView.indexes[index]=0
+                       return
+                  @appendOldData()
                ,1000)
              )
 
@@ -42,6 +52,16 @@ define ['_','baseView'],
               baseApplication.router.loadPage('oneItem',{model:baseApplication.cache.items[@cacheClass][index]})
             )
 
+
+          renderList:()=>
+            compile=_.template(itemsTemplate)
+            compiledHtml=compile(@model)
+
+            return  compiledHtml
+
+          appendOldData:()->
+            compiledTemplate=@renderList()
+            @appendEl().append(compiledTemplate)
 
 
 

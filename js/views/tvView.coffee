@@ -17,9 +17,13 @@ define ['_','categoryView','text!templates/tv.html'],
             @handleOnClickItem()
 
 
-          infiniteStart: ()->
-            console.log "infinite"
 
+
+          appendEl:()->
+             return @$('#tab3 ul')
+
+          infiniteScrollSelector:()->
+             return  @$('#tab3 .infinite-scroll-preloader')
 
 
 

@@ -17,8 +17,12 @@ define ['_','categoryView','text!templates/blogs.html'],
             @handleOnClickItem()
 
 
-          infiniteStart: ()->
-            console.log "infinite"
+          appendEl:()->
+             return @$('#tab2 ul')
+
+
+          infiniteScrollSelector:()->
+             return  @$('#tab3 .infinite-scroll-preloader')
 
 
 

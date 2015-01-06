@@ -5,45 +5,13 @@
 <div class="list-block media-list news-list">
     <ul>
         <% var lastIndex = items.length - 1; %>
-        <%if (!items.length){%>
-        <li>Нет информации</li>
-        <%}%>
-        <% _.each(items,function(oneItem,index){ %>
-        <%if (index>=listView.indexes.news&&index<limit){%>
-        <% if(index == 0) { %>
-        <li class="list-wrap">
-            <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
-            <% } %>
-            <% if(index >1 && !baseApplication.helpers.compareTwoDates(oneItem.pubDate, items[index-1].pubDate)) { %>
-        </li>
-        <li class="list-wrap">
-            <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate)%></div>
-            <% } %>
-            <div class="item-content"  data-index="<%=index%>">
-                <div class="item-media with-img">
-                    <% if(oneItem.smallImg){ %>
-                    <img src="<%=oneItem.smallImg %>" width="84" height="52"/>
-                    <% } else { %>
-                    <img src="./img/no_image_available.png" height="52" />
-                    <% } %>
-                    <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div>
-                </div>
-                <div class="item-inner">
-                    <div class="item-title-row">
-                        <div class="item-title"><%=oneItem.title%></div>
-                    </div>
-                    <div class="item-text"><%=oneItem.shortDescription%></div>
-
-                </div>
-
-            </div>
-            <% if(index == lastIndex) { %>
-        </li>
-        <% } %>
-        <%}%>
-        <% }) %>
+             <%if (!items.length){%>
+                 <li>Нет информации</li>
+             <%} else {print(renderList())}%>
     </ul>
 </div>
+<%if (items.length){%>
 <div class="infinite-scroll-preloader">
     <div class="preloader infinite"></div>
 </div>
+<%}%>

@@ -16,6 +16,12 @@ define ['_','categoryView','text!templates/news.html'],
             @initInfinitScroll()
             @handleOnClickItem()
 
+          appendEl:()->
+            return @$('#tab1 ul')
+
+          infiniteScrollSelector:()->
+            return  @$('#tab1 .infinite-scroll-preloader')
+
 
 
 
