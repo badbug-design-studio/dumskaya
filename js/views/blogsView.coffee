@@ -22,7 +22,7 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           infiniteScrollSelector:()->
-             return  @$('#tab3 .infinite-scroll-preloader')
+             return  @$('#tab2 .infinite-scroll-preloader')
 
 
 
