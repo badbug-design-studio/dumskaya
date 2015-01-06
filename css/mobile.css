@@ -124,11 +124,11 @@ body, html {
     border-color: #8a1020 transparent transparent transparent;
     z-index: 5;
     transform: translate3d(0, 0, 0);
-    -moz-transition: all 300ms ease;
-    -ms-transition: all 300ms ease;
-    -o-transition: all 300ms ease;
     -webkit-transition: all 300ms ease;
     transition: all 300ms ease;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
 }
 .navbar {
     border-bottom: 1px solid #720c18;
@@ -201,11 +201,20 @@ body, html {
 }
 .news-list ul {
     border-bottom: none;
+    background: none;
+}
+.news-list ul .list-wrap {
+    background: #fff;
+    padding: 5px 0;
+}
+.news-list ul .list-wrap.without-bg {
+    background: transparent;
+    padding: 0;
 }
 .news-list li.list-line {
     border-bottom: 1px solid #c8c7cc;
     height: 1px;
-    margin: 0px 7px;
+    width: 100%;
 }
 .news-list.list-block .item-inner {
     border: none;
