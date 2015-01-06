@@ -8,15 +8,16 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                 "click .share":"shareLink"
                 "click .comments-link":"commentsOpen"
 
-          constructor:(query)->
+          constructor: (query)->
             super
 
 
+
           onRender:()->
-            console.log @model.title if @model
-            console.log @model
-            if !+(@model.commentscount)
-              @$(".comments-link").addClass("no-comments")
+            setTimeout(()=>
+              @$("#contentOneItem").html(@model.description.__cdata)
+            ,1000) #terrible wait until animation works
+
 
 
           shareLink: ->

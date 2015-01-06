@@ -586,3 +586,15 @@ body, html {
 /*.comments-page .item-wrap>div {*/
     /*width: 100%;*/
 /*}*/
+#contentOneItem{
+    margin-top: 15px;
+}
+#contentOneItem .preloader{
+    margin: 15px auto 0 auto;
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+.disable-touch{
+    pointer-events: none;
+}

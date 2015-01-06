@@ -4,7 +4,7 @@
 <% _.each(items,function(oneItem,index){ %>
          <%if (index>=renderedCount&&iteration<limit){%>
              <% if(index == 0 || (listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate))) { %>
-                <%if(listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate)){%>
+                <%if(index&&listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate)){%>
                      <li class="list-line"></li>
                      <%listView.previousDate=oneItem.pubDate%>
                 <%}%>

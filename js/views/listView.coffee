@@ -26,6 +26,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           onRender:()->
             @elTabsDom7=@$('.tabs')
+            @elBody=@$('#body')
             @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
@@ -44,15 +45,11 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           swipeTabsHandle:()->
             Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
-              if @isUpdating
-                return
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
             Hammer(@elTabsDom7[0]).on("swiperight", ()=>
-              if @isUpdating
-                 return
               if(@model.currentTab>1)
                  @model.currentTab--
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
@@ -67,13 +64,12 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               ,@delay)
 
           updateCurrentTab:()=>
-            @isUpdating=true
+            @elBody.addClass('disable-touch')
             index=@model.currentTab-1
             tab=@model.tabs[index]
-            console.log tab
             tab.updateItems.call(@,()=>
               app.pullToRefreshDone()
-              @isUpdating=false
+              @elBody.removeClass('disable-touch')
             ) if tab
 
           onPageBeforeAnimation:()->
