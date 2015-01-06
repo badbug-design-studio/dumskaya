@@ -202,8 +202,10 @@ body, html {
 .news-list ul {
     border-bottom: none;
 }
-.news-list li {
+.news-list li.list-line {
     border-bottom: 1px solid #c8c7cc;
+    height: 1px;
+    margin: 0px 7px;
 }
 .news-list.list-block .item-inner {
     border: none;
