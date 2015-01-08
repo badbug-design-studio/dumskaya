@@ -40,7 +40,14 @@ body, html {
     background: #efeff4;
 }
 .page, .pages {
-    /*background: #fff;*/
+    background: #efeff4;
+}
+iframe {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
 }
 .slider {
     height: 100%;
