@@ -12,12 +12,16 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
             super
 
 
-
           onRender:()->
             setTimeout(()=>
               @$("#contentOneItem").html(@model.description.__cdata)
-            ,1000) #terrible wait until animation works
-
+              baseApplication.sync.getComments(@model.commentscounturl,
+                 (data)=>
+                   if @model.commentscount != data
+                     @model.commentscount = data
+                     @$("#comments_count").text(@model.commentscount)
+               )
+            ,4000) #terrible wait until animation works
 
 
           shareLink: ->
