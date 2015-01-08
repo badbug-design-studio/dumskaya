@@ -593,10 +593,10 @@ iframe {
 /*.comments-page .item-wrap>div {*/
     /*width: 100%;*/
 /*}*/
-#contentOneItem{
+#contentOneItem,#commentsOneItem{
     margin-top: 15px;
 }
-#contentOneItem .preloader{
+#contentOneItem .preloader,#commentsOneItem .preloader{
     margin: 15px auto 0 auto;
     display: block;
     width: 30px;

@@ -3,7 +3,7 @@ define ['f7','_'],
   class Cache
     $: Framework7.$
     date:new Date()
-    items:{}
+    data:{}
     dbName:"dumskayaDB"
     version: '1.0';
     db: null
@@ -18,9 +18,9 @@ define ['f7','_'],
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
-            if !@items[cacheKey]
+            if !@data[cacheKey]
               parsedData=JSON.parse(cachedData.data)
-              @items[cacheKey]=parsedData.channel.item
+              @data[cacheKey]=parsedData
               callback(parsedData,cacheKey)
             need2Update() if need2Update
           ,delay)
@@ -29,7 +29,7 @@ define ['f7','_'],
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
           if(data&&data.channel) #set new info if we got it from server
-            @items[cacheKey]=data.channel.item
+            @data[cacheKey]=data
             @setTableData(cacheKey,data)
 
           setTimeout(()->
@@ -65,15 +65,7 @@ define ['f7','_'],
       return false
 
 
-    setCachedData:(cacheKey,data,callback)->
-      transaction = @db.transaction(['data'], 'readwrite');
-      store = transaction.objectStore('data');
-      request = store.put({
-        data: data,
-        id: cacheKey
-      });
-      request.onsuccess=(e)->
-        callback if callback
+
 
       request.onerror = @databaseError;
 

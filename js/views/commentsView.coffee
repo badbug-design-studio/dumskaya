@@ -10,12 +10,15 @@ define ['_','baseView', 'text!templates/comments.html'],
 
 
           onRender:()->
-            baseApplication.sync.getComments(@model.commentsUrl,
-            (data)=>
-              data=data.toString().split('</style>')
-              if(data.length>1) then  html=data[1] else html=data[0]
-              @$('.comments-page .item-page-wrap').html(html)
-            )
+            setTimeout(()=>
+              baseApplication.sync.getComments(@model.commentsUrl,
+                (data)=>
+                  data=data.toString().split('</style>')
+                  if(data.length>1) then  html=data[1] else html=data[0]
+                  @$('#commentsOneItem').html(html)
+                )
+            ,1000)
+
 
 
         return CommentsView

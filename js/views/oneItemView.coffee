@@ -17,11 +17,13 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               @$("#contentOneItem").html(@model.description.__cdata)
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
-                   if @model.commentscount != data
+                   if data&&@model.commentscount != data
                      @model.commentscount = data
                      @$("#comments_count").text(@model.commentscount)
+                     @saveInCacheNewData()
+
                )
-            ,4000) #terrible wait until animation works
+            ,1000) #terrible wait until animation works
 
 
           shareLink: ->
@@ -54,5 +56,9 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
 
           commentsOpen: =>
             baseApplication.router.loadPage("comments",{model:{commentsUrl: @model.comments},viewParams:{swipeBackPage:true}})
+
+          saveInCacheNewData:()->
+            baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
+            baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
 
         return OneItamNewsView

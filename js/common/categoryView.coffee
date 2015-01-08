@@ -32,7 +32,7 @@ define ['_','baseView','text!templates/items.html'],
                setTimeout(()=>
                   loading=false
                   index=@model.cacheKey
-                  itemLength=baseApplication.cache.items[index].length
+                  itemLength=baseApplication.cache.data[index].channel.item.length
                   @model.listView.indexes[index]+=@model.limit
                   renderedCount=@model.listView.indexes[index]
 
@@ -49,7 +49,10 @@ define ['_','baseView','text!templates/items.html'],
             cT=@model.listView.model.currentTab-1
             @model.listView.domTabsObj[cT].on('click',@itemSelector,()=>
               index=@$(event.target).parents('.item-content').data('index')
-              baseApplication.router.loadPage('oneItem',{model:baseApplication.cache.items[@cacheClass][index]})
+              model=baseApplication.cache.data[@cacheClass].channel.item[index]
+              model.cacheClass=@cacheClass
+              model.index=index
+              baseApplication.router.loadPage('oneItem',{model:model})
             )
 
 
