@@ -498,6 +498,9 @@ iframe {
     background-size: 80%;
     font-size: 12px;
 }
+.navbar #comments_count.active-state {
+    opacity: 1;
+}
 .navbar a.link.comments-link.no-comments {
     pointer-events: none;
     opacity: 0.3;

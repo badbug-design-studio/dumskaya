@@ -21,7 +21,8 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                      @model.commentscount = data
                      @$("#comments_count").text(@model.commentscount)
                      @saveInCacheNewData()
-
+                   if +@model.commentscount
+                     @$("#comments_count").removeClass("no-comments")
                )
             ,1000) #terrible wait until animation works
 
