@@ -6,7 +6,6 @@
              <% if(index == 0 || (listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate))) { %>
                 <%if(index&&listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate)){%>
                      <li class="list-line"></li>
-                     <%listView.previousDate=oneItem.pubDate%>
                 <%}%>
                 <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>
                 <li class="list-wrap without-bg">

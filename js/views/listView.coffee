@@ -58,7 +58,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
-              console.log tab
               setTimeout(()=>
                      tab.updateItems.apply(@) if tab
               ,@delay)
@@ -68,6 +67,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             index=@model.currentTab-1
             tab=@model.tabs[index]
             tab.updateItems.call(@,()=>
+              @previousDate=false
               app.pullToRefreshDone()
               @elBody.removeClass('disable-touch')
             ) if tab

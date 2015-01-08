@@ -4,8 +4,6 @@ define([
       tabs= [
                     {id:'tab1',name:'Новости',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
-                              console.log data
-                              console.log cacheKey
                               model={}
                               model.items=[]
 

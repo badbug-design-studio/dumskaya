@@ -13,8 +13,6 @@ define ['f7','_'],
     getList:(cacheKey,callback,need2Update)->
       delay=0
       delay=1000 if need2Update
-      console.log '---------------------'
-      console.log @
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
@@ -120,7 +118,7 @@ define ['f7','_'],
       )
 
     querySuccess: () =>
-      console.log true
+#      console.log true
 
     dropTables: (tableName) =>
       @db.transaction((tx) =>
