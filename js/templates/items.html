@@ -2,16 +2,18 @@
 <% renderedCount=listView.indexes[cacheKey]%>
 <%var iteration=0%>
 <% _.each(items,function(oneItem,index){ %>
+         <%=console.log('absqwer')%>
          <%if (index>=renderedCount&&iteration<limit){%>
              <% if(index == 0 || (listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate))) { %>
                 <%if(index&&listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate)){%>
                      <li class="list-line"></li>
+                     <%listView.previousDate=oneItem.pubDate%>
                 <%}%>
-                <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>
                 <li class="list-wrap without-bg">
                     <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>
                 </li>
              <% } %>
+                <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>
                 <li class="list-wrap">
                     <!--<div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>-->
                      <div class="item-content"  data-index="<%=index%>">
