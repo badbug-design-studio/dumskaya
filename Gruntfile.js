@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             mainConfigFile:'js/main.js',
             name: 'bootstrap',
             out:'build/<%= pkg.name %>.min.js',
-            include: ['main','prod','./../cordova'],
+            include: ['main','text','prod','./../cordova',''],
             preserveLicenseComments: false,
             "optimize": "uglify2"
         }
@@ -21,8 +21,31 @@ module.exports = function(grunt) {
             files:[
                 {expand: true, src: ['css/**'], dest: 'build/'},
                 {expand: true, src: ['fonts/**'], dest: 'build/'},
+                {expand: true, src: ['img/**'], dest: 'build/'},
+                {expand: false, src: ['js/libs/**'], dest: 'build/'},
+                {expand: false, src: ['js/templates/**'], dest: 'build/'},
+                {expand: false, src: ['js/views/**.js'], dest: 'build/'},
+                {expand: false, flatten: true, src: ['js/common/baseView.js'], dest: 'build/js/common/baseView.js',filter: 'isFile'},
+                {expand: false, flatten: true, src: ['js/common/categoryView.js'], dest: 'build/js/common/categoryView.js',filter: 'isFile'},
+                {expand: false, flatten: true, src: ['js/common/tabs.js'], dest: 'build/js/common/tabs.js',filter: 'isFile'},
+                {expand: false, flatten: true, src: ['cordova_plugins.js'], dest: 'build/cordova_plugins.js',filter: 'isFile'},
+                {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'}
             ]
        }
+    },
+   "regex-replace":{
+        dist:{
+            src:['build/index.html'],
+            actions:[
+                {
+                    name:'change-main-js-path',
+                    search:'<script src="./js/libs/require.js" data-main=".*"></script>',
+                    replace:function(match){
+                        return '<script src="./js/libs/require.js" data-main="'+grunt.config('pkg').name +'.min.js"></script>'
+                    }
+                }
+            ]
+        }
     }
 
   });
@@ -30,11 +53,12 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
 //  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
-
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-regex-replace');
+
 
   // Default task(s).
-  grunt.registerTask('build', ['requirejs','copy']);
+  grunt.registerTask('build', ['requirejs','copy','regex-replace']);
 
 // EXAMPLE
 //  grunt.registerTask("default",function(){
