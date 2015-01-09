@@ -3,23 +3,28 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
-      build: {
-        src: ['js/libs/**.js',
-              'js/common/**.js',
-              'js/controllers/**.js',
-              'js/views/**.js'
-        ],
-        dest: 'build/<%= pkg.name %>.min.js'
+    requirejs: {
+      compile: {
+        options:{
+            baseUrl: './js',
+            mainConfigFile:'js/main.js',
+            name: 'bootstrap',
+            out:'build/<%= pkg.name %>.min.js',
+            include: ['main','prod','./../cordova'],
+            preserveLicenseComments: false,
+            "optimize": "uglify2"
+
+        }
       }
     }
   });
 
   // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+//  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['requirejs']);
 
 // EXAMPLE
 //  grunt.registerTask("default",function(){
