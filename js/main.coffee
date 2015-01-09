@@ -38,8 +38,8 @@ require.config({
        layout:
         deps:["app"]
 
-       categoryView:
-        deps:["baseView"]
+#       categoryView:
+#        deps:["baseView"]
 
 
 
