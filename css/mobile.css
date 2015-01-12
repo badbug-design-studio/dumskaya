@@ -319,6 +319,17 @@ iframe {
 .item-media.with-img {
     width: 82px;
 }
+.news-list.blogs .item-media.with-img {
+    width: 52px;
+}
+.news-list .item-media img {
+    width: 84px;
+    height: 52px;
+}
+.news-list.blogs .item-media img {
+    width: 52px;
+    height: 52px;
+}
 .item-content a {
     color: #8a1020;
 }
