@@ -547,6 +547,7 @@
                     return app.router.load(view, options);
                 },
                 back: function (options) {
+                    window.stop()
                     return app.router.back(view, options);  
                 },
                 // Shortcuts

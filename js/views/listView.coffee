@@ -66,8 +66,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @elBody.addClass('disable-touch')
             index=@model.currentTab-1
             tab=@model.tabs[index]
+            @previousDate=false
             tab.updateItems.call(@,()=>
-              @previousDate=false
               app.pullToRefreshDone()
               @elBody.removeClass('disable-touch')
             ) if tab

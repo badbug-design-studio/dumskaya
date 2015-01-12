@@ -1,5 +1,6 @@
 require.config({
     urlArgs : 'antichache'
+    baseUrl:"./js/"
 # alias libraries paths
     paths:
         domReady: './libs/domReady'
@@ -37,13 +38,13 @@ require.config({
        layout:
         deps:["app"]
 
-       categoryView:
-        deps:["baseView"]
+#       categoryView:
+#        deps:["baseView"]
 
 
 
 
 
 #    kick start application
-    deps: ['./bootstrap']
+    deps: ['bootstrap']
 });
