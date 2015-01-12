@@ -21,7 +21,7 @@
                              <% if(oneItem.smallImg){ %>
                                 <img src="<%=oneItem.smallImg %>" />
                              <% } else { %>
-                                <img src="./img/no_image_available.png" height="52" />
+                                <div class="no-image"></div>
                              <% } %>
                                 <div class="item-after"><%=baseApplication.helpers.getTime(oneItem.pubDate)%></div>
                          </div>
