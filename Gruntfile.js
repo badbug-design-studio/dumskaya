@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -31,6 +30,13 @@ module.exports = function(grunt) {
                 {expand: false, flatten: true, src: ['cordova_plugins.js'], dest: 'build/cordova_plugins.js',filter: 'isFile'},
                 {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'}
             ]
+       },
+       copyToDir:{
+           files:[
+               {expand: true, src: ['**'],cwd: 'build/', dest:"<%= pkg.build %>/www"},
+               {expand: true, src: ['**'], cwd: 'res/', dest:"<%= pkg.build %>/res"},
+               {expand: false, flatten: true, src: ['config.xml'], dest: '<%= pkg.build %>/',filter: 'isFile'}
+           ]
        }
     },
    "regex-replace":{
@@ -48,6 +54,7 @@ module.exports = function(grunt) {
         }
     }
 
+
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -55,10 +62,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-regex-replace');
+  grunt.registerTask('build', ['requirejs','copy:main','regex-replace'])
+  grunt.registerTask('copyDir', ['copy:copyToDir'])
+
+
+
+
 
 
   // Default task(s).
-  grunt.registerTask('build', ['requirejs','copy','regex-replace']);
 
 // EXAMPLE
 //  grunt.registerTask("default",function(){

@@ -27,29 +27,59 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
             ,1000) #terrible wait until animation works
 
 
-          shareLink: ->
+          shareLink: =>
+            console.log @model.link
             buttons1 = [
               {
-                text: 'Заголовок статті',
+                text: 'Поделиться ссылкой',
                 label: true
               },
               {
-                text: 'E-Mail'
+                text: 'E-Mail',
+                onClick:->
+                  if(window.plugins)
+                    window.plugins.socialsharing.shareViaEmail(
+                      @model.link,
+                      'Думская. Поделиться ссылкой',
+                      null, #TO: must be null or an array
+                      null, # CC: must be null or an array
+                      null, #BCC: must be null or an array
+                      null, #['https://www.google.nl/images/srpr/logo4w.png','www/localimage.png'],FILES: can be null, a string, or an array
+                      ()->
+                        console.log 'via email share ok'
+                      , #called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
+                      ()->
+                        console.log 'via email share FALSE'
+                      # called when sh*t hits the fan
+                    )
               },
               {
                 text: 'Twitter'
+                onClick:()->
+                  if(window.plugins)
+                    window.plugins.socialsharing.shareViaTwitter(@model.link)
               },
               {
-                text: 'Facebook'
+                text: 'Facebook',
+                onClick:()->
+                  if(window.plugins)
+                    window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null , null ,
+                    ()->
+                      console.log('share ok')
+                    ,(errormsg)->
+                      console.log(errormsg))
               },
               {
-                text: 'Копіювати посилання'
+                text: 'Копировать ссылку',
+                onClick:()->
+                  if(window.cordova&&window.cordova.plugins)
+                    window.cordova.plugins.clipboard.copy(@model.link);
               },
             ]
             buttons2 = [
               {
-                text: 'Відмінити',
-                color: '#8a1020'
+                text: 'Отмена',
+                color: 'red'
               }
             ]
             groups = [buttons1, buttons2];
