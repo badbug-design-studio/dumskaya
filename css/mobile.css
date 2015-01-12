@@ -36,6 +36,11 @@ body, html {
   height: 100%;
   overflow: hidden;
 }
+.icon-logo {
+    background: url("../img/logo.png") no-repeat;
+    width: 35px;
+    height: 35px;
+}
 .panel {
     background: #efeff4;
 }
@@ -298,6 +303,9 @@ iframe {
     padding: 0 0 0 7px;
     position: relative;
     margin-bottom: 20px;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    /*?????????????*/
 }
 .list-block.media-list.news-list .item-media, .list-block li.media-item .item-media {
     padding-top: 0;
@@ -555,7 +563,9 @@ iframe {
 }
 
 .comments-page .user{
-
+    vertical-align: top;
+    display: inline-block;
+    line-height: 100%;
     color: #8A1020;
 }
 .comments-page .comdate {
@@ -563,6 +573,8 @@ iframe {
     color: #999;
     margin: 0;
     display: block;
+    line-height: 100%;
+    margin-top: -2px;
 }
 
 
@@ -582,7 +594,6 @@ iframe {
 .comments-page  .comtd4 img{
     width: 18px;;
     display: inline-block;
-    vertical-align: top;
 }
 .comments-page  .comtd5 {
     float: right;
@@ -599,6 +610,9 @@ iframe {
 #contentOneItem,#commentsOneItem{
     margin-top: 15px;
 }
+#contentOneItem img {
+    width: 100%;
+}
 #contentOneItem .preloader,#commentsOneItem .preloader{
     margin: 15px auto 0 auto;
     display: block;
@@ -607,4 +621,8 @@ iframe {
 }
 .disable-touch{
     pointer-events: none;
+}
+.no-info {
+    padding-top: 30px;
+    text-align: center;
 }
