@@ -14,6 +14,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
 
           onRender:()->
             setTimeout(()=>
+              @$("#image").attr('src',@model.smallImg)
               @$("#contentOneItem").html(@model.description.__cdata)
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>

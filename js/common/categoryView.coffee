@@ -37,7 +37,6 @@ define ['_','baseView','text!templates/items.html'],
                   if(renderedCount==itemLength-@model.limit)
 #                       baseApplication.f7app.detachInfiniteScroll(@$('.infinite-scroll'));
                       @infiniteScrollSelector().remove()
-                      @model.listView.indexes[index]=0
                       return false
                   @model.listView.indexes[index]+=@model.limit
                   @appendOldData()

@@ -6,13 +6,13 @@ define([
                       onDownloaded=(data,cacheKey)=>
                               model={}
                               model.items=[]
-
                               if data&&data.channel&&data.channel.item
                                 model.items=data.channel.item
                               model.limit=10
                               @indexes[cacheKey]=0
                               model.listView=@
                               model.cacheKey=cacheKey
+
                               new NewsView({model:model,tabIndex:0})
 
                       baseApplication.cache.getList('news',onDownloaded, pullToRefreshCallback)
