@@ -33,14 +33,13 @@ define ['_','baseView','text!templates/items.html'],
                   loading=false
                   index=@model.cacheKey
                   itemLength=baseApplication.cache.data[index].channel.item.length
-                  @model.listView.indexes[index]+=@model.limit
                   renderedCount=@model.listView.indexes[index]
-
-                  if(renderedCount==itemLength)
+                  if(renderedCount==itemLength-@model.limit)
 #                       baseApplication.f7app.detachInfiniteScroll(@$('.infinite-scroll'));
-                       @infiniteScrollSelector().remove()
-                       @model.listView.indexes[index]=0
-                       return
+                      @infiniteScrollSelector().remove()
+                      @model.listView.indexes[index]=0
+                      return false
+                  @model.listView.indexes[index]+=@model.limit
                   @appendOldData()
                ,1000)
              )
