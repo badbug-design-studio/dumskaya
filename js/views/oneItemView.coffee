@@ -69,7 +69,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                 text: 'Facebook',
                 onClick:()=>
                   if(window.plugins)
-                    window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null , null ,
+                    window.plugins.socialsharing.shareViaFacebook(@model.link, null , null ,
                       ()->
                         console.log('share ok')
                       ,(errormsg)->
