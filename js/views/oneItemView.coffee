@@ -5,8 +5,8 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           template:template
           domTabsObj:[]
           events:
-                "click .share":"shareLink"
-                "click .comments-link":"commentsOpen"
+                "click #share":"shareLink"
+                "click #comments_count":"commentsOpen"
 
           constructor: (query)->
             super
@@ -36,7 +36,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               },
               {
                 text: 'E-Mail',
-                onClick:->
+                onClick:=>
                   if(window.plugins)
                     window.plugins.socialsharing.shareViaEmail(
                       @model.link,
@@ -55,23 +55,39 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               },
               {
                 text: 'Twitter'
-                onClick:()->
+                onClick:()=>
                   if(window.plugins)
-                    window.plugins.socialsharing.shareViaTwitter(@model.link)
+                    window.plugins.socialsharing.shareViaTwitter(@model.link, null, null,
+                      ()->
+                        console.log('post via twitter success')
+                      , (error)->
+                        alert('Установите программу Twitter')
+                        console.log(error))
+
               },
               {
                 text: 'Facebook',
-                onClick:()->
+                onClick:()=>
                   if(window.plugins)
                     window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null , null ,
-                    ()->
-                      console.log('share ok')
-                    ,(errormsg)->
-                      console.log(errormsg))
+                      ()->
+                        console.log('share ok')
+                      ,(errormsg)->
+                        alert('Установите программу Facebook')
+                        console.log(errormsg))
+              },
+              {
+                text: 'Выбрать другую программу',
+                onClick:()=>
+                  if(window.plugins)
+                    window.plugins.socialsharing.shareViaWhatsApp('Вибрать другую программу', null, null ,
+                      ()->
+                        console.log('share ok')
+                      , (errormsg)->alert(errormsg))
               },
               {
                 text: 'Копировать ссылку',
-                onClick:()->
+                onClick:()=>
                   if(window.cordova&&window.cordova.plugins)
                     window.cordova.plugins.clipboard.copy(@model.link);
               },

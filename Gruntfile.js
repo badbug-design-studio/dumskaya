@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             mainConfigFile:'js/main.js',
             name: 'bootstrap',
             out:'build/<%= pkg.name %>.min.js',
-            include: ['main','text','prod','./../cordova',''],
+            include: ['main','text','prod'],
             preserveLicenseComments: false,
             "optimize": "uglify2"
         }
@@ -27,7 +27,6 @@ module.exports = function(grunt) {
                 {expand: false, flatten: true, src: ['js/common/baseView.js'], dest: 'build/js/common/baseView.js',filter: 'isFile'},
                 {expand: false, flatten: true, src: ['js/common/categoryView.js'], dest: 'build/js/common/categoryView.js',filter: 'isFile'},
                 {expand: false, flatten: true, src: ['js/common/tabs.js'], dest: 'build/js/common/tabs.js',filter: 'isFile'},
-                {expand: false, flatten: true, src: ['cordova_plugins.js'], dest: 'build/cordova_plugins.js',filter: 'isFile'},
                 {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'}
             ]
        },
@@ -47,7 +46,9 @@ module.exports = function(grunt) {
                     name:'change-main-js-path',
                     search:'<script src="./js/libs/require.js" data-main=".*"></script>',
                     replace:function(match){
-                        return '<script src="./js/libs/require.js" data-main="'+grunt.config('pkg').name +'.min.js"></script>'
+                        return '<script src="http://jsconsole.com/remote.js?410831F1-23CB-469B-9DAA-AD1247408B87"></script>' +
+                                '<script src="cordova.js"></script>'+
+                                '<script src="./js/libs/require.js" data-main="'+grunt.config('pkg').name +'.min.js"></script>'
                     }
                 }
             ]
