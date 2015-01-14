@@ -45,13 +45,15 @@ define ['_','baseView','text!templates/items.html'],
 
           handleOnClickItem:()->
             cT=@model.listView.model.currentTab-1
-            @model.listView.domTabsObj[cT].on('click',@itemSelector,()=>
-              index=@$(event.target).parents('.item-content').data('index')
-              model=baseApplication.cache.data[@cacheClass].channel.item[index]
-              model.cacheClass=@cacheClass
+            self=this
+            @model.listView.domTabsObj[cT].on('click',@itemSelector,()->
+              index=self.$(this).data('index')
+              model=baseApplication.cache.data[self.cacheClass].channel.item[index]
+              model.cacheClass=self.cacheClass
               model.index=index
               baseApplication.router.loadPage('oneItem',{model:model})
             )
+
 
 
           renderList:()=>

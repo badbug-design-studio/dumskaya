@@ -5,7 +5,7 @@ define ['_','baseView', 'text!templates/menu.html'],
           template:template
           isInjectedOnly: true
           container:()->
-            return @$('.settings-page')
+            return @$('#settings-page')
 
           constructor:(query)->
             super
