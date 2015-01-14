@@ -15,6 +15,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           onRender:()->
             setTimeout(()=>
               @$("#image").attr('src',@model.smallImg)
+              @model.description.__cdata=@model.description.__cdata.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
               @$("#contentOneItem").html(@model.description.__cdata)
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
@@ -29,7 +30,6 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
 
 
           shareLink: =>
-            console.log @model.link
             buttons1 = [
               {
                 text: 'Поделиться ссылкой',
@@ -77,15 +77,15 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                         alert('Установите программу Facebook')
                         console.log(errormsg))
               },
-              {
-                text: 'Выбрать другую программу',
-                onClick:()=>
-                  if(window.plugins)
-                    window.plugins.socialsharing.shareViaWhatsApp('Вибрать другую программу', null, null ,
-                      ()->
-                        console.log('share ok')
-                      , (errormsg)->alert(errormsg))
-              },
+#              {
+#                text: 'Выбрать другую программу',
+#                onClick:()=>
+#                  if(window.plugins)
+#                    window.plugins.socialsharing.shareViaWhatsApp('Вибрать другую программу', null, null ,
+#                      ()->
+#                        console.log('share ok')
+#                      , (errormsg)->alert(errormsg))
+#              },
               {
                 text: 'Копировать ссылку',
                 onClick:()=>
@@ -108,5 +108,8 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           saveInCacheNewData:()->
             baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
             baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
+
+          openLink:()->
+           return "onclick=window.open('$1','_system')"
 
         return OneItamNewsView
