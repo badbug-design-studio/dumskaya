@@ -45,7 +45,7 @@ define ['_','xml2json'],
            if isXML
             response= xmlHttp.responseText.replace(/\<\?xml.+\?\>/,"")
             response=self.x2js.xml_str2json(response);
-            response=response.rss
+            response=response.rss if response
 #           resolve(response);
            onSuccess(response)
          else
