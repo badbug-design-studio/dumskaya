@@ -551,7 +551,7 @@ iframe {
 }
 .navbar a.link.share {
     background: url("../img/share.png")no-repeat center;
-    background-size: 70%;
+    background-size: 30px 24px;
 }
 .item-page-wrap {
     overflow: auto;
