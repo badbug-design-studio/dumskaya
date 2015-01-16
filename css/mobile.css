@@ -333,10 +333,14 @@ iframe {
     height: 52px;
 }
 .no-image {
-    background: url("../img/no_image_available.png") no-repeat -15px 0;
+    background: url("../img/no_image_available.png") no-repeat 0px 0;
     background-size: auto 52px;
     width: 100%;
     height: 100%;
+}
+.news-list.blogs .no-image {
+    background: url("../img/no_image_available.png") no-repeat -15px 0;
+    background-size: auto 52px;
 }
 .item-content a {
     color: #8a1020;
