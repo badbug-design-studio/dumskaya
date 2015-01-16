@@ -14,7 +14,7 @@
             <div class="content-block">
                 <div class="content-block-title">Отправить фотографию в редакцию</div>
                 <div class="list-block send-photo-form inset">
-                    <form action="http://dumskaya.net/mobilesendphoto//send/?app=1" enctype="multipart/form-data" method="post" id="form" class="ajax-submit">
+                    <form action="http://dumskaya.net/mobilesendphoto//send/?app=1" enctype="multipart/form-data" method="post" id="form">
                         <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
                         <ul>
                             <li>
@@ -42,7 +42,7 @@
                             <li>
                                 <div class="item-inner">
                                     <input class="send-photo" type="file" multiple="true" name="pictures[]" accept="image/*;capture=camera" id="file" capture="" />
-                                    <!--<input class="send-photo" type="file" name="picture" accept="image/*;capture=camera" id="file" capture="camera">-->
+                                    <!--<input class="send-photo" type="file" name="picture" accept="image/jpeg,image/png,image/gif" id="file" capture="camera">-->
                                     <!--<input class="send-photo" type="file" name="img" accept="image/jpeg,image/png,image/gif" />-->
                                 </div>
                             </li>
