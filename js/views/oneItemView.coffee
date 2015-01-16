@@ -109,7 +109,6 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
             baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
             baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
 
-          openLink:()->
-           return "onclick=window.open('$1','_system')"
+
 
         return OneItamNewsView

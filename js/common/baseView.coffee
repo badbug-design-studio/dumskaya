@@ -46,6 +46,9 @@ define ['require','_'],
       @addEventListeners()
       @onRender()
 
+    openLink:()->
+            return "onclick=window.open('$1','_system')"
+
 
 
 

@@ -12,7 +12,7 @@ define ['f7','_'],
 
     getList:(cacheKey,callback,need2Update)->
       delay=0
-      delay=1000 if need2Update
+      delay=1300 if need2Update
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
@@ -26,15 +26,16 @@ define ['f7','_'],
 
         url=@getUrl(cacheKey)
         baseApplication.sync.request(url,true,(data)=>
-          if(data&&data.channel) #set new info if we got it from server
-            @data[cacheKey]=data
-            @setTableData(cacheKey,data)
+          if(data&&data.channel) #if we got info from the server
+            if !@data[cacheKey]||@data[cacheKey]&&@data[cacheKey].channel.item[0].lastUpdate!=data.channel.item[0].lastUpdate #if we got NEW info
+              @setTableData(cacheKey,data)
+              @data[cacheKey]=data
 
-          setTimeout(()->
-            if data&&data.channel #do rerender only if we got new info
-              callback(data,cacheKey)
-            else if !cachedData #if we dont have new data and cached info for current tab do render anywhere,because we must show something
-              callback(data,cacheKey)
+
+          setTimeout(()=>
+            if !cachedData||need2Update #do render when first time app was started or need to update
+              callback(@data[cacheKey],cacheKey)
+
             need2Update() if need2Update
           ,delay)
         )
