@@ -1,6 +1,6 @@
 define([
-    'f7','views/newsView','views/blogsView','views/tvView','views/articlesView'
-],  (f7,NewsView,BlogsView,TVView,ArticlesView) ->
+    'f7','views/newsView','views/blogsView','views/tvView'
+],  (f7,NewsView,BlogsView,TVView) ->
       tabs= [
                     {id:'tab1',name:'Новости',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
