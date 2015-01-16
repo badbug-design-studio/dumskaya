@@ -1,6 +1,6 @@
 define([
-    'f7','views/newsView','views/blogsView','views/tvView'
-],  (f7,NewsView,BlogsView,TVView) ->
+    'f7','views/newsView','views/blogsView','views/tvView','views/articlesView'
+],  (f7,NewsView,BlogsView,TVView,ArticlesView) ->
       tabs= [
                     {id:'tab1',name:'Новости',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
@@ -45,7 +45,20 @@ define([
 
                       baseApplication.cache.getList('tv',onDownloaded, pullToRefreshCallback)
                     }
-                    {id:'tab4',name:'Статьи',updateItems:()->}
+#                    {id:'tab4',name:'Статьи',updateItems:(pullToRefreshCallback)->
+#                      onDownloaded=(data,cacheKey)=>
+#                        model={}
+#                        model.items=[]
+#                        if data&&data.channel&&data.channel.item
+#                          model.items=data.channel.item
+#                        model.limit=10
+#                        @indexes[cacheKey]=0
+#                        model.listView=@
+#                        model.cacheKey=cacheKey
+#                        new ArticlesView({model:model,tabIndex:2})
+#
+#                      baseApplication.cache.getList('articles',onDownloaded, pullToRefreshCallback)
+#                    }
       ]
       return tabs
 );
