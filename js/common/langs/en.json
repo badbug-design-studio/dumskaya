@@ -1,0 +1,36 @@
+{
+    "menu": "Menu",
+    "aboutFountain": "About city",
+    "feedback":"Feedback",
+    "language": "Language",
+    "driveway":"How to get?",
+
+    "navbarTitle": "Vinnitsa - city of fountains",
+
+    "map":"Map",
+
+    "back": "Back",
+    "cancel":"Cancel",
+    "comment": "Comments",
+    "send": "Send",
+
+    "fountainDescription":"River embankment ;Southern Bug' near the island 'Festival'",
+    "workingTime": "Working time",
+
+    "fromTheTRailwayStation": "From the Railway Station",
+    "fromTheWestBusStation":"From the West Bus Station",
+    "fromTheEasternBusStation":"From the Eastern Bus Station",
+    "fromTheCentralBusStation":"From the Central Bus Station",
+    "whereToPark":"Where to park",
+
+    "tram1":"Tram № 1,4,6",
+    "trolleybus1":"Trolleybus № 5,6,11",
+    "stop1":"Stop  \"Kotsyubynsky Museum\"",
+    "tram2":"ram №4",
+    "trolleybus2":"Trolleybus № 1, 2, 10, 12",
+    "stop2":"Stop \"F. Nansen Str.\"",
+    "stop3":"5 min. walking distance",
+    "stop4":"G. Uspenskoho str., F. Nansena str.",
+    "stop5":"B. Khmelnitskoho str., I. Bevza str.",
+    "stop6":"Kievska str. (near the Central bus station)"
+}

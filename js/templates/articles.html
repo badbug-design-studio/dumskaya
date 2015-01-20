@@ -1,0 +1,18 @@
+<div class="pull-to-refresh-layer">
+    <div class="preloader"></div>
+    <div class="pull-to-refresh-arrow"></div>
+</div>
+<div class="list-block media-list news-list">
+    <ul>
+        <% var lastIndex = items.length - 1; %>
+        <%if (!items.length){%>
+        <li class="no-info">Нет информации</li>
+        <%} else {print(renderList())}%>
+
+    </ul>
+</div>
+<%if (items.length){%>
+<div class="infinite-scroll-preloader">
+    <div class="preloader infinite"></div>
+</div>
+<%}%>

@@ -47,6 +47,7 @@ define ['f7','_'],
         when "news" then return baseApplication.sync.getNewsRssUrl()
         when "blogs" then return baseApplication.sync.getBlogsRssUrl()
         when "tv" then return baseApplication.sync.getTVRssUrl()
+        when "articles" then return baseApplication.sync.getArticlesRssUrl()
         else console.error('URL not found by key')
 
 

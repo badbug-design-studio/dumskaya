@@ -27,6 +27,12 @@ define ['_','xml2json'],
           ext='.xml'
         return @getRoot()+"rsstv"+ext
 
+    getArticlesRssUrl:()=>
+      ext='/'
+      if !@isProd
+        ext='.xml'
+      return @getRoot()+"articles"+ext
+
     getRoot:()->
       if @isProd
         return "http://dumskaya.net/"
