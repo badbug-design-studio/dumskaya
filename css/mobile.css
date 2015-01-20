@@ -246,6 +246,9 @@ iframe {
    align-items: stretch;
 
 }
+.list-block .item-inner.no-border{
+    border: none;
+}
 .list-block.news-list .item-title-row {
     -webkit-box-ordinal-group: 1;
      -webkit-order: 0;
@@ -655,4 +658,9 @@ iframe {
 .no-info {
     padding-top: 30px;
     text-align: center;
+}
+#imgPreView{
+    display: none;
+    height: 120px;
+    margin: 0 auto;
 }

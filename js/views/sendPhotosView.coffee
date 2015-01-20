@@ -10,6 +10,10 @@ define ['_','baseView','text!templates/sendPhotos.html'],
 
     onRender:()->
       @sendForm()
+      self=@
+      @$("#file").change(()->
+        self.readURL(this);
+      );
 
     onPageBeforeAnimation:()->
       console.log("onPageBeforeAnimation")
@@ -35,4 +39,16 @@ define ['_','baseView','text!templates/sendPhotos.html'],
             alert("Попробуйте позже")
         xmlHttp.send(formData)
       )
+
+    readURL:(input)->
+      if (input.files && input.files[0])
+          reader = new FileReader();
+          reader.onload =  (e) ->
+             img= Framework7.$('#imgPreView')
+             img.attr('src', e.target.result);
+             img.show()
+
+          reader.readAsDataURL(input.files[0]);
+
+
   return SendPhotosView
