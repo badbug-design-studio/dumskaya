@@ -10,6 +10,7 @@ define ['_','baseView','text!templates/sendPhotos.html'],
 
     onRender:()->
       @sendForm()
+      @clicks()
       self=@
       @$("#file").change(()->
         self.readURL(this);
@@ -49,6 +50,9 @@ define ['_','baseView','text!templates/sendPhotos.html'],
              img.show()
 
           reader.readAsDataURL(input.files[0]);
-
+    clicks: ()->
+      @$('.file-button').on("touchend", ()=>
+        @$('#file').click()
+      )
 
   return SendPhotosView
