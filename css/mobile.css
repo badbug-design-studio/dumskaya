@@ -17,7 +17,7 @@ p {
     background: #8A1020;
 }
 input{
-    -webkit-user-select:text;
+    /*-webkit-user-select:auto;*/
 }
 #overflowvisible{
     opacity: 1 !important;
@@ -340,8 +340,25 @@ iframe {
     margin-left: 0;
 
 }
-.send-photo, .send-button {
+.send-photo, .send-button, .file-button {
     width: 100%;
+}
+.file-button {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.file-button input {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    font-size: 10000px;
+    border: 10000px solid transparent;
+    opacity: 0;
+    position: absolute;
+    right: -1000px;
+    top: -1000px;
+    cursor: pointer;
 }
 .send-photo-form {
     /*margin: 0 10px;*/
