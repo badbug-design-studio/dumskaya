@@ -58,6 +58,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               @changePositionTriagle()
               index=@model.currentTab-1
               tab=@model.tabs[index]
+              @previousDate=false
               setTimeout(()=>
                      tab.updateItems.apply(@) if tab
               ,@delay)
