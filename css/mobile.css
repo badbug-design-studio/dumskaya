@@ -124,6 +124,9 @@ iframe {
     background: none;
     color: rgba(255,255,255,1);
 }
+.buttons-row.theme-bg .tab-link.button.active-state {
+    background: none;
+}
 .triangle {
     content: "";
     position: absolute;
