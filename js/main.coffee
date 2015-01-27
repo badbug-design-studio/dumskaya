@@ -30,13 +30,23 @@ require.config({
         deps:["f7","_"]
 
        app:
-         deps:["f7","_"]
+         deps:["f7","_", "hammer","mainTabs"]
 
        sync:
          deps:["f7","_",'xml2json']
 
+       baseView:
+         deps:["f7"]
+
+       categoryView:
+         deps:["f7"]
+
        layout:
-        deps:["app"]
+        deps:["app","baseView","categoryView"]
+
+
+
+
 
 #       categoryView:
 #        deps:["baseView"]

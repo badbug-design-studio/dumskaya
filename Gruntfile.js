@@ -18,15 +18,11 @@ module.exports = function(grunt) {
     copy:{
        main:{
             files:[
-                {expand: true, src: ['css/**'], dest: 'build/'},
                 {expand: true, src: ['fonts/**'], dest: 'build/'},
                 {expand: true, src: ['img/**'], dest: 'build/'},
-                {expand: false, src: ['js/libs/**'], dest: 'build/'},
+                {expand: false, src: ['js/libs/require.js'], dest: 'build/'},
                 {expand: false, src: ['js/templates/**'], dest: 'build/'},
                 {expand: false, src: ['js/views/**.js'], dest: 'build/'},
-                {expand: false, flatten: true, src: ['js/common/baseView.js'], dest: 'build/js/common/baseView.js',filter: 'isFile'},
-                {expand: false, flatten: true, src: ['js/common/categoryView.js'], dest: 'build/js/common/categoryView.js',filter: 'isFile'},
-                {expand: false, flatten: true, src: ['js/common/tabs.js'], dest: 'build/js/common/tabs.js',filter: 'isFile'},
                 {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'}
             ]
        },
@@ -38,6 +34,21 @@ module.exports = function(grunt) {
            ]
        }
     },
+    concat:{
+            css:{
+                src: ['css/reset.css','css/animate.css','css/font-awesome.css','css/framework7.css','css/framework7.themes.css','css/mobile.css'],
+                dest: 'css/concat.css'
+            }
+    },
+    cssmin: {
+        options: {
+                keepSpecialComments: 0
+        },
+        minify: {
+            src: 'css/concat.css',
+            dest: 'build/css/my-app.css'
+        }
+   },
    "regex-replace":{
         dist:{
             src:['build/index.html'],
@@ -53,8 +64,11 @@ module.exports = function(grunt) {
                 }
             ]
         }
-    }
+   },
 
+    clean: {
+      css: ["css/concat.css"]
+    }
 
   });
 
@@ -63,7 +77,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-regex-replace');
-  grunt.registerTask('build', ['requirejs','copy:main','regex-replace'])
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+
+
+  grunt.registerTask('build', ['requirejs','copy:main','concat:css','cssmin','regex-replace','clean'])
   grunt.registerTask('copyDir', ['copy:copyToDir'])
 
 

@@ -1,6 +1,6 @@
 {
   "name": "dumskaya",
-  "build":"D:/Dumskaya",
+  "build": "D:/Dumskaya",
   "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -9,6 +9,8 @@
     "grunt-contrib-uglify": "~0.7.0",
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-copy": "~0.7.0",
-    "grunt-regex-replace": "~0.2.6"
+    "grunt-regex-replace": "~0.2.6",
+    "grunt-contrib-cssmin": "~0.11.0",
+    "grunt-contrib-clean": "~0.6.0"
   }
 }

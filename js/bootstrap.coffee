@@ -11,7 +11,7 @@ define([
 ],  (require,_, f7, app,routes,layout,SyncServices,Helpers,Cache)->
     'use strict';
   #  document.addEventListener('deviceready', onDeviceReady);
-    onDevieReady =  (document)->
+    onDeviceReady =  ()->
       window.baseApplication = {
             f7app: app,
             mainLayout: layout
@@ -26,8 +26,10 @@ define([
       }
 
 
-    require(['domReady!'],()->
-      onDevieReady(document)
-    );
+#    @todo ondeviceready in cordova
+    setTimeout(()->
+        onDeviceReady()
+    ,300)
+
 
 )
