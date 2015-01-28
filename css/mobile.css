@@ -235,7 +235,7 @@ iframe {
     border: none;
     display: -webkit-box;
     display: -webkit-flex;
-    display: flex;
+    display: block;
    -webkit-box-direction: normal;
    -webkit-box-orient: vertical;
    -webkit-flex-direction: column;
