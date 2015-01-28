@@ -87,7 +87,7 @@ iframe {
     background: #fff;
 }
 .tabs-animated-wrap {
-    height: -webkit-calc(100% - 69);
+    height: 100%;
     overflow: hidden;
 }
 /*------------header------------*/
