@@ -19,7 +19,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           infiniteTabsEventOn:[false,false,false,false]
 
           events:
-            "refresh .pull-to-refresh-content":"updateCurrentTab"
+            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
           constructor:(query)->
             super
 

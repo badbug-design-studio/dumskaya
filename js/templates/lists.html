@@ -30,11 +30,13 @@
         <!-- Scrollable page content-->
         <div class="page-content">
             <div class="tabs-animated-wrap">
-                <div class="tabs">
+                <div class="tabs" id="tabs">
                     <% _.each(tabs,function(tab,i){ %>
                     <%var active=(i+1)==currentTab?'active':'';%>
                     <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll page-content  pull-to-refresh-content">
-
+                        <div class="infinite-scroll-preloader centered">
+                            <div class="preloader infinite big"></div>
+                        </div>
                     </div>
                     <%}) %>
                 </div>
