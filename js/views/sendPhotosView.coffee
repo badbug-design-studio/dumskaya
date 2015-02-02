@@ -20,7 +20,9 @@ define ['_','baseView','text!templates/sendPhotos.html'],
       console.log("onPageBeforeAnimation")
 
     sendForm: ()->
+      self=@
       @$('#form').on('submit', (e) ->
+        self.$('#send-button').addClass('in-progress')
         console.log e
         e.preventDefault()
         formData = new FormData(@)
@@ -29,6 +31,7 @@ define ['_','baseView','text!templates/sendPhotos.html'],
         xmlHttp.open('POST', @.getAttribute("action"), true);
         xmlHttp.onreadystatechange = ()->
           if (xmlHttp.readyState != 4) then return
+          self.$('#send-button').removeClass('in-progress')
           if(xmlHttp.status == 200)
             console.log xmlHttp.responseText
             match = xmlHttp.responseText.toString().match(/success:(\d+), error:"(\w*)"/)
@@ -51,7 +54,7 @@ define ['_','baseView','text!templates/sendPhotos.html'],
 
           reader.readAsDataURL(input.files[0]);
     clicks: ()->
-      @$('.file-button').on("touchend", ()=>
+      @$('#file-button').on("touchend", ()=>
         @$('#file').click()
       )
 

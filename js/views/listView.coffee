@@ -77,8 +77,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             console.log("onPageBeforeAnimation")
 
           changePositionTriagle:()->
-            triangle= @$('.buttons-row .triangle')[0]
+            triangle= @$('#triangle')
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
-            @$(triangle).transform("translate3d(#{shift}px, 0, 0)")
+            triangle.transform("translate3d(#{shift}px, 0, 0)")
 
         return ListView

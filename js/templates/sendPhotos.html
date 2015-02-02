@@ -35,7 +35,7 @@
                             </li>
                             <li>
                                 <div class="item-inner">
-                                    <a href="#" class="button button-fill color-green file-button">
+                                    <a href="#" class="button button-fill color-green file-button" id="file-button">
                                         Выбрать фотографию
                                         <input class="send-photo" type="file" name="picture" accept="image/*" id="file" />
                                     </a>
@@ -50,7 +50,11 @@
                             </li>
                             <li>
                                 <div class="item-inner">
-                                    <button class="button button-big button-fill send-button">Отправить</button>
+                                    <button class="button button-big button-fill send-button" id="send-button">
+                                        <span class="preloader preloader-white"></span>
+
+                                        Отправить
+                                    </button>
                                 </div>
                             </li>
                         </ul>

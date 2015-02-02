@@ -690,3 +690,17 @@ iframe {
     height: 120px;
     margin: 0 auto;
 }
+.send-button .preloader-white{
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 20px;
+    display: none;
+}
+.send-button.in-progress{
+    background: rgba(0, 122, 255, 0.75);
+    pointer-events: none;
+}
+.send-button.in-progress .preloader-white{
+    display: block;
+}
