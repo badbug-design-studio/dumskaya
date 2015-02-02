@@ -24,6 +24,8 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
       @$('#form').on('submit', (e) ->
         self.$('#send-button').addClass('in-progress')
         console.log e
+        form=this
+        console.log form
         e.preventDefault()
         formData = new FormData(@)
         xmlHttp=new XMLHttpRequest();
@@ -36,6 +38,8 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
             console.log xmlHttp.responseText
             match = xmlHttp.responseText.toString().match(/success:(\d+), error:"(\w*)"/)
             if match && parseInt(match[1])
+               form.reset()
+               Framework7.$('#imgPreView').hide()
                baseApplication.f7app.alert('Картика отправлена')
             else
               baseApplication.f7app.alert("Все печально")
