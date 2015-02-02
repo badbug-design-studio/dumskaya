@@ -62,7 +62,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                       ()->
                         console.log('post via twitter success')
                       , (error)->
-                        alert('Установите программу Twitter')
+                        app.alert('Установите программу Twitter')
                         console.log(error))
 
               },
@@ -74,7 +74,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                       ()->
                         console.log('share ok')
                       ,(errormsg)->
-                        alert('Установите программу Facebook')
+                        app.alert('Установите программу Facebook')
                         console.log(errormsg))
               },
 #              {
