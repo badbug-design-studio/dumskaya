@@ -1,5 +1,5 @@
-define ['_','baseView','text!templates/sendPhotos.html'],
-(_, BaseView,template)->
+define ['_','f7','baseView','text!templates/sendPhotos.html'],
+(_, f7, BaseView,template)->
 
   class SendPhotosView extends BaseView
     template:template
@@ -36,11 +36,11 @@ define ['_','baseView','text!templates/sendPhotos.html'],
             console.log xmlHttp.responseText
             match = xmlHttp.responseText.toString().match(/success:(\d+), error:"(\w*)"/)
             if match && parseInt(match[1])
-              alert("Картика отправлена")
+               baseApplication.f7app.alert('Картика отправлена')
             else
-              alert("Все печально")
+              baseApplication.f7app.alert("Все печально")
           else
-            alert("Попробуйте позже")
+            baseApplication.f7app.alert("Попробуйте позже")
         xmlHttp.send(formData)
       )
 

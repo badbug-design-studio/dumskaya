@@ -155,7 +155,7 @@ iframe {
 .navbar-through .page-content, .navbar-fixed .page-content {
     padding-top: 0;
     padding-bottom: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .navbar-through .page-content.standard, .navbar-fixed .page-content.standard {
     padding-top: 44px;
@@ -549,6 +549,7 @@ iframe {
 .navbar a.link.back span{
     width: 100%;
     text-align: center;
+    display: inline-block;
 }
 .navbar a.link.comments-link {
     background: url("../img/cloud.png")no-repeat center 12px;
