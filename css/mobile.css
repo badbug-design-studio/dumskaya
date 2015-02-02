@@ -548,6 +548,7 @@ iframe {
 }
 .navbar a.link.back span{
     width: 100%;
+    text-align: center;
 }
 .navbar a.link.comments-link {
     background: url("../img/cloud.png")no-repeat center 12px;
