@@ -73,14 +73,11 @@ module.exports = function(grunt) {
   coffee: {
       coffee_to_js:{
           options:{
-            bare: true,
-            sourceMap: true
+            bare: true
           },
           expand: true,
           flatten: false,
-          cwd: "./js",
           src: ["**/*.coffee"],
-          dest: '/js/',
           ext: ".js"
 
 }
@@ -99,7 +96,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
 
 
-  grunt.registerTask('build', ['requirejs','copy:main','concat:css','cssmin','regex-replace','clean'])
+  grunt.registerTask('build', ['coffee','requirejs','copy:main','concat:css','cssmin','regex-replace','clean'])
+
   grunt.registerTask('copyDir', ['copy:copyToDir'])
 
 
