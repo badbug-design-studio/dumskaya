@@ -68,7 +68,23 @@ module.exports = function(grunt) {
 
     clean: {
       css: ["css/concat.css"]
-    }
+    },
+
+  coffee: {
+      coffee_to_js:{
+          options:{
+            bare: true,
+            sourceMap: true
+          },
+          expand: true,
+          flatten: false,
+          cwd: "./js",
+          src: ["**/*.coffee"],
+          dest: '/js/',
+          ext: ".js"
+
+}
+  }
 
   });
 
@@ -80,6 +96,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
 
 
   grunt.registerTask('build', ['requirejs','copy:main','concat:css','cssmin','regex-replace','clean'])

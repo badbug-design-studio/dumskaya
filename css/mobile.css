@@ -537,16 +537,31 @@ iframe {
     width: 100%;
     height: 100%;
 }
-.navbar a.link.back  {
+.navbar a.custom-btn-back  {
     background: url("../img/arrow.png")no-repeat center;
     color: #8A1020;
     background-size: 99%;
     font-size: 14px;
     font-weight: bold;
     width: 90px;
-    text-align: center;
+    line-height: 44px;
+    height: 44px;
+    text-decoration: none;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
-.navbar a.link.back span{
+.navbar a.custom-btn-back span{
     width: 100%;
     text-align: center;
     display: inline-block;

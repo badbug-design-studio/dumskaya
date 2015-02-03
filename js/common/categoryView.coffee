@@ -1,5 +1,5 @@
-define ['_','baseView','text!templates/items.html'],
-  (_, BaseView,itemsTemplate)->
+define ['_','baseView','text!templates/items.html','hammer'],
+  (_, BaseView,itemsTemplate, Hammer)->
 
         class CategoryView extends BaseView
           template:null
@@ -44,15 +44,22 @@ define ['_','baseView','text!templates/items.html'],
              )
 
           handleOnClickItem:()->
-            cT=@model.listView.model.currentTab-1
-            self=this
-            @model.listView.domTabsObj[cT].on('click',@itemSelector,()->
-              index=self.$(this).data('index')
-              model=baseApplication.cache.data[self.cacheClass].channel.item[index]
-              model.cacheClass=self.cacheClass
-              model.index=index
-              baseApplication.router.loadPage('oneItem',{model:model})
-            )
+              cT=@model.listView.model.currentTab-1
+              console.log(cT)
+              self=this
+              console.log @model.listView.domTabsObj
+              elem=@model.listView.domTabsObj[cT][0]
+              Hammer(elem).on("tap", (event) ->
+                  console.log event
+                  index=event.target.getAttribute('data-index')
+                  if(!index)
+                    return
+                  model=baseApplication.cache.data[self.cacheClass].channel.item[index]
+                  model.cacheClass=self.cacheClass
+                  model.index=index
+                  baseApplication.router.loadPage('oneItem',{model:model})
+              );
+
 
 
 

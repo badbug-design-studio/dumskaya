@@ -3,7 +3,7 @@
     <div class="navbar-inner" id="main-navbar">
         <div class="left">
             <!-- Right link contains only icon - additional "icon-only" class-->
-            <a href="#" class="link icon-only open-panel ajax"><i class="icon menu fa fa-navicon"></i></a>
+            <a  class="icon-only" onTouchStart="javascript:baseApplication.f7app.openPanel('left');"><i class="icon menu fa fa-navicon"></i></a>
         </div>
         <!-- We have home navbar without left link-->
         <div class="center sliding">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="right">
-            <a href="#" onclick="baseApplication.router.loadPage('sendPhotos',{model:{},viewParams:{swipeBackPage:true}})" class="link item-link icon-only"><i class="icon fa fa-camera"></i></a>
+            <a href="#" onTouchStart="baseApplication.router.loadPage('sendPhotos',{model:{},viewParams:{swipeBackPage:true}})" class="link item-link icon-only"><i class="icon fa fa-camera"></i></a>
         </div>
 
     </div>

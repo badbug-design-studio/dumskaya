@@ -25,9 +25,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
 
           onRender:()->
-            @elTabsDom7=@$('.tabs')
+            @elTabsDom7=@$('#tabs')
+            console.log @elTabsDom7
             @elBody=@$('#body')
-            @elTabs=@$('.tabs')[0]
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @handleTabs()
             @swipeTabsHandle()
@@ -38,13 +38,14 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               tabDom=@$('#'+tab.id)
               @domTabsObj.push(tabDom)
               tabDom.on('show',  () =>
-                @model.currentTab=(i+1)
-                @showCurrentTab()
+                  @model.currentTab=(i+1)
+                  @showCurrentTab()
               );
             )
 
           swipeTabsHandle:()->
             Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
+              console.log 'swipeleft1'
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 baseApplication.f7app.showTab('#tab'+@model.currentTab)
@@ -55,13 +56,16 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                  baseApplication.f7app.showTab('#tab'+@model.currentTab)
             );
           showCurrentTab:()->
-              @changePositionTriagle()
-              index=@model.currentTab-1
-              tab=@model.tabs[index]
-              @previousDate=false
-              setTimeout(()=>
-                     tab.updateItems.apply(@) if tab
-              ,@delay)
+                @changePositionTriagle()
+
+
+                @previousDate=false
+                setTimeout(()=>
+                       index=@model.currentTab-1
+                       tab=@model.tabs[index]
+                       console.log 'apply!!!!'
+                       tab.updateItems.apply(@) if tab
+                ,@delay)
 
           updateCurrentTab:()=>
             @elBody.addClass('disable-touch')
