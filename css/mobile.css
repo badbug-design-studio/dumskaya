@@ -109,9 +109,13 @@ iframe {
     top: 44px;
     left: 0;
 }
-.tabs-animated-wrap > .tabs > .tab {
+.tabs-animated-wrap > .tabs > .tab, .custom-tabs .custom-tab {
     width: 100%;
     height: 100%;
+    overflow: auto;
+    min-height: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
 }
 .tab-link.button {
     overflow: visible;
@@ -120,7 +124,7 @@ iframe {
     border-radius: 0;
     border: none;
 }
-.buttons-row.theme-bg .tab-link.button.active {
+.buttons-row.theme-bg .tab-link.button.active,.buttons-row.theme-bg .my-custom-tab-link.button  {
     background: none;
     color: rgba(255,255,255,1);
 }
@@ -148,7 +152,7 @@ iframe {
 .navbar {
     border-bottom: 1px solid #720c18;
 }
-.buttons-row.theme-bg .tab-link.button {
+.buttons-row.theme-bg .tab-link.button, .my-custom-tab-link  {
     line-height: 24px;
     height: 25px;
 }
@@ -208,7 +212,7 @@ iframe {
 .tab .list-block {
     margin: 0;
 }
-.tab .list-block ul:first-child {
+.tab .list-block ul:first-child, .custom-tab .list-block ul:first-child{
     border-top: none;
 }
 .file-uploader {
@@ -734,3 +738,35 @@ iframe {
     position: relative;
     height: 100%;
 }
+
+.tabs-animated-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+.custom-tabs{
+    margin-top: 34px;
+}
+ .custom-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+ .custom-tabs .custom-tab {
+  width: 100%;
+  display: block;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+}
+ .overflow{
+     position: relative;
+     overflow: hidden;
+     height: 100%;
+     width: 100%;
+ }

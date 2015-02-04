@@ -23,24 +23,24 @@
 
     <!-- Page, data-page contains page name-->
     <div data-page="index" class="page cached" id="overflowvisible">
-        <div class="buttons-row theme-bg">
+        <div class="buttons-row theme-bg" id="change-tabs">
                        <span class="triangle" id="triangle"></span>
-                       <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+tab.id+'" class="tab-link '+active+' button ajax" >'+tab.name+'</a>')}) %>
+                       <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+(i+1)+'" class="my-custom-tab-link '+active+' button ajax" >'+tab.name+'</a>')}) %>
                    </div>
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div class="tabs-animated-wrap">
-                <div class="tabs" id="tabs">
-                    <% _.each(tabs,function(tab,i){ %>
-                    <%var active=(i+1)==currentTab?'active':'';%>
-                    <div id="<%=tab.id%>" class="tab <%=active%> infinite-scroll page-content  pull-to-refresh-content">
-                        <div class="infinite-scroll-preloader centered">
-                            <div class="preloader infinite big"></div>
+                <div class="overflow">
+                    <div class="custom-tabs" id="tabs">
+                        <% _.each(tabs,function(tab,i){ %>
+                        <%var active=(i+1)==currentTab?'active':'';%>
+                        <div id="<%=tab.id%>" class="custom-tab">
+                            <div class="infinite-scroll-preloader centered">
+                                <div class="preloader infinite big"></div>
+                            </div>
                         </div>
+                        <%}) %>
                     </div>
-                    <%}) %>
                 </div>
-            </div>
         </div>
     </div>
 </div>

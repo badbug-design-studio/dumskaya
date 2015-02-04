@@ -3080,7 +3080,10 @@ body.panel-closing .views {
   overflow: hidden;
   height: 100%;
 }
-.tabs-animated-wrap > .tabs {
+.custom-tabs{
+    margin-top: 34px;
+}
+.tabs-animated-wrap > .tabs, .custom-tabs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -3089,7 +3092,7 @@ body.panel-closing .views {
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
 }
-.tabs-animated-wrap > .tabs > .tab {
+.tabs-animated-wrap > .tabs > .tab, .custom-tabs .custom-tab {
   width: 100%;
   display: block;
   -webkit-flex-shrink: 0;

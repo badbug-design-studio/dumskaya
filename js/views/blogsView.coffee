@@ -13,7 +13,7 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           onRender:()->
-            @initInfinitScroll()
+#            @initInfinitScroll()
             @handleOnClickItem()
 
 

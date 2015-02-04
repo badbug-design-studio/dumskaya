@@ -20,42 +20,41 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           events:
             "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
+            "touchstart #change-tabs a":"changeTab"
+
           constructor:(query)->
             super
 
 
           onRender:()->
-            @elTabsDom7=@$('#tabs')
-            console.log @elTabsDom7
+            @elTabsDom = document.getElementById('tabs')
+            @triangle=  document.getElementById('triangle')
             @elBody=@$('#body')
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
-            @handleTabs()
+            @cacheTabs()
             @swipeTabsHandle()
             @showCurrentTab()
 
-          handleTabs:()->
+          cacheTabs:()->
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
               @domTabsObj.push(tabDom)
-              tabDom.on('show',  () =>
-                  @model.currentTab=(i+1)
-                  @showCurrentTab()
-              );
             )
 
           swipeTabsHandle:()->
-            Hammer(@elTabsDom7[0]).on("swipeleft", ()=>
+            Hammer(@elTabsDom,{threshold:0}).on("swipeleft", ()=>
               console.log 'swipeleft1'
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
-                baseApplication.f7app.showTab('#tab'+@model.currentTab)
+                @showCurrentTab()
             );
-            Hammer(@elTabsDom7[0]).on("swiperight", ()=>
+            Hammer(@elTabsDom,{threshold:0}).on("swiperight", ()=>
               if(@model.currentTab>1)
                  @model.currentTab--
-                 baseApplication.f7app.showTab('#tab'+@model.currentTab)
+                 @showCurrentTab()
             );
           showCurrentTab:()->
+                @tabTransition()
                 @changePositionTriagle()
 
 
@@ -81,8 +80,20 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             console.log("onPageBeforeAnimation")
 
           changePositionTriagle:()->
-            triangle= @$('#triangle')
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
-            triangle.transform("translate3d(#{shift}px, 0, 0)")
+            @triangle.style.webkitTransform ="translate3d(#{shift}px, 0, 0)"
+
+          changeTab:(event)=>
+           newTabIndex= (+event.target.getAttribute('href').substr(1))
+           if(!newTabIndex)
+             return
+           @model.currentTab=  newTabIndex
+           @showCurrentTab()
+
+
+          tabTransition:()->
+            shift=(@model.currentTab-1)*100;
+            @elTabsDom.style.webkitTransform ="translate3d(-#{shift}%, 0, 0)"
+
 
         return ListView

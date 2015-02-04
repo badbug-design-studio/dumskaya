@@ -11,7 +11,7 @@ define ['_','categoryView','text!templates/articles.html'],
 
 
     onRender:()->
-      @initInfinitScroll()
+#      @initInfinitScroll()
       @handleOnClickItem()
 
 

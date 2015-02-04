@@ -13,7 +13,7 @@ define ['_','categoryView','text!templates/news.html'],
 
 
           onRender:()->
-            @initInfinitScroll()
+#            @initInfinitScroll()
             @handleOnClickItem()
 
           appendEl:()->

@@ -3036,6 +3036,7 @@
         ************   Swipe panels   ************
         ======================================================*/
         app.initSwipePanels = function () {
+            return
             var panel, side;
             if (app.params.swipePanel) {
                 panel = $('.panel.panel-' + app.params.swipePanel);
@@ -4970,6 +4971,7 @@
             
             return true;
         };
+
         /*===============================================================================
         ************   Accordion   ************
         ===============================================================================*/
@@ -5030,11 +5032,13 @@
             });
             item.trigger('close');
         };
+
         /*===============================================================================
         ************   Fast Clicks   ************
         ************   Inspired by https://github.com/ftlabs/fastclick   ************
         ===============================================================================*/
         app.initFastClicks = function () {
+            return
             if (app.params.activeState) {
                 $('html').addClass('watch-active-state');
             }
@@ -5347,6 +5351,7 @@
         ************   Handle clicks and make them fast (on tap);   ************
         ===============================================================================*/
         app.initClickEvents = function () {
+            return
             function handleClicks(e) {
                 /*jshint validthis:true */
                 var clicked = $(this);
