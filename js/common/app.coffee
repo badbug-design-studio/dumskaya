@@ -10,6 +10,7 @@ define([
             pushState: false
 #            fastClicks: false
             ajaxLinks: ".ajax"
+#            activeState: false
             #     Hide and show indicator during ajax requests
             onAjaxStart: (xhr) ->
               app.showIndicator();
