@@ -13,7 +13,9 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           onRender:()->
-#            @initInfinitScroll()
+            setTimeout(()=>
+              @initCustomInfinitScroll()
+            ,0)
             @handleOnClickItem()
 
 
@@ -22,7 +24,7 @@ define ['_','categoryView','text!templates/blogs.html'],
 
 
           infiniteScrollSelector:()->
-             return  @$('#tab2 .infinite-scroll-preloader')
+             return  @$('#tab2 .infinite-custom-preloader')
 
 
 

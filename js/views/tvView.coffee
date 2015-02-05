@@ -13,7 +13,7 @@ define ['_','categoryView','text!templates/tv.html'],
 
 
           onRender:()->
-            @initInfinitScroll()
+            @initCustomInfinitScroll()
             @handleOnClickItem()
 
 
@@ -23,7 +23,7 @@ define ['_','categoryView','text!templates/tv.html'],
              return @$('#tab3 ul')
 
           infiniteScrollSelector:()->
-             return  @$('#tab3 .infinite-scroll-preloader')
+             return  @$('#tab3 .infinite-custom-preloader')
 
 
 

@@ -19,35 +19,53 @@ define ['_','baseView','text!templates/items.html','hammer'],
             @render()
 
 
-          initInfinitScroll:()->
+          initCustomInfinitScroll:()->
              cT=@model.listView.model.currentTab-1
-             loading = false;
+             @loading = false;
              if(@model.listView.infiniteTabsEventOn[cT])
                return
              @model.listView.infiniteTabsEventOn[cT]=true
-             @model.listView.domTabsObj[cT].on('infinite',  ()=>
-               if (loading) then return;
-       #       Set loading flag
-               loading = true;
-               setTimeout(()=>
-                  loading=false
-                  index=@model.cacheKey
-                  itemLength=baseApplication.cache.data[index].channel.item.length
-                  renderedCount=@model.listView.indexes[index]
-                  if(renderedCount==itemLength-@model.limit)
-#                       baseApplication.f7app.detachInfiniteScroll(@$('.infinite-scroll'));
-                      @infiniteScrollSelector().remove()
-                      return false
-                  @model.listView.indexes[index]+=@model.limit
-                  @appendOldData()
-               ,1000)
-             )
+             menuHeight=69 #harcode
+             preloaderHeightAvg=20 #harcode
+             tabHeight=@model.listView.domTabsObj[cT][0].clientHeight
+             scrollHeiht=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+             if(tabHeight>=scrollHeiht)
+               @triggerCustomInfiniteScroll()
+             @model.listView.domTabsObj[cT][0].onscroll=()=>
+               if(@model.listView.domTabsObj[cT][0].scrollTop+tabHeight-menuHeight-preloaderHeightAvg>=scrollHeiht)
+                 @triggerCustomInfiniteScroll(()=>
+                   scrollHeiht=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+                 )
+
+
+#             @model.listView.domTabsObj[cT][0].on('infinite',  ()=>
+#               @triggerCustomInfiniteScroll()
+#             )
+
+
+          triggerCustomInfiniteScroll:(callback)->
+             if (@loading) then return;
+     #       Set loading flag
+             @loading = true;
+             setTimeout(()=>
+                @loading=false
+                index=@model.cacheKey
+                itemLength=baseApplication.cache.data[index].channel.item.length
+                renderedCount=@model.listView.indexes[index]
+                if(renderedCount==itemLength-@model.limit)
+                    domEl=@infiniteScrollSelector()
+                    if(domEl) then domEl.remove()
+                    cT=@model.listView.model.currentTab-1
+                    @model.listView.domTabsObj[cT][0].onscroll=null
+                    return false
+                @model.listView.indexes[index]+=@model.limit
+                @appendOldData()
+                callback() if callback
+             ,1000)
 
           handleOnClickItem:()->
               cT=@model.listView.model.currentTab-1
-              console.log(cT)
               self=this
-              console.log @model.listView.domTabsObj
               elem=@model.listView.domTabsObj[cT][0]
               Hammer(elem).on("tap", (event) ->
                   console.log event

@@ -34,6 +34,11 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @cacheTabs()
             @swipeTabsHandle()
             @showCurrentTab()
+            document.getElementById('tab1').onscroll =  (event) ->
+              # called when the window is scrolled.
+              console.log event
+              console.log document.body.scrollTop
+
 
           cacheTabs:()->
             _.each(@model.tabs,(tab,i)=>
@@ -84,16 +89,21 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @triangle.style.webkitTransform ="translate3d(#{shift}px, 0, 0)"
 
           changeTab:(event)=>
-           newTabIndex= (+event.target.getAttribute('href').substr(1))
+           event.preventDefault()
+           newTabIndex= event.target.getAttribute('href').substr(1)
            if(!newTabIndex)
              return
-           @model.currentTab=  newTabIndex
+           @model.currentTab=  +newTabIndex
            @showCurrentTab()
 
 
           tabTransition:()->
             shift=(@model.currentTab-1)*100;
             @elTabsDom.style.webkitTransform ="translate3d(-#{shift}%, 0, 0)"
+
+
+
+
 
 
         return ListView

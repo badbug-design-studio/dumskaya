@@ -380,11 +380,11 @@ iframe {
     height: 35px;
     position: relative;
 }
-.infinite-scroll-preloader .preloader {
+.infinite-scroll-preloader .preloader, .infinite-custom-preloader .preloader.infinite {
     width:30px;
     height:30px;
 }
-.infinite-scroll-preloader .preloader.infinite{
+.infinite-scroll-preloader .preloader.infinite, .infinite-custom-preloader .preloader.infinite{
     -webkit-transform-origin: 50%;
     transform-origin: 50%;
     -webkit-animation: preloader-spin 1s step-end infinite;
@@ -770,3 +770,9 @@ iframe {
      height: 100%;
      width: 100%;
  }
+.infinite-custom-preloader {
+    text-align: center;
+    height: 35px;
+    position: relative;
+    transform: translate3d(0,-35px,0);
+}

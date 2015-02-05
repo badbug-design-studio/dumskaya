@@ -13,14 +13,14 @@ define ['_','categoryView','text!templates/news.html'],
 
 
           onRender:()->
-#            @initInfinitScroll()
+            @initCustomInfinitScroll()
             @handleOnClickItem()
 
           appendEl:()->
             return @$('#tab1 ul')
 
           infiniteScrollSelector:()->
-            return  @$('#tab1 .infinite-scroll-preloader')
+            return @$('#tab1 .infinite-custom-preloader')
 
 
 
@@ -28,6 +28,9 @@ define ['_','categoryView','text!templates/news.html'],
 
           infiniteStart: ()->
             console.log "infinite"
+
+
+
 
 
 
