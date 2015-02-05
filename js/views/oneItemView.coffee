@@ -15,6 +15,11 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           onRender:()->
             setTimeout(()=>
               @$("#image").attr('src',@model.smallImg)
+              @model.description.__cdata=@model.description.__cdata.replace(/\<iframe class="youtube" src="http:\/\/www.youtube.com\/embed\/(\w+)" [^>]+><\/iframe>/g,(match,$1)->
+                console.log(match)
+                console.log($1)
+                return "<div class='youtube-play' ontouchstart=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
+              )
               @model.description.__cdata=@model.description.__cdata.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
               @$("#contentOneItem").html(@model.description.__cdata)
               baseApplication.sync.getComments(@model.commentscounturl,

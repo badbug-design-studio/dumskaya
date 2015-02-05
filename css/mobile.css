@@ -776,3 +776,44 @@ iframe {
     position: relative;
     transform: translate3d(0,-35px,0);
 }
+.youtube-play{
+    width: 100%;
+    position: relative;
+}
+.youtube-play:after{
+    width: 90px;
+    height: 63px;
+    display: block;
+    content: "";
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin-top: -31px;
+    margin-left: -45px;
+    background: url("../img/youtube-play-ico.png") scroll 50% 50% no-repeat
+
+}
+.popup.custom-dark-theme{
+    background: #000000;
+}
+.popup.custom-dark-theme .content-block{
+    height: 100%;
+    box-sizing: border-box;
+    margin: 35px 0 0 0;
+    text-align: center;
+}
+.popup.custom-dark-theme  iframe{
+    background: url("../img/youtube-preloader.GIF") scroll 50% 50% no-repeat;
+}
+.popup.custom-dark-theme .content-block iframe{
+    width: 100%;
+}
+.popup.custom-dark-theme .navbar{
+    background: rgba(30,30,30,.8);
+    border:none;
+}
+.popup.custom-dark-theme a.link{
+    color: #fff;
+}.popup.custom-dark-theme a.link span{
+     margin-left: 7px;
+}

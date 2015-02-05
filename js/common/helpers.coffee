@@ -79,5 +79,22 @@ define ['f7','_'],
       date2 = new Date(dateString2)
       return date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate()
 
+    showVideo:(videoId)->
+      if(!@videoFrame)
+        @videoFrame=document.getElementById('video-frame')
+      baseApplication.f7app.popup('#popup-video');
+      setTimeout(()=>
+        @videoFrame.setAttribute('src',"http://www.youtube.com/embed/#{videoId}?rel=0&autoplay=1")
+      ,1000)
+
+
+    closeVideo:()->
+      window.stop()
+      baseApplication.f7app.closeModal()
+      setTimeout(()=>
+        @videoFrame.setAttribute('src','')
+      ,400)
+
+
   return Helpers
 
