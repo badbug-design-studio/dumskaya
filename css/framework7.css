@@ -3080,9 +3080,6 @@ body.panel-closing .views {
   overflow: hidden;
   height: 100%;
 }
-.custom-tabs{
-    margin-top: 34px;
-}
 .tabs-animated-wrap > .tabs, .custom-tabs {
   display: -webkit-box;
   display: -ms-flexbox;

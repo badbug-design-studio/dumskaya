@@ -29,6 +29,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           onRender:()->
             @elTabsDom = document.getElementById('tabs')
             @triangle=  document.getElementById('triangle')
+            @ptrEl=  document.getElementById('ptr')
             @elBody=@$('#body')
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @cacheTabs()
@@ -47,8 +48,16 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             )
 
           swipeTabsHandle:()->
+#            hammer = new Hammer(@elTabsDom);
+#            hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+            window.WebPullToRefresh.init({
+              ptrEl: @ptrEl
+              contentEl: document.getElementById('tab1')
+              loadingFunction: @exampleLoadingFunction()
+            });
+
             Hammer(@elTabsDom,{threshold:0}).on("swipeleft", ()=>
-              console.log 'swipeleft1'
               if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 @showCurrentTab()
@@ -58,18 +67,26 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                  @model.currentTab--
                  @showCurrentTab()
             );
+          exampleLoadingFunction:()->
+            return new Promise((resolve, reject)=>
+              if(true)
+                resolve();
+              else
+                reject();
+            )
+
           showCurrentTab:()->
-                @tabTransition()
-                @changePositionTriagle()
+              @tabTransition()
+              @changePositionTriagle()
 
 
-                @previousDate=false
-                setTimeout(()=>
-                       index=@model.currentTab-1
-                       tab=@model.tabs[index]
-                       console.log 'apply!!!!'
-                       tab.updateItems.apply(@) if tab
-                ,@delay)
+              @previousDate=false
+              setTimeout(()=>
+                     index=@model.currentTab-1
+                     tab=@model.tabs[index]
+                     console.log 'apply!!!!'
+                     tab.updateItems.apply(@) if tab
+              ,@delay)
 
           updateCurrentTab:()=>
             @elBody.addClass('disable-touch')

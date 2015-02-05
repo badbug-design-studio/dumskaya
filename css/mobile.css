@@ -116,6 +116,20 @@ iframe {
     min-height: 100%;
     min-width: 100%;
     box-sizing: border-box;
+    background: #efeff4;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 35px;
+
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800;
+    -webkit-transform-style: preserve-3d;
+}
+.custom-tabs .custom-tab .list-block {
+    margin: 0 0 35px 0;
 }
 .tab-link.button {
     overflow: visible;
@@ -400,13 +414,13 @@ iframe {
 }
 
 .pull-to-refresh-layer {
-    position: absolute;
-    position: relative;
-     margin-top: -44px;
-    left: 0;
-    width: 100%;
-    height: 44px;
-    right: 0;
+    /*position: absolute;*/
+    /*position: relative;*/
+     /*margin-top: -44px;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 44px;*/
+    /*right: 0;*/
 }
 .navbar-through .page-content.pull-to-refresh-content , .navbar-fixed .page-content.pull-to-refresh-content  {
     padding-top: 69px;
@@ -746,8 +760,11 @@ iframe {
   height: 100%;
 }
 .custom-tabs{
-    margin-top: 34px;
+    margin-top: 69px;
 }
+/*.custom-tabs .list-block {*/
+    /*margin: 0;*/
+/*}*/
  .custom-tabs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -816,4 +833,132 @@ iframe {
     color: #fff;
 }.popup.custom-dark-theme a.link span{
      margin-left: 7px;
+}
+
+
+#ptr {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    text-align: center;
+    height: 50px;
+}
+
+#ptr .genericon {
+    width: 13px;
+    height: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -6px;
+    margin-top: -10px;
+    background: no-repeat center;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 40'><polygon points='9,22 9,0 17,0 17,22 26,22 13.5,40 0,22' fill='%238c8c8c'/></svg>");
+    background-size: 13px 20px;
+    z-index: 10;
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0);
+    -ms-transform: rotate(0deg) translate3d(0, 0, 0);
+    transform: rotate(0deg) translate3d(0, 0, 0);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+.ptr-refresh #ptr .genericon {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.ptr-loading #ptr .genericon,
+.ptr-reset #ptr .genericon {
+    display: none;
+}
+
+.loading {
+    display: inline-block;
+    text-align: center;
+    opacity: .4;
+    margin: 12px 0 0 5px;
+    display: none;
+}
+.ptr-loading .loading {
+    display: block;
+}
+
+.loading span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    -webkit-transform: scale(0.3);
+    transform: scale(0.3);
+    border-radius: 50%;
+    -webkit-animation: ptr-loading 0.4s infinite alternate;
+    animation: ptr-loading 0.4s infinite alternate;
+}
+
+#l1 {
+    -webkit-animation-delay: 0;
+    animation-delay: 0;
+}
+
+#l2 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+#l3 {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+
+@-webkit-keyframes ptr-loading {
+    0% {
+        -webkit-transform: translateY(0) scale(0.3);
+        transform: translateY(0) scale(0.3);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        background-color: #000;
+        opacity: 1;
+    }
+}
+
+@keyframes ptr-loading {
+    0% {
+        -webkit-transform: translateY(0) scale(0.3);
+        transform: translateY(0) scale(0.3);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        background-color: #000;
+        opacity: 1;
+    }
+}
+
+.custom-tab {
+    min-height: 100%;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+
+.ptr-loading .custom-tab, .ptr-reset .custom-tab,
+.ptr-loading #ptr, .ptr-reset #ptr {
+    transition: all .25s ease;
+}
+
+.ptr-reset .custom-tab {
+    -webkit-transform: translate3d( 0, 0, 0 );
+    transform: translate3d( 0, 0, 0 );
+}
+
+.ptr-loading .custom-tab {
+    -webkit-transform: translate3d( 0, 50px, 0 );
+    transform: translate3d( 0, 50px, 0 );
 }

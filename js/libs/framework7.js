@@ -4582,6 +4582,7 @@
         ************   Pull To Refresh   ************
         ======================================================*/
         app.initPullToRefresh = function (pageContainer) {
+            return
             var eventsTarget = $(pageContainer);
             if (!eventsTarget.hasClass('pull-to-refresh-content')) {
                 eventsTarget = eventsTarget.find('.pull-to-refresh-content');
