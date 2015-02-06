@@ -82,7 +82,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           showCurrentTab:()->
                 @tabTransition()
                 @changePositionTriagle()
-
+                console.log('showCurrentTab')
 
                 @previousDate=false
                 setTimeout(()=>
@@ -90,6 +90,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                        tab=@model.tabs[index]
                        console.log 'apply!!!!'
                        if tab
+                         console.log('update')
                          tab.updateItems.apply(@)
                        else
                          alert('tab is not defined')
@@ -123,9 +124,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           changeTab:(event)=>
            event.preventDefault()
            newTabIndex= event.target.getAttribute('href').substr(1)
-           if(!newTabIndex)
-             return
+           console.log(newTabIndex)
            @model.currentTab=  +newTabIndex
+           console.log(@model.currentTab)
            @showCurrentTab()
 
 
