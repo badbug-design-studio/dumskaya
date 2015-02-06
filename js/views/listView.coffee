@@ -35,21 +35,17 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @cacheTabs()
             @showCurrentTab()
 #            @swipeTabsHandle()
-            @handleOnClickItem()
 
 
-          handleOnClickItem:()->
-            cT=@model.currentTab-1
+          handleOnClickItem:(elem,i)->
             cacheClassesArr = ['news','blogs','tv','articles']
-            self=this
-            elem=@domTabsObj[cT][0]
-            Hammer(elem).on("tap", (event) ->
+            Hammer(elem[0]).on("tap", (event) ->
               console.log(123)
               index=event.target.getAttribute('data-index')
               if(!index)
                 return
-              model=baseApplication.cache.data[cacheClassesArr[cT]].channel.item[index]
-              model.cacheClass=cacheClassesArr[cT]
+              model=baseApplication.cache.data[cacheClassesArr[i]].channel.item[index]
+              model.cacheClass=cacheClassesArr[i]
               model.index=index
               baseApplication.router.loadPage('oneItem',{model:model})
             );
@@ -58,6 +54,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             self=this
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
+              @handleOnClickItem(tabDom,i)
               baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,@swipeLeft,@swipeRight)
               @domTabsObj.push(tabDom)
             )
