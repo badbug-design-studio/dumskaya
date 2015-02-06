@@ -26,7 +26,7 @@ define ['_','baseView','text!templates/items.html','hammer'],
                return
              @model.listView.infiniteTabsEventOn[cT]=true
              menuHeight=69 #harcode
-             preloaderHeightAvg=20 #harcode
+             preloaderHeightAvg=25 #harcode
              tabHeight=@model.listView.domTabsObj[cT][0].clientHeight
              scrollHeiht=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
              if(tabHeight>=scrollHeiht)
@@ -68,7 +68,6 @@ define ['_','baseView','text!templates/items.html','hammer'],
               self=this
               elem=@model.listView.domTabsObj[cT][0]
               Hammer(elem).on("tap", (event) ->
-                  console.log event
                   index=event.target.getAttribute('data-index')
                   if(!index)
                     return

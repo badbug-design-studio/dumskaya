@@ -19,7 +19,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           infiniteTabsEventOn:[false,false,false,false]
 
           events:
-            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
+#            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
             "touchstart #change-tabs a":"changeTab"
 
           constructor:(query)->
@@ -29,35 +29,45 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           onRender:()->
             @elTabsDom = document.getElementById('tabs')
             @triangle=  document.getElementById('triangle')
-            @elBody=@$('#body')
+            @elBody=document.getElementById('body')
+            @ptr=document.getElementById('ptr')
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @cacheTabs()
-            @swipeTabsHandle()
             @showCurrentTab()
-            document.getElementById('tab1').onscroll =  (event) ->
-              # called when the window is scrolled.
-              console.log event
-              console.log document.body.scrollTop
+#            @swipeTabsHandle()
+
 
 
           cacheTabs:()->
+            self=this
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
+              baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,@swipeLeft,@swipeRight)
               @domTabsObj.push(tabDom)
             )
 
           swipeTabsHandle:()->
             Hammer(@elTabsDom,{threshold:0}).on("swipeleft", ()=>
               console.log 'swipeleft1'
-              if(@model.currentTab<@model.tabs.length)
-                @model.currentTab++
-                @showCurrentTab()
+
             );
             Hammer(@elTabsDom,{threshold:0}).on("swiperight", ()=>
-              if(@model.currentTab>1)
-                 @model.currentTab--
-                 @showCurrentTab()
+
             );
+
+          swipeLeft:()->
+            console.log @
+            if(@model.currentTab<@model.tabs.length)
+                @model.currentTab++
+                @showCurrentTab()
+
+
+          swipeRight:()->
+            console.log @
+            if(@model.currentTab>1)
+                  @model.currentTab--
+                  @showCurrentTab()
+
           showCurrentTab:()->
                 @tabTransition()
                 @changePositionTriagle()
@@ -72,13 +82,19 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                 ,@delay)
 
           updateCurrentTab:()=>
-            @elBody.addClass('disable-touch')
             index=@model.currentTab-1
             tab=@model.tabs[index]
             @previousDate=false
+            domEl=@domTabsObj[index]
+            console.log(domEl)
             tab.updateItems.call(@,()=>
-              app.pullToRefreshDone()
-              @elBody.removeClass('disable-touch')
+              domEl[0].style.transitionDuration='300ms'
+              domEl[0].style.webkitTransform="translate3d(0,0,0)"
+              @elBody.classList.remove('dragging')
+              setTimeout(()=>
+               domEl[0].style.transitionDuration='0ms'
+               @elBody.className=""
+              ,300)
             ) if tab
 
           onPageBeforeAnimation:()->
@@ -100,6 +116,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           tabTransition:()->
             shift=(@model.currentTab-1)*100;
             @elTabsDom.style.webkitTransform ="translate3d(-#{shift}%, 0, 0)"
+            @ptr.style.webkitTransform ="translate3d(#{shift}%, 0, 0)"
 
 
 
