@@ -28,20 +28,30 @@ define ['_','baseView','text!templates/items.html','hammer'],
              menuHeight=69 #harcode
              preloaderHeightAvg=25 #harcode
              tabHeight=@model.listView.domTabsObj[cT][0].clientHeight
-             scrollHeiht=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
-             if(tabHeight>=scrollHeiht)
+             infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+#             onrender ===
+             if(tabHeight>=infinitScrollHeight)
                @triggerCustomInfiniteScroll()
+              #onscroll===
              @model.listView.domTabsObj[cT][0].onscroll=()=>
-               if(@model.listView.domTabsObj[cT][0].scrollTop+tabHeight-menuHeight-preloaderHeightAvg>=scrollHeiht)
+#               console.log(@model.listView.domTabsObj[cT][0].scrollTop+tabHeight-menuHeight-preloaderHeightAvg)
+#               console.log(infinitScrollHeight)
+#               console.log(@model.listView.model.needUpdateScroll)
+#               console.log('--------')
+               if(@model.listView.model.needUpdateScroll) #after pull to refresh
+#                 console.log(@model.listView.domTabsObj[cT][0].firstChild)
+                 infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+                 @model.listView.model.needUpdateScroll=false
+
+               if(@model.listView.domTabsObj[cT][0].scrollTop+tabHeight-menuHeight-preloaderHeightAvg>=infinitScrollHeight)
                  @triggerCustomInfiniteScroll(()=>
-                   scrollHeiht=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+                   infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
                  )
 
 
 #             @model.listView.domTabsObj[cT][0].on('infinite',  ()=>
 #               @triggerCustomInfiniteScroll()
 #             )
-
 
           triggerCustomInfiniteScroll:(callback)->
              if (@loading) then return;
@@ -55,8 +65,6 @@ define ['_','baseView','text!templates/items.html','hammer'],
                 if(renderedCount==itemLength-@model.limit)
                     domEl=@infiniteScrollSelector()
                     if(domEl) then domEl.remove()
-                    cT=@model.listView.model.currentTab-1
-                    @model.listView.domTabsObj[cT][0].onscroll=null
                     return false
                 @model.listView.indexes[index]+=@model.limit
                 @appendOldData()

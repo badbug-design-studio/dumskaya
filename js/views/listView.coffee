@@ -56,14 +56,12 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             );
 
           swipeLeft:()->
-            console.log @
             if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 @showCurrentTab()
 
 
           swipeRight:()->
-            console.log @
             if(@model.currentTab>1)
                   @model.currentTab--
                   @showCurrentTab()
@@ -82,20 +80,22 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                 ,@delay)
 
           updateCurrentTab:()=>
+            self=@
             index=@model.currentTab-1
             tab=@model.tabs[index]
             @previousDate=false
             domEl=@domTabsObj[index]
-            console.log(domEl)
             tab.updateItems.call(@,()=>
               domEl[0].style.transitionDuration='300ms'
               domEl[0].style.webkitTransform="translate3d(0,0,0)"
-              @elBody.classList.remove('dragging')
               setTimeout(()=>
                domEl[0].style.transitionDuration='0ms'
                @elBody.className=""
+               @model.needUpdateScroll=true
               ,300)
             ) if tab
+
+
 
           onPageBeforeAnimation:()->
             console.log("onPageBeforeAnimation")

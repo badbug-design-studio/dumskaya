@@ -107,6 +107,7 @@ define ['f7','_'],
       scrollTop=0
       swipe=false
       preloader=false
+      pullInProgress=false
 
 
       updateDistance=60;
@@ -139,28 +140,35 @@ define ['f7','_'],
            touchYStart=event.touches[0].pageY
            touchXStart=event.touches[0].pageX
            scrollTop=this.scrollTop
+           console.log(this.scrollTop)
       , false);
 
       domEl.addEventListener("touchmove",
           (event)->
+             if(scrollTop)
+                return
 #             distanceX=event.touches[0].pageX-touchXStart
              touchXEnd=event.touches[0].pageX
+             console.log(touchYStart)
+             console.log(event.touches[0].pageY)
              distance=event.touches[0].pageY-touchYStart
+             console.log(distance)
+             console.log('----------')
 #             console.log Math.abs(distanceX)
 #             if(!preloader&&Math.abs(distanceX)>=20&&!swipe&&distance<Math.abs(distanceX))
 #                 swipe=true
 #             else
 #                preloader=true
-             console.log(swipe)
-             console.log(preloader)
-             console.log('-------------')
+#             console.log(swipe)
+#             console.log(preloader)
+#             console.log('-------------')
 #             console.log(swipe)
 #             if(swipe)
 #               return
-             if(scrollTop)
-                return
+
 #             console.log(distance)
              if(distance>=0)#only down direction!
+               pullInProgress=true
                body.classList.add('dragging')
                this.style.webkitTransform="translate3d(0,"+distance+"px,0)"
              if(distance>=updateDistance)
@@ -181,14 +189,18 @@ define ['f7','_'],
 #               swipe=false
 #               finish.call(this)
 #             else
-               if(distance>updateDistance)
-                 body.classList.add('ptr-loading')
-                 console.log('update');
-                 update.call(this,callback)
-               else
-                 console.log('go back')
-                 finish.call(this)
-               preloader=false
+               if(pullInProgress)
+                  pullInProgress=false
+                  if(distance>updateDistance)
+                    body.classList.add('ptr-loading')
+                    console.log('update');
+                    distance=0
+                    update.call(this,callback)
+                  else
+                    console.log('go back')
+                    finish.call(this)
+                  preloader=false
+
       , false);
 
   return Helpers
