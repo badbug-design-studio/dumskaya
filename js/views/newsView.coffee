@@ -14,7 +14,6 @@ define ['_','categoryView','text!templates/news.html'],
 
           onRender:()->
             @initCustomInfinitScroll()
-            @handleOnClickItem()
 
           appendEl:()->
             return @$('#tab1 ul')

@@ -16,8 +16,6 @@ define ['_','categoryView','text!templates/blogs.html'],
             setTimeout(()=>
               @initCustomInfinitScroll()
             ,0)
-            @handleOnClickItem()
-
 
           appendEl:()->
              return @$('#tab2 ul')

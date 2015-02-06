@@ -71,19 +71,6 @@ define ['_','baseView','text!templates/items.html','hammer'],
                 callback() if callback
              ,1000)
 
-          handleOnClickItem:()->
-              cT=@model.listView.model.currentTab-1
-              self=this
-              elem=@model.listView.domTabsObj[cT][0]
-              Hammer(elem).on("tap", (event) ->
-                  index=event.target.getAttribute('data-index')
-                  if(!index)
-                    return
-                  model=baseApplication.cache.data[self.cacheClass].channel.item[index]
-                  model.cacheClass=self.cacheClass
-                  model.index=index
-                  baseApplication.router.loadPage('oneItem',{model:model})
-              );
 
 
 

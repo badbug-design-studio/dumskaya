@@ -5,8 +5,8 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           template:template
           domTabsObj:[]
           events:
-                "click #share":"shareLink"
-                "click #comments_count":"commentsOpen"
+                "touchstart #share":"shareLink"
+                "touchstart #comments_count":"commentsOpen"
 
           constructor: (query)->
             super
@@ -32,7 +32,6 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                      @$("#comments_count").removeClass("no-comments")
                )
             ,1000) #terrible wait until animation works
-
 
           shareLink: =>
             buttons1 = [

@@ -14,8 +14,6 @@ define ['_','categoryView','text!templates/tv.html'],
 
           onRender:()->
             @initCustomInfinitScroll()
-            @handleOnClickItem()
-
 
 
 

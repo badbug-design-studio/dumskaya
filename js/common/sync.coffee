@@ -43,7 +43,11 @@ define ['_','xml2json'],
       xmlHttp=new XMLHttpRequest();
 
       xmlHttp.open('GET', url+"?#{Date.now()}", true);
-#      promise = new Promise((resolve, reject)->
+      xmlHttp.timeout = 4000;
+      xmlHttp.ontimeout = ()->
+        onSuccess(false, "timeout") if onSuccess
+
+      #      promise = new Promise((resolve, reject)->
       xmlHttp.onreadystatechange = ()->
          if (xmlHttp.readyState != 4) then return
          if(xmlHttp.status == 200)
