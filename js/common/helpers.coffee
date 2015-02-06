@@ -92,6 +92,7 @@ define ['f7','_'],
       window.stop()
       baseApplication.f7app.closeModal()
       setTimeout(()=>
+        @videoFrame.contentWindow.document.write("")
         @videoFrame.setAttribute('src','')
       ,300)
 

@@ -775,6 +775,7 @@ iframe {
     height: 35px;
     position: relative;
     transform: translate3d(0,-35px,0);
+    -webkit-transform: translate3d(0,-35px,0);
 }
 .youtube-play{
     width: 100%;

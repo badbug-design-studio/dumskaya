@@ -9,12 +9,15 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
 
 
     onRender:()->
-      @sendForm()
-      @clicks()
-      self=@
-      @$("#file").change(()->
-        self.readURL(this);
-      );
+      setTimeout(()=>
+         @sendForm()
+         @clicks()
+         self=@
+         @$("#file").change(()->
+           self.readURL(this);
+         );
+      ,1000)
+
 
     onPageBeforeAnimation:()->
       console.log("onPageBeforeAnimation")
