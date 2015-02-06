@@ -76,7 +76,10 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                        index=@model.currentTab-1
                        tab=@model.tabs[index]
                        console.log 'apply!!!!'
-                       tab.updateItems.apply(@) if tab
+                       if tab
+                         tab.updateItems.apply(@)
+                       else
+                         alert('tab is not defined')
                 ,@delay)
 
           updateCurrentTab:()=>
