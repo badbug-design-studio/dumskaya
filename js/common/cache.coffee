@@ -13,6 +13,12 @@ define ['f7','_'],
     getList:(cacheKey,callback,need2Update)->
       delay=0
       delay=1300 if need2Update
+      @need2Update=need2Update
+      @listViewCallback=callback
+      @cachedTableName=cacheKey
+      if @error
+        @requestDo(false)
+        return
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
@@ -24,23 +30,27 @@ define ['f7','_'],
           ,delay)
           return false #dont do any request
 
-        url=@getUrl(cacheKey)
-        baseApplication.sync.request(url,true,(data)=>
-          if(data&&data.channel) #if we got info from the server
-            if !@data[cacheKey]||@data[cacheKey]&&@data[cacheKey].channel.item[0].lastUpdate!=data.channel.item[0].lastUpdate #if we got NEW info
-              @setTableData(cacheKey,data)
-              @data[cacheKey]=data
-
-
-          setTimeout(()=>
-            if !cachedData||need2Update #do render when first time app was started or need to update
-              callback(@data[cacheKey],cacheKey)
-
-            need2Update() if need2Update
-          ,delay)
-        )
+        @requestDo(cachedData)
       )
 
+    requestDo:(cachedData)->
+      delay=0
+      delay=1300 if @need2Update
+      url=@getUrl(@cachedTableName)
+      baseApplication.sync.request(url,true,(data)=>
+        if(data&&data.channel) #if we got info from the server
+          if !@data[@cachedTableName]||@data[@cachedTableName]&&@data[@cachedTableName].channel.item[0].lastUpdate!=data.channel.item[0].lastUpdate #if we got NEW info
+            @setTableData(@cachedTableName,data)
+            @data[@cachedTableName]=data
+
+
+        setTimeout(()=>
+          if !cachedData||@need2Update #do render when first time app was started or need to update
+            @listViewCallback(@data[@cachedTableName],@cachedTableName)
+
+          @need2Update() if @need2Update
+        ,delay)
+      )
 
     getUrl:(cacheKey)->
       switch cacheKey
@@ -95,6 +105,7 @@ define ['f7','_'],
 #      tx.executeSql("CREATE UNIQUE INDEX myindex ON news (id, data, JOB);", [], null, @errorHandler)
 
     errorHandler: (error)->
+      @error=true
       console.error(error)
       return false;
 
@@ -116,7 +127,10 @@ define ['f7','_'],
             data = result.rows.item(0);
           else data=false
           callback(data)
-        ,@errorHandler, @querySuccess())
+        ,()->
+          console.error('select db error')
+          @requstDo(false)
+        , @querySuccess())
       )
 
     querySuccess: () =>
