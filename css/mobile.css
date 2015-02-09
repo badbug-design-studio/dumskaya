@@ -538,8 +538,10 @@ iframe {
     margin-bottom: 0;
 }
 .item-page .item-media img {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 .navbar a.custom-btn-back  {
     background: url("../img/arrow.png")no-repeat center;
@@ -690,8 +692,11 @@ iframe {
 #contentOneItem,#commentsOneItem{
     margin-top: 15px;
 }
-#contentOneItem img {
-    width: 100%;
+#contentOneItem img, #contentOneItem iframe {
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 #contentOneItem .preloader,#commentsOneItem .preloader{
     margin: 15px auto 0 auto;
@@ -783,16 +788,17 @@ iframe {
     position: relative;
 }
 .youtube-play:after{
-    width: 90px;
-    height: 63px;
+    width: 60px;
+    height: 40px;
     display: block;
     content: "";
     position: absolute;
-    top:50%;
+    top: 50%;
     left: 50%;
-    margin-top: -31px;
-    margin-left: -45px;
-    background: url("../img/youtube-play-ico.png") scroll 50% 50% no-repeat;
+    margin-top: -20px;
+    margin-left: -30px;
+    background: url("../img/youtube-play-ico.png") no-repeat;
+    background-size: 100% 100%;
 
 }
 .popup.custom-dark-theme{
