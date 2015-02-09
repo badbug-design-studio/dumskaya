@@ -14,6 +14,8 @@ define ['_'],
       require ['./views/'+ controllerName + 'View'], (View)->
         delete baseApplication['currentView']
         baseApplication.currentView = new View(query)
+        if baseApplication.currentView.constructor.name == 'ListView'
+         baseApplication.listView=baseApplication.currentView
 
 
   return new Routes()

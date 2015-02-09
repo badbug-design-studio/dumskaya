@@ -49,6 +49,11 @@ define ['require','_'],
     openLink:()->
             return "onclick=window.open('$1','_system')"
 
+    getPic:()->
+             if window.innerWidth>600
+                return "sddefault.jpg"
+             return "mqdefault.jpg"
+
 
 
 

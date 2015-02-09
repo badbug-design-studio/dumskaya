@@ -22,10 +22,14 @@ define ['f7','_'],
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
-            if !@data[cacheKey]
+            if !@data[cacheKey] #do render only when we go to the tab first time
               parsedData=JSON.parse(cachedData.data)
               @data[cacheKey]=parsedData
               callback(parsedData,cacheKey)
+            else
+              console.log 'dont do rerender!'
+              console.log cachedData
+              console.log need2Update
             need2Update() if need2Update
           ,delay)
           return false #dont do any request

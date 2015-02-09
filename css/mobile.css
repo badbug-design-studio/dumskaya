@@ -670,9 +670,7 @@ iframe {
     max-width: 100%;
     text-overflow: ellipsis;
 }
-.comments-page .comtd2>div img {
-    width: 100%;
-}
+
 .comments-page  .comtd4 img{
     width: 18px;;
     display: inline-block;
@@ -692,7 +690,8 @@ iframe {
 #contentOneItem,#commentsOneItem{
     margin-top: 15px;
 }
-#contentOneItem img, #contentOneItem iframe {
+#contentOneItem img, #contentOneItem iframe,.comments-page .comtd2>div img {
+
     width: 300px;
     height: auto;
     display: block;
@@ -783,9 +782,10 @@ iframe {
     -webkit-transform: translate3d(0,-35px,0);
 }
 .youtube-play{
-    width: 100%;
+    width: 300px;
     min-height: 140px;
     position: relative;
+    margin: 15px auto 0 auto;
 }
 .youtube-play:after{
     width: 60px;
@@ -816,6 +816,8 @@ iframe {
 }
 .popup.custom-dark-theme .content-block iframe{
     width: 100%;
+    max-width: 630px;
+    margin: 0 auto;
 }
 .popup.custom-dark-theme .navbar{
     background: rgba(30,30,30,.8);
