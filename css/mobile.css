@@ -873,15 +873,17 @@ body.dragging .custom-tab{
     background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 40'><polygon points='9,22 9,0 17,0 17,22 26,22 13.5,40 0,22' fill='%238c8c8c'/></svg>");
     background-size: 13px 20px;
     z-index: 10;
-    -webkit-transform: rotate(0deg) translate3d(0, 0, 0);
-    -ms-transform: rotate(0deg) translate3d(0, 0, 0);
-    transform: rotate(0deg) translate3d(0, 0, 0);
+    -webkit-transform: rotate3d(1,1,1,0deg) translate3d(0, 0, 0);
+    -ms-transform: rotate3d(1,1,1,0deg) translate3d(0, 0, 0);
+    transform: rotate(1,1,1,0deg) translate3d(0, 0, 0);
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: perspective(0);
     -webkit-transition-duration: 300ms;
     transition-duration: 300ms;
 }
 .ptr-refresh #ptr .genericon {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
+    -webkit-transform: rotate3d(1,0,0,180deg);
+    transform: rotate(1,0,0,180deg);
 }
 .ptr-loading #ptr .genericon,
 .ptr-reset #ptr .genericon {
