@@ -19,8 +19,7 @@
 <!-- Status bar overlay for fullscreen mode-->
 <div class="statusbar-overlay"></div>
 <!-- Panels overlay-->
-<div class="panel-overlay" onTouchStart="javascript:baseApplication.f7app.closePanel();">
-</div>
+<!--<div class="panel-overlay" ontouchstart="javascript:baseApplication.f7app.closePanel();"></div>-->
 <!-- Left panel with reveal effect-->
 <div class="panel panel-left panel-reveal settings-page" id="settings-page">
 </div>
@@ -43,11 +42,11 @@
   <div class="popup popup-video custom-dark-theme" id="popup-video">
       <div class="navbar">
           <div class="navbar-inner">
-            <a class="link" ontouchstart="javascript:baseApplication.helpers.closeVideo()"><i class="icon icon-back color-white"></i><span>Закрыть</span></a>
+            <!--<a class="link" ontouchstart="javascript:baseApplication.helpers.closeVideo()"><i class="icon icon-back color-white"></i><span>Закрыть</span></a>-->
           </div>
        </div>
     <div class="content-block">
-        <iframe id="video-frame" width="320px" height="260px" frameborder="0" allowfullscreen></iframe>
+        <iframe id="video-frame" width="320" height="260" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 <div class="popup-overlay"></div>

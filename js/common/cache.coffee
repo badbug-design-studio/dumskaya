@@ -94,6 +94,7 @@ define ['f7','_'],
         @db.transaction(@createDbTables, @errorHandler);
         callback()
       else
+        @error=true
         callback()
         console.error("It seems your browser does not have support for WebSQL.")
 
@@ -110,6 +111,9 @@ define ['f7','_'],
       return false;
 
     setTableData: (tableName, data)=>
+      if !@db
+        @error = true
+        return
       @db.transaction((tx)=>
         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (id,data, created) VALUES (?,?,?)", [1,JSON.stringify(data),  new Date().getTime()]
           (tx, resultSet) ->

@@ -6,7 +6,7 @@ define([
     console.log
     return  app.addView(selector, {
           dynamicNavbar: true,
-          domCache: true
+#          domCache: true
           #fastClicks: false
           #animatePages:false
         })
