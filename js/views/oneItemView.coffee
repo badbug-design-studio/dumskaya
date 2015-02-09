@@ -18,7 +18,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               @model.description.__cdata=@model.description.__cdata.replace(/\<iframe [^>]*src="http:\/\/www\.youtube\.com\/embed\/([^"]+)"[^>]*><\/iframe>/g,(match,$1)->
                 console.log(match)
                 console.log($1)
-                return "<div class='youtube-play' ontouchstart=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
+                return "<div class='youtube-play' onclick=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
               )
               @model.description.__cdata=@model.description.__cdata.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
               document.getElementById("contentOneItem").innerHTML=@model.description.__cdata
