@@ -20,7 +20,9 @@ define([
             helpers: new Helpers
             cache: new Cache(()->
               routes.loadPage('list')
-              routes.loadPage('menu')
+              setTimeout(()->
+                routes.loadPage('menu')
+              ,1000)
               app.hideIndicator();
             )
       }

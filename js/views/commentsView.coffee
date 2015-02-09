@@ -20,8 +20,7 @@ define ['_','baseView', 'text!templates/comments.html'],
                   html=html.replace(/\<iframe [^>]*src="http:\/\/www\.youtube\.com\/embed\/([^"]+)"[^>]*><\/iframe>/g,(match,$1)->
                     return "<div class='youtube-play' ontouchstart=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
                   )
-
-                  @$('#commentsOneItem').html(html)
+                  document.getElementById("commentsOneItem").innerHTML=html
                 )
             ,1000)
 

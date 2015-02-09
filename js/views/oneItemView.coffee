@@ -21,7 +21,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                 return "<div class='youtube-play' ontouchstart=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
               )
               @model.description.__cdata=@model.description.__cdata.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
-              @$("#contentOneItem").html(@model.description.__cdata)
+              document.getElementById("contentOneItem").innerHTML=@model.description.__cdata
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
                    if data&&@model.commentscount != data
