@@ -22,20 +22,21 @@ define ['_','baseView','text!templates/items.html','hammer'],
           initCustomInfinitScroll:()->
              cT=@model.listView.model.currentTab-1
              @loading = false;
-             if(@model.listView.infiniteTabsEventOn[cT])
-               return
-             @model.listView.infiniteTabsEventOn[cT]=true
              menuHeight=69 #harcode
              preloaderHeightAvg=25 #harcode
              tabHeight=@model.listView.domTabsObj[cT][0].clientHeight
+             console.log tabHeight
              infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
+             console.log infinitScrollHeight
 #             onrender ===
              if(tabHeight>=infinitScrollHeight)
-               @triggerCustomInfiniteScroll()
+               @triggerCustomInfiniteScroll(()=>
+                                  infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight+5
+               )
               #onscroll===
              @model.listView.domTabsObj[cT][0].onscroll=()=>
 #               console.log(@model.listView.domTabsObj[cT][0].scrollTop+tabHeight-menuHeight-preloaderHeightAvg)
-#               console.log(infinitScrollHeight)
+               console.log(infinitScrollHeight)
 #               console.log(@model.listView.model.needUpdateScroll)
 #               console.log('--------')
                if(@model.listView.model.needUpdateScroll) #after pull to refresh

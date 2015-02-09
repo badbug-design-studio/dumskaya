@@ -16,7 +16,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             blogs:0
             tv:0
             articles:0
-          infiniteTabsEventOn:[false,false,false,false]
 
           events:
 #            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
