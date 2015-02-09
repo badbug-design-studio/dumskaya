@@ -16,9 +16,6 @@ define ['f7','_'],
       @need2Update=need2Update
       @listViewCallback=callback
       @cachedTableName=cacheKey
-      if @error
-        @requestDo(false)
-        return
       @getDataFromTable(cacheKey,(cachedData)=>
         if(cachedData&&!need2Update)#if we had cache work wit it
           setTimeout(()=>
@@ -87,20 +84,20 @@ define ['f7','_'],
     setCachedHtml:(cacheKey,data)->
 
 
-    databaseError:(e)->
-      console.error('An IndexedDB error has occurred', e);
 
-    initDatabase: (callback) ->
+
+    initDatabase: (callback,reinit) ->
+      reinit=reinit||false
       displayName = 'Web SQL Storage Dumskaya Database';
       maxSize = 20*1024*1024;
       if window.openDatabase
         @db = openDatabase(@dbName, @version, displayName, maxSize);
         @db.transaction(@createDbTables, @errorHandler);
-        callback()
+        callback() if callback
       else
-        @error=true
-        callback()
         console.error("It seems your browser does not have support for WebSQL.")
+        callback() if callback
+
 
     createDbTables:(tx)=>
       tx.executeSql("CREATE TABLE IF NOT EXISTS news (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
@@ -110,13 +107,12 @@ define ['f7','_'],
 #      tx.executeSql("CREATE UNIQUE INDEX myindex ON news (id, data, JOB);", [], null, @errorHandler)
 
     errorHandler: (error)->
-      @error=true
       console.error(error)
       return false;
 
     setTableData: (tableName, data)=>
       if !@db
-        @error = true
+        console.error 'set to DB #{tableName} failed'
         return
       @db.transaction((tx)=>
         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (id,data, created) VALUES (?,?,?)", [1,JSON.stringify(data),  new Date().getTime()]
@@ -129,20 +125,34 @@ define ['f7','_'],
       );
 
     getDataFromTable: (tableName,callback) =>
+      if !@db
+        console.error 'get from DB #{tableName} failed'
+        @requestDo(false)
+        return
+
       @db.transaction((tx)=>
         tx.executeSql("SELECT * FROM #{tableName}", [], (tx,result)->
           if result.rows.length
             data = result.rows.item(0);
           else data=false
           callback(data)
-        ,()->
+        ,(error)=>
           console.error('select db error')
-          @requstDo(false)
-        , @querySuccess())
+          console.error(error)
+          @requestDo(false)
+        , @querySuccess(tableName))
+      ,(error)=>
+        console.error('transaction')
+        console.error(error)
+        if !error.code
+         @initDatabase(()=>
+          @requestDo(false)
+         )
+
       )
 
-    querySuccess: () =>
-#      console.log true
+    querySuccess: (tableName) =>
+      console.log "select from db #{tableName} success"
 
     dropTables: (tableName) =>
       @db.transaction((tx) =>
