@@ -828,8 +828,12 @@ iframe {
 }.popup.custom-dark-theme a.link span{
      margin-left: 7px;
 }
-body.dragging .custom-tab{
-    overflow: hidden;
+body.dragging .list-block{
+    height: 100%;
+    margin: 0;
+}
+body.dragging .infinite-custom-preloader{
+    height: 0;
 }
 .custom-tabs{
       position: relative;
@@ -837,6 +841,8 @@ body.dragging .custom-tab{
 }
 .custom-tabs .list-block{
    margin: 0 0 35px 0;
+   overflow: hidden;
+
 }
 .custom-tabs .custom-tab{
    position: relative;
