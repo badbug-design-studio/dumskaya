@@ -695,7 +695,10 @@ iframe {
     width: 300px;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
+}
+.comments-page .comtd2>div .youtube-play img, #contentOneItem .youtube-play img{
+    margin: 0px auto;
 }
 #contentOneItem .preloader,#commentsOneItem .preloader{
     margin: 15px auto 0 auto;

@@ -49,9 +49,10 @@ define ['f7','_'],
       prop='shortName' if isShort
       if !index
         return
-      return @months[index][prop]
+      return @months[index][prop]||""
 
     getShortItemDate:(dateString,isShort)->
+     console.log(dateString)
      date=new Date(dateString)
      day=date.getDate()
      month=date.getMonth()
