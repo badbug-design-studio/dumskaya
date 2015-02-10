@@ -52,7 +52,6 @@ define ['f7','_'],
       return @months[index][prop]||""
 
     getShortItemDate:(dateString,isShort)->
-     console.log(dateString)
      date=new Date(dateString)
      day=date.getDate()
      month=date.getMonth()
