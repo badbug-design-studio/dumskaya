@@ -43,11 +43,7 @@ define ['_','xml2json'],
       xmlHttp=new XMLHttpRequest();
 
       xmlHttp.open('GET', url+"?#{Date.now()}", true);
-      xmlHttp.timeout = 4000;
-      xmlHttp.ontimeout = ()->
-        onSuccess(false, "timeout") if onSuccess
-
-      #      promise = new Promise((resolve, reject)->
+      xmlHttp.timeout = 8500;
       xmlHttp.onreadystatechange = ()->
          if (xmlHttp.readyState != 4) then return
          if(xmlHttp.status == 200)
@@ -60,6 +56,7 @@ define ['_','xml2json'],
            onSuccess(response)
          else
             console.error "xmlHttpRequest error status #{xmlHttp.status} and url #{url}"
+            console.log(xmlHttp)
             onSuccess(false,xmlHttp.statusText) if onSuccess
 #            reject(xmlHttp.statusText) if reject
       xmlHttp.send()
