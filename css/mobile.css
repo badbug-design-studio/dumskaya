@@ -607,6 +607,7 @@ iframe {
 /*comments*/
 .page-content.comments-page {
     padding-top: 44px;
+    overflow: hidden;
 }
 .comments-page .item-page-wrap>div {
     width: 100%;
