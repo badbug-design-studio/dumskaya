@@ -54,6 +54,8 @@ define ['_','baseView','text!templates/items.html','hammer'],
              setTimeout(()=>
                 @loading=false
                 index=@model.cacheKey
+                if(!baseApplication.cache.data[index])
+                  return
                 itemLength=baseApplication.cache.data[index].channel.item.length
                 renderedCount=@model.listView.indexes[index]
                 if(renderedCount==itemLength-@model.limit)

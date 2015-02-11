@@ -119,6 +119,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           changePositionTriagle:()->
             shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
             @triangle.style.webkitTransform ="translate3d(#{shift}px, 0, 0)"
+            if(navigator.userAgent.indexOf('Windows NT ')!=-1)
+              @triangle.style.transform ="translate3d(#{shift}px, 0, 0)"
 
           changeTab:(event)=>
            event.preventDefault()
@@ -133,6 +135,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             shift=(@model.currentTab-1)*100;
             @elTabsDom.style.webkitTransform ="translate3d(-#{shift}%, 0, 0)"
             @ptr.style.webkitTransform ="translate3d(#{shift}%, 0, 0)"
+            if(navigator.userAgent.indexOf('Windows NT ')!=-1)
+              @ptr.style.transform ="translate3d(#{shift}px, 0, 0)"
 
 
 

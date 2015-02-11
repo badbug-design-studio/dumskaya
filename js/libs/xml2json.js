@@ -479,13 +479,16 @@ function X2JS(config) {
 		}
 		var xmlDoc;
 		if (window.DOMParser) {
-			var parser=new window.DOMParser();			
+			var parser=new window.DOMParser();
+            try{
 			var parsererrorNS = parser.parseFromString('INVALID', 'text/xml').childNodes[0].namespaceURI;
 			xmlDoc = parser.parseFromString( xmlDocStr, "text/xml" );
 			if(xmlDoc.getElementsByTagNameNS(parsererrorNS, 'parsererror').length > 0) {
 		        //throw new Error('Error parsing XML: '+xmlDocStr);
 				xmlDoc = null;
 		    }
+            }
+            catch(e){console.log(e)}
 		}
 		else {
 			// IE :(
