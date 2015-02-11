@@ -11,7 +11,7 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
     onRender:()->
       setTimeout(()=>
          @sendForm()
-         @clicks()
+#         @clicks()
          self=@
          @$("#file").change(()->
            self.readURL(this);
