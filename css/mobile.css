@@ -541,7 +541,7 @@ iframe {
     width: 300px;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 15px auto;
 }
 .navbar a.custom-btn-back  {
     background: url("../img/arrow.png")no-repeat center;
@@ -688,7 +688,7 @@ iframe {
 /*.comments-page .item-wrap>div {*/
     /*width: 100%;*/
 /*}*/
-#contentOneItem,#commentsOneItem{
+#commentsOneItem{
     margin-top: 15px;
 }
 #contentOneItem img, #contentOneItem iframe,.comments-page .comtd2>div img {
@@ -996,4 +996,7 @@ body.dragging .infinite-custom-preloader{
 .ptr-loading .custom-tab {
     -webkit-transform: translate3d( 0, 50px, 0 );
     transform: translate3d( 0, 50px, 0 );
+}
+.item-page .item-media img.none{
+    display: none;
 }

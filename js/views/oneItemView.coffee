@@ -1,3 +1,4 @@
+
 define ['_','baseView','app', 'text!templates/oneItem.html'],
   (_, BaseView, app, template)->
 
@@ -14,7 +15,9 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
 
           onRender:()->
             setTimeout(()=>
-              @$("#image").attr('src',@model.smallImg)
+              #bug #12
+              if(@model.cacheClass!='news')
+                @$("#image").attr('src',@model.smallImg).removeClass('none')
               @model.description.__cdata=@model.description.__cdata.replace(/\<iframe [^>]*src="http:\/\/www\.youtube\.com\/embed\/([^"]+)"[^>]*><\/iframe>/g,(match,$1)->
                 console.log(match)
                 console.log($1)
