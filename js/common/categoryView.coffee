@@ -58,7 +58,7 @@ define ['_','baseView','text!templates/items.html','hammer'],
                   return
                 itemLength=baseApplication.cache.data[index].channel.item.length
                 renderedCount=@model.listView.indexes[index]
-                if(renderedCount==itemLength-@model.limit)
+                if(renderedCount+@model.limit>=itemLength)
                     domEl=@infiniteScrollSelector()
                     if(domEl) then domEl.remove()
                     return false

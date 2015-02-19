@@ -8,7 +8,7 @@ define([
                               model.items=[]
                               if data&&data.channel&&data.channel.item
                                 model.items=data.channel.item
-                              model.limit=10
+                              model.limit=15
                               @indexes[cacheKey]=0
                               model.listView=@
                               model.cacheKey=cacheKey
@@ -23,7 +23,7 @@ define([
                             model.items=[]
                             if data&&data.channel&&data.channel.item
                               model.items=data.channel.item
-                            model.limit=10
+                            model.limit=15
                             @indexes[cacheKey]=0
                             model.listView=@
                             model.cacheKey=cacheKey
@@ -37,7 +37,7 @@ define([
                            model.items=[]
                            if data&&data.channel&&data.channel.item
                              model.items=data.channel.item
-                           model.limit=10
+                           model.limit=15
                            @indexes[cacheKey]=0
                            model.listView=@
                            model.cacheKey=cacheKey
