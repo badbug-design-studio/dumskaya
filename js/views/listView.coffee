@@ -30,6 +30,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @triangle=  document.getElementById('triangle')
             @elBody=document.getElementById('body')
             @ptr=document.getElementById('ptr')
+            @tabsLinks = @$("#change-tabs a");
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @cacheTabs()
             @showCurrentTab()
@@ -125,6 +126,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           changeTab:(event)=>
            event.preventDefault()
            newTabIndex= event.target.getAttribute('href').substr(1)
+           @tabsLinks.removeClass("active");
+           @$(event.target).addClass("active");
            console.log(newTabIndex)
            @model.currentTab=  +newTabIndex
            console.log(@model.currentTab)

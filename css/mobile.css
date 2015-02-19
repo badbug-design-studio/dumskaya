@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-family: 'PTSans';
+    src: url('../fonts/PT_Sans-Web-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -29,12 +29,15 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'PTSans', sans-serif;
 }
 .wrapper {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+.title {
+    font-size: 22px;
 }
 .icon-logo {
     background: url("../img/logo.png") no-repeat;
@@ -124,12 +127,16 @@ iframe {
     border-radius: 0;
     border: none;
 }
-.buttons-row.theme-bg .tab-link.button.active,.buttons-row.theme-bg .my-custom-tab-link.button  {
+.buttons-row.theme-bg .my-custom-tab-link.button  {
     background: none;
+    color: rgba(255,255,255,0.8);
+}
+.buttons-row.theme-bg .my-custom-tab-link.button.active {
     color: rgba(255,255,255,1);
 }
 .buttons-row.theme-bg .tab-link.button.active-state {
     background: none;
+    color: rgba(255,255,255,1);
 }
 .triangle {
     content: "";
@@ -153,8 +160,9 @@ iframe {
     border-bottom: 1px solid #720c18;
 }
 .buttons-row.theme-bg .tab-link.button, .my-custom-tab-link  {
-    line-height: 24px;
-    height: 25px;
+    line-height: 27px;
+    height: 30px;
+    font-size: 17px;
 }
 .navbar-through .page-content, .navbar-fixed .page-content {
     padding-top: 0;
@@ -409,7 +417,7 @@ iframe {
     right: 0;
 }
 .navbar-through .page-content.pull-to-refresh-content , .navbar-fixed .page-content.pull-to-refresh-content  {
-    padding-top: 69px;
+    padding-top: 74px;
 }
 .item-page-wrap {
     padding: 7px;
@@ -517,14 +525,14 @@ iframe {
 }
 .item-page .item-title {
     font-size: 18px;
-    line-height: 18px;
+    line-height: 22px;
     padding: 0 7px;
     margin-bottom: 15px;
     color: #8A1020;
 }
 .item-page .item-text {
     font-size: 15px;
-    line-height: 15px;
+    line-height: 22px;
     padding: 0 7px 10px;
     color: #000000;
 }
@@ -568,9 +576,10 @@ iframe {
     align-items: center;
 }
 .navbar a.custom-btn-back span{
-    width: 100%;
+    width: 90px;
     text-align: center;
     display: inline-block;
+    text-indent: 6px;
 }
 .navbar a.link.comments-link {
     background: url("../img/cloud.png")no-repeat center 12px;
@@ -665,7 +674,7 @@ iframe {
     padding: 5px;
     white-space: normal;
     font-size: 14px;
-    line-height: 15px;
+    line-height: 20px;
     position: relative;
     overflow: hidden;
     max-width: 100%;
@@ -847,7 +856,7 @@ body.dragging .infinite-custom-preloader{
 }
 .custom-tabs{
       position: relative;
-      margin-top: 69px;
+      margin-top: 74px;
 }
 .custom-tabs .list-block{
    margin: 0 0 35px 0;
