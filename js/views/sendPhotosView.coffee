@@ -49,7 +49,7 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
               else
                 baseApplication.f7app.alert("Не удается отправить фото, попробуйте позже")
             else
-              baseApplication.f7app.alert("Попробуйте позже")
+              baseApplication.f7app.alert("Не удается отправить фото, попробуйте позже")
           xmlHttp.send(formData)
       )
 
