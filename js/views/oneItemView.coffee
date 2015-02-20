@@ -125,9 +125,6 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
              @$(@model.targetDom).parents('.list-wrap').addClass('visited')
              baseApplication.cache.updateVisitedCommentsCountItem(@model.cacheClass,@model.id, comentsCount,()=>
              )
-#            @TODO SHOULD BE IMPLEMENTED SAVE COUNT OF COMMENTS TO CARRENT ITEM!
-#            baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
-#            baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
 
 
 
