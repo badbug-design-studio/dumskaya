@@ -13,7 +13,7 @@
                 </li>
              <% } %>
                 <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>
-                <li class="list-wrap" >
+                <li class="list-wrap <%if(oneItem.visited) print('visited')%>" >
                     <!--<div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>-->
                      <div class="item-content"  data-index="<%=index%>">
                          <div class="item-media with-img">

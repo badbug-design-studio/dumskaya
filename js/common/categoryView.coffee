@@ -53,16 +53,16 @@ define ['_','baseView','text!templates/items.html','hammer'],
              @loading = true;
              setTimeout(()=>
                 @loading=false
-                index=@model.cacheKey
-                if(!baseApplication.cache.data[index])
+                cacheKey=@model.cacheKey
+                if(!baseApplication.cache.data[cacheKey])
                   return
-                itemLength=baseApplication.cache.data[index].channel.item.length
-                renderedCount=@model.listView.indexes[index]
+                itemLength=baseApplication.cache.data[cacheKey].length
+                renderedCount=@model.listView.indexes[cacheKey]
                 if(renderedCount+@model.limit>=itemLength)
                     domEl=@infiniteScrollSelector()
                     if(domEl) then domEl.remove()
                     return false
-                @model.listView.indexes[index]+=@model.limit
+                @model.listView.indexes[cacheKey]+=@model.limit
                 @appendOldData()
                 callback() if callback
              ,1000)

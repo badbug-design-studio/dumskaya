@@ -18,21 +18,30 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               #bug #12
               if(@model.cacheClass!='news')
                 @$("#image").attr('src',@model.smallImg).removeClass('none')
-              @model.description.__cdata=@model.description.__cdata.replace(/\<iframe [^>]*src="http:\/\/www\.youtube\.com\/embed\/([^"]+)"[^>]*><\/iframe>/g,(match,$1)->
+
+              if typeof @model.description=='string'
+                description=JSON.parse(@model.description).__cdata
+              else
+                description=@model.description.__cdata
+
+              description=description.replace(/\<iframe [^>]*src="http:\/\/www\.youtube\.com\/embed\/([^"]+)"[^>]*><\/iframe>/g,(match,$1)->
                 console.log(match)
                 console.log($1)
                 return "<div class='youtube-play' onclick=baseApplication.helpers.showVideo('"+$1+"')><img src='http://img.youtube.com/vi/#{$1}/mqdefault.jpg' alt='youtube-poster'></div>"
               )
-              @model.description.__cdata=@model.description.__cdata.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
-              document.getElementById("contentOneItem").innerHTML=@model.description.__cdata
+              description=description.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
+
+              document.getElementById("contentOneItem").innerHTML=description
+              comentsCount=@model.commentscount
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
-                   if data&&@model.commentscount != data
+                   if data&&@model.commentscount != data||!@model.visited
                      @model.commentscount = data
-                     @$("#comments_count").text(@model.commentscount)
-                     @saveInCacheNewData()
+                     @$("#comments_count").text(parseInt(data))
+                     @saveInCacheNewData(comentsCount)
                    if +@model.commentscount
                      @$("#comments_count").removeClass("no-comments")
+
                )
             ,1000) #terrible wait until animation works
 
@@ -112,9 +121,13 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           commentsOpen: =>
             baseApplication.router.loadPage("comments",{model:{commentsUrl: @model.comments},viewParams:{swipeBackPage:true}})
 
-          saveInCacheNewData:()->
-            baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
-            baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
+          saveInCacheNewData:(comentsCount)=>
+             @$(@model.targetDom).parents('.list-wrap').addClass('visited')
+             baseApplication.cache.updateVisitedCommentsCountItem(@model.cacheClass,@model.id, comentsCount,()=>
+             )
+#            @TODO SHOULD BE IMPLEMENTED SAVE COUNT OF COMMENTS TO CARRENT ITEM!
+#            baseApplication.cache.data[@model.cacheClass].channel.item[@model.index]=@model
+#            baseApplication.cache.setTableData(@model.cacheClass,baseApplication.cache.data[@model.cacheClass])
 
 
 

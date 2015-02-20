@@ -40,13 +40,13 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           handleOnClickItem:(elem,i)->
             cacheClassesArr = ['news','blogs','tv','articles']
             Hammer(elem[0]).on("tap", (event) ->
-              console.log(123)
               index=event.target.getAttribute('data-index')
               if(!index)
                 return
-              model=baseApplication.cache.data[cacheClassesArr[i]].channel.item[index]
+              model=baseApplication.cache.data[cacheClassesArr[i]][index]
               model.cacheClass=cacheClassesArr[i]
               model.index=index
+              model.targetDom=event.target
               baseApplication.router.loadPage('oneItem',{model:model})
             );
 
@@ -83,14 +83,11 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                 @tabTransition()
                 @changePositionTriagle()
                 console.log('showCurrentTab')
-
                 @previousDate=false
                 setTimeout(()=>
                        index=@model.currentTab-1
                        tab=@model.tabs[index]
-                       console.log 'apply!!!!'
                        if tab
-                         console.log('update')
                          tab.updateItems.apply(@)
                        else
                          alert('tab is not defined')
@@ -128,7 +125,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
            newTabIndex= event.target.getAttribute('href').substr(1)
            @tabsLinks.removeClass("active");
            @$(event.target).addClass("active");
-           console.log(newTabIndex)
            @model.currentTab=  +newTabIndex
            console.log(@model.currentTab)
            @showCurrentTab()

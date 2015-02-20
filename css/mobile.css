@@ -417,6 +417,7 @@ iframe {
     display: block;
     overflow: hidden;
 }
+
 .list-wrap:first-child .content-block-title {
     margin-top: 20px;
 }
@@ -864,6 +865,9 @@ iframe {
 body.dragging .list-block{
     height: 100%;
     margin: 0;
+}
+.list-block .list-wrap.visited{
+    opacity: 0.7;
 }
 body.dragging .infinite-custom-preloader{
     height: 0;
