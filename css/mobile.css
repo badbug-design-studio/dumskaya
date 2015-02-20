@@ -162,7 +162,7 @@ iframe {
 .buttons-row.theme-bg .tab-link.button, .my-custom-tab-link  {
     line-height: 27px;
     height: 30px;
-    font-size: 17px;
+    font-size: 18px;
 }
 .navbar-through .page-content, .navbar-fixed .page-content {
     padding-top: 0;
@@ -276,20 +276,11 @@ iframe {
 }
 .list-block.news-list .item-title {
     font-size: 15px;
-    max-height: 30px;
+    /*max-height: 30px;*/
     height: auto;
     line-height: 15px;
-    -webkit-line-clamp: 2;
     white-space: normal;
     color: #8A1020;
-}
-.list-block.news-list .item-text {
-    font-size: 13px;
-    max-height: 43px;
-    height: auto;
-    line-height: 14px;
-    margin-top: 3px;
-    -webkit-line-clamp: 3;
     -webkit-box-ordinal-group: 1;
     -webkit-order: 0;
     order: 0;
@@ -298,7 +289,30 @@ iframe {
     flex: 0 1 auto;
     -webkit-align-self: auto;
     align-self: auto;
+
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+.list-block.news-list .item-text {
+    font-size: 13px;
+    max-height: 30px;
+    height: auto;
+    line-height: 14px;
+    margin-top: 3px;
     color: #000000;
+    -webkit-line-clamp: 2;
+    -webkit-box-ordinal-group: 1;
+    -webkit-order: 0;
+    order: 0;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    align-self: auto;
 }
 .item-text iframe{
     width: 100%;
