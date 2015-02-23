@@ -170,7 +170,7 @@ define ['f7','_'],
     addOneItemToDb:(tableName,oneItem,callback)->
       @db.transaction((tx)=>
          lastUpdate=+oneItem.lastUpdate||+oneItem.lastupdate #server bug!
-         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (title,description,shortDescription,lastUpdate,pubDate,smallImg,commentscount,commentscounturl,comments, created) VALUES (?,?,?,?,?,?,?,?,?,?)", [oneItem.title,JSON.stringify(oneItem.description),oneItem.shortDescription,lastUpdate,new Date(oneItem.pubDate).getTime(),oneItem.smallImg,+oneItem.commentscount,oneItem.commentscounturl,oneItem.comments, new Date().getTime()]
+         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (title,description,shortDescription,lastUpdate,pubDate,smallImg,commentscount,commentscounturl,comments, created) VALUES (?,?,?,?,?,?,?,?,?,?)", [oneItem.title,JSON.stringify(oneItem.description),oneItem.shortDescription,lastUpdate,parseInt(oneItem.createdUnix+"000"),oneItem.smallImg,+oneItem.commentscount,oneItem.commentscounturl,oneItem.comments, new Date().getTime()]
            (tx, resultSet) ->
              if (!resultSet.rowsAffected)
                alert('No rows affected!');
