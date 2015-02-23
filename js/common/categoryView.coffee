@@ -57,14 +57,29 @@ define ['_','baseView','text!templates/items.html','hammer'],
                 if(!baseApplication.cache.data[cacheKey])
                   return
                 itemLength=baseApplication.cache.data[cacheKey].length
-                renderedCount=@model.listView.indexes[cacheKey]
-                if(renderedCount+@model.limit>=itemLength)
-                    domEl=@infiniteScrollSelector()
-                    if(domEl) then domEl.remove()
-                    return false
-                @model.listView.indexes[cacheKey]+=@model.limit
-                @appendOldData()
-                callback() if callback
+                if (@model.listView.indexes[cacheKey]+@model.limit)>itemLength
+                    increaser=(itemLength-@model.listView.indexes[cacheKey])
+                else
+                    increaser=@model.limit
+                @model.listView.indexes[cacheKey]+=increaser
+                if(@model.listView.indexes[cacheKey]>=itemLength)
+                    baseApplication.cache.getDataFromTable(cacheKey,(data)=>
+#                      console.log(data)
+                      if(data&&data.length!=itemLength)
+                         console.log('merge arrays')
+                         Array.prototype.push.apply(baseApplication.cache.data[cacheKey], data); #merge arrays
+#                         console.log(baseApplication.cache.data[cacheKey])
+                         @appendOldData()
+                         callback() if callback
+                      else
+                        console.log('the end')
+                        domEl=@infiniteScrollSelector()
+                        if(domEl) then domEl.remove()
+
+                    ,itemLength);
+                else
+                   @appendOldData()
+                   callback() if callback
              ,1000)
 
 

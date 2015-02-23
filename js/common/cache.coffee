@@ -182,14 +182,16 @@ define ['f7','_'],
           if(callback) then callback()
        );
 
-    getDataFromTable: (tableName,callback) =>
+    getDataFromTable: (tableName,callback,startLimit) =>
       if !@db
         console.error 'get from DB #{tableName} failed'
         @requestDo(false)
         return
       data=[]
+      startLimit=startLimit||0
+      endLimit=startLimit+@itemsMaxCount
       @db.transaction((tx)=>
-        tx.executeSql("SELECT * FROM #{tableName} order by #{this.criteria} desc  limit #{this.itemsMaxCount}", [], (tx,result)->
+        tx.executeSql("SELECT * FROM #{tableName} order by #{this.criteria} desc  limit #{startLimit},#{endLimit}", [], (tx,result)->
           rowsLength=result.rows.length
           if rowsLength
             i=0
@@ -241,6 +243,7 @@ define ['f7','_'],
           console.log("Successfully Dropped")
         );
       )
+
 
   return Cache
 
