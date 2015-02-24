@@ -27,10 +27,14 @@ define ['_','baseView','text!templates/items.html','hammer'],
              tabHeight=@model.listView.domTabsObj[cT][0].clientHeight
              infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
 #             onrender ===
-             if(tabHeight>=infinitScrollHeight)
+             cacheKey=@model.cacheKey
+             if(baseApplication.cache.data[cacheKey].length>15&&tabHeight>=infinitScrollHeight)
                @triggerCustomInfiniteScroll(()=>
                                   infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight+5
                )
+             else
+               @hideInfinitePreloader()
+
               #onscroll===
              @model.listView.domTabsObj[cT][0].onscroll=()=>
                if(@model.listView.model.needUpdateScroll) #after pull to refresh
@@ -52,17 +56,21 @@ define ['_','baseView','text!templates/items.html','hammer'],
      #       Set loading flag
              @loading = true;
              setTimeout(()=>
+                alert(2)
                 @loading=false
                 cacheKey=@model.cacheKey
-                if(!baseApplication.cache.data[cacheKey])
-                  return
                 itemLength=baseApplication.cache.data[cacheKey].length
+                console.log(itemLength)
+                if(!baseApplication.cache.data[cacheKey]||!itemLength)
+                  return
                 if (@model.listView.indexes[cacheKey]+@model.limit)>itemLength
                     increaser=(itemLength-@model.listView.indexes[cacheKey])
                 else
                     increaser=@model.limit
                 @model.listView.indexes[cacheKey]+=increaser
+                console.log(@model.listView.indexes[cacheKey])
                 if(@model.listView.indexes[cacheKey]>=itemLength)
+                    alert(1)
                     baseApplication.cache.getDataFromTable(cacheKey,(data)=>
 #                      console.log(data)
                       if(data&&data.length!=itemLength)
@@ -72,9 +80,7 @@ define ['_','baseView','text!templates/items.html','hammer'],
                          @appendOldData()
                          callback() if callback
                       else
-                        console.log('the end')
-                        domEl=@infiniteScrollSelector()
-                        if(domEl) then domEl.remove()
+                       @hideInfinitePreloader()
 
                     ,itemLength);
                 else
@@ -84,7 +90,10 @@ define ['_','baseView','text!templates/items.html','hammer'],
 
 
 
-
+          hideInfinitePreloader:()->
+            console.log('the end')
+            domEl=@infiniteScrollSelector()
+            if(domEl) then domEl.remove()
 
           renderList:()=>
             compile=_.template(itemsTemplate)
