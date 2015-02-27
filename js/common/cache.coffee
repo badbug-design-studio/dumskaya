@@ -23,7 +23,9 @@ define ['f7','_','imgCache'],
       ImgCache.options.debug = false;
 
       # increase allocated space on Chrome to 50MB, default was 10MB
-      ImgCache.options.chromeQuota = 50*1024*1024;
+      ImgCache.options.chromeQuota = 40*1024*1024;
+      ImgCache.options.localCacheFolder = 'dumskaya-cache';
+      ImgCache.options.cacheClearSize = 40
       ImgCache.init(()->
           console.log('ImgCache init: success!');
           callback()
@@ -66,7 +68,6 @@ define ['f7','_','imgCache'],
       baseApplication.sync.request(url,true,(data)=>
         if(data&&data.channel) #if we got info from the server
             @setTableData(@cachedTableName,data.channel.item,()=>
-              console.log('onsaved')
               @getSavedInfo()
             )
         else #if we dont have information from internet
@@ -169,7 +170,6 @@ define ['f7','_','imgCache'],
       )
 
     addEachItemsToDbRecursive:(tableName,index,itemsArray,criteria,onSaved)->
-     console.log(index)
      if index<0
        onSaved()
        return
@@ -204,10 +204,8 @@ define ['f7','_','imgCache'],
        ,@errorHandler,
        ()=>
           console.log('addOneItemToDb')
-          @setCachedImage(oneItem.smallImg,()=>
-            console.log('set to db and cache image success!')
-            if(callback) then callback()
-          )
+          console.log('set to db success!')
+          if(callback) then callback()
        );
 
     getDataFromTable: (tableName,callback,startLimit) =>
@@ -277,26 +275,15 @@ define ['f7','_','imgCache'],
       ImgCache.getCachedFile(onlineSrc,(onlineSrc, file_entry)=>
         if(file_entry)
           gotSrc=file_entry.toURL()
+        else
+          ImgCache.cacheFile(onlineSrc,
+                  () =>
+                    console.log('cached!')
+                  ,()=> #on error
+                    console.log('cache error!')
+                  )
         onGotCallback(gotSrc)
       )
-
-    setCachedImage:(onlineSrc,onCachedCallback)->
-      if(typeof cordova=='undefined' )
-        onCachedCallback(onlineSrc) if typeof onCachedCallback!="undefined" #use online src only for non-cordova version!
-        return
-      ImgCache.cacheFile(onlineSrc,
-      () =>
-                  console.log('cached!')
-#                  setTimeout(()=>
-#                  onCachedCallback(onlineSrc)
-#                  ,100)
-      ,()=> #on error
-        console.log('cache error!')
-#        setTimeout(()=>
-#        onCachedCallback(onlineSrc)
-#        ,100)
-      )
-      onCachedCallback(onlineSrc)
 
     prepareCachedImgsRecursive:(start, itemsCount, items, callback)=>
       i=0
