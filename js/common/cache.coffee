@@ -24,7 +24,7 @@ define ['f7','_','imgCache'],
 
       # increase allocated space on Chrome to 50MB, default was 10MB
       ImgCache.options.chromeQuota = 40*1024*1024;
-      ImgCache.options.localCacheFolder = 'dumskaya-cache';
+      ImgCache.options.localCacheFolder = 'dumskaya';
       ImgCache.options.cacheClearSize = 40
       ImgCache.init(()->
           console.log('ImgCache init: success!');
