@@ -18,7 +18,7 @@
                      <div class="item-content"  data-index="<%=index%>">
                          <div class="item-media with-img">
                              <% if(oneItem.smallImg){ %>
-                                <img src="<%=oneItem.smallImg %>" data-index="<%=index%>" />
+                                <img src="<%=oneItem.cachedSrc %>" data-index="<%=index%>" />
                              <% } else { %>
                                 <div class="no-image"></div>
                              <% } %>

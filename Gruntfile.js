@@ -57,8 +57,8 @@ module.exports = function(grunt) {
                     name:'change-main-js-path',
                     search:'<script src="./js/libs/require.js" data-main=".*"></script>',
                     replace:function(match){
-//                         '<script src="http://jsconsole.com/remote.js?410831F1-23CB-469B-9DAA-AD1247408B87"></script>' +
-                        return  '<script src="cordova.js"></script>'+
+//                        return  '<script src="http://jsconsole.com/remote.js?B7E382C9-B465-497F-AE93-80373D77D5D4"></script>' +
+                        return '<script src="cordova.js"></script>'+
                                 '<script src="./js/libs/require.js" data-main="'+grunt.config('pkg').name +'.min.js"></script>'
                     }
                 }

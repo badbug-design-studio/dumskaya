@@ -7,6 +7,7 @@ require.config({
         f7: './libs/framework7'
         hammer:"./libs/hammer"
         _: './libs/underscore'
+        imgCache: './libs/imgCache'
         xml2json: './libs/xml2json'
 
         app:'./common/app'
@@ -25,6 +26,9 @@ require.config({
          exports: 'Framework7'
        _:
          exports: '_'
+
+       imgCache:
+         exports: 'ImgCache'
 
        routes:
         deps:["f7","_"]

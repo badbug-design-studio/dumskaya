@@ -28,12 +28,13 @@ define ['_','baseView','text!templates/items.html','hammer'],
              infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight
 #             onrender ===
              cacheKey=@model.cacheKey
-             if(baseApplication.cache.data[cacheKey].length>15&&tabHeight>=infinitScrollHeight)
+#             alert baseApplication.cache.data[cacheKey].length
+#             alert baseApplication.cache.data[cacheKey].length<15
+             if(tabHeight>=infinitScrollHeight)
                @triggerCustomInfiniteScroll(()=>
                                   infinitScrollHeight=@model.listView.domTabsObj[cT][0].firstChild.scrollHeight+5
                )
-             else
-               @hideInfinitePreloader()
+
 
               #onscroll===
              @model.listView.domTabsObj[cT][0].onscroll=()=>
@@ -56,42 +57,41 @@ define ['_','baseView','text!templates/items.html','hammer'],
      #       Set loading flag
              @loading = true;
              setTimeout(()=>
-                alert(2)
                 @loading=false
                 cacheKey=@model.cacheKey
-                itemLength=baseApplication.cache.data[cacheKey].length
-                console.log(itemLength)
+                itemLength=0
+                if baseApplication.cache.data[cacheKey]
+                  itemLength=baseApplication.cache.data[cacheKey].length
                 if(!baseApplication.cache.data[cacheKey]||!itemLength)
                   return
-                if (@model.listView.indexes[cacheKey]+@model.limit)>itemLength
-                    increaser=(itemLength-@model.listView.indexes[cacheKey])
+                if @model.listView.indexes[cacheKey]+@model.limit>itemLength
+                  count=itemLength-@model.listView.indexes[cacheKey]
                 else
-                    increaser=@model.limit
-                @model.listView.indexes[cacheKey]+=increaser
-                console.log(@model.listView.indexes[cacheKey])
+                  count=@model.limit
+                @model.listView.indexes[cacheKey]+=count
                 if(@model.listView.indexes[cacheKey]>=itemLength)
-                    alert(1)
-                    baseApplication.cache.getDataFromTable(cacheKey,(data)=>
-#                      console.log(data)
-                      if(data&&data.length!=itemLength)
-                         console.log('merge arrays')
-                         Array.prototype.push.apply(baseApplication.cache.data[cacheKey], data); #merge arrays
+                  baseApplication.cache.getDataFromTable(cacheKey,(data)=>
+                    if(data&&data.length!=itemLength)
+                       Array.prototype.push.apply(baseApplication.cache.data[cacheKey], data); #merge arrays
 #                         console.log(baseApplication.cache.data[cacheKey])
-                         @appendOldData()
-                         callback() if callback
-                      else
-                       @hideInfinitePreloader()
-
-                    ,itemLength);
+                       @renderOtherItems(baseApplication.cache.data[cacheKey].length-@model.listView.indexes[cacheKey],callback)
+                    else
+                     @hideInfinitePreloader()
+                  ,itemLength);
                 else
-                   @appendOldData()
-                   callback() if callback
+                  @renderOtherItems(count,callback)
              ,1000)
 
 
+          renderOtherItems:(count,callback)->
+
+            cacheKey=@model.cacheKey
+            baseApplication.cache.prepareCachedImgsRecursive(@model.listView.indexes[cacheKey],count,baseApplication.cache.data[cacheKey],()=>
+              @appendOldData()
+              callback() if callback
+            )
 
           hideInfinitePreloader:()->
-            console.log('the end')
             domEl=@infiniteScrollSelector()
             if(domEl) then domEl.remove()
 

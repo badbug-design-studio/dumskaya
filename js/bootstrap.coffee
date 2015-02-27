@@ -27,11 +27,12 @@ define([
             )
       }
 
-
-#    @todo ondeviceready in cordova
-    setTimeout(()->
-        onDeviceReady()
-    ,300)
+    if(typeof window.cordova=="undefined")
+      setTimeout(()->
+          onDeviceReady()
+      ,300)
+    else
+      document.addEventListener("deviceready", onDeviceReady, false);
 
 
 )

@@ -12,8 +12,9 @@ define([
                               @indexes[cacheKey]=0
                               model.listView=@
                               model.cacheKey=cacheKey
-
-                              new NewsView({model:model,tabIndex:0})
+                              baseApplication.cache.prepareCachedImgsRecursive(0,model.limit,model.items,()->
+                                new NewsView({model:model,tabIndex:0})
+                              )
 
                       baseApplication.cache.getList('news',onDownloaded, pullToRefreshCallback)
                     }
@@ -27,21 +28,25 @@ define([
                             @indexes[cacheKey]=0
                             model.listView=@
                             model.cacheKey=cacheKey
-                            new BlogsView({model:model,tabIndex:1})
+                            baseApplication.cache.prepareCachedImgsRecursive(0,model.limit,model.items,()->
+                              new BlogsView({model:model,tabIndex:1})
+                            )
 
                       baseApplication.cache.getList('blogs',onDownloaded, pullToRefreshCallback)
                     }
                     {id:'tab3',name:'ТВ',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
-                           model={}
-                           model.items=[]
-                           if data
-                             model.items=data
-                           model.limit=15
-                           @indexes[cacheKey]=0
-                           model.listView=@
-                           model.cacheKey=cacheKey
-                           new TVView({model:model,tabIndex:2})
+                          model={}
+                          model.items=[]
+                          if data
+                           model.items=data
+                          model.limit=15
+                          @indexes[cacheKey]=0
+                          model.listView=@
+                          model.cacheKey=cacheKey
+                          baseApplication.cache.prepareCachedImgsRecursive(0,model.limit,model.items,()->
+                            new TVView({model:model,tabIndex:2})
+                          )
 
                       baseApplication.cache.getList('tv',onDownloaded, pullToRefreshCallback)
                     }

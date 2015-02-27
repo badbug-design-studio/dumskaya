@@ -1,5 +1,5 @@
-define ['f7','_'],
-(Framework7,_)->
+define ['f7','_','imgCache'],
+(Framework7,_,ImgCache)->
   class Cache
     $: Framework7.$
     date:new Date()
@@ -9,9 +9,31 @@ define ['f7','_'],
     criteria:"pubDate" #creteria field on what check for add new items
     itemsMaxCount:40
 
-    constructor:(callback)->
+    constructor:(onDBinit)->
       @data={}
-      @initDatabase(callback)
+      @initImgCache(()=>
+        @initDatabase(onDBinit)
+      )
+
+    initImgCache:(callback)->
+      if(typeof cordova=='undefined')
+         callback()
+         return
+      #write log to console
+      ImgCache.options.debug = false;
+
+      # increase allocated space on Chrome to 50MB, default was 10MB
+      ImgCache.options.chromeQuota = 50*1024*1024;
+      ImgCache.init(()->
+          console.log('ImgCache init: success!');
+          callback()
+          # from within this function you're now able to call other ImgCache methods
+          # or you can wait for the ImgCacheReady event
+
+      , ()->
+          console.log('ImgCache init: error! Check the log for errors');
+          callback()
+      )
 
     getList:(cacheKey,callback,need2Update)->
       @need2Update=need2Update
@@ -28,7 +50,8 @@ define ['f7','_'],
 #      delay=0
 #      delay=1300 if @need2Update
       @getDataFromTable(@cachedTableName,(cachedData)=>
-         if(cachedData)#if we had cache work wit it
+#         console.log(cachedData)
+         if(cachedData&&cachedData.length)#if we had cache work witt it
              @data[@cachedTableName]=cachedData
              @listViewCallback(cachedData,@cachedTableName)
              @need2Update() if @need2Update
@@ -43,6 +66,7 @@ define ['f7','_'],
       baseApplication.sync.request(url,true,(data)=>
         if(data&&data.channel) #if we got info from the server
             @setTableData(@cachedTableName,data.channel.item,()=>
+              console.log('onsaved')
               @getSavedInfo()
             )
         else #if we dont have information from internet
@@ -119,7 +143,7 @@ define ['f7','_'],
         console.error 'set to DB #{tableName} failed'
         return
       @getLastCriteriaUpdate(tableName,(criteria)=>
-        @addEachItemsToDb(tableName,(data.length-1),data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
+        @addEachItemsToDbRecursive(tableName,(data.length-1),data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
       )
 
 
@@ -144,7 +168,8 @@ define ['f7','_'],
               )
       )
 
-    addEachItemsToDb:(tableName,index,itemsArray,criteria,onSaved)->
+    addEachItemsToDbRecursive:(tableName,index,itemsArray,criteria,onSaved)->
+     console.log(index)
      if index<0
        onSaved()
        return
@@ -161,11 +186,11 @@ define ['f7','_'],
 #       console.log('add')
        @addOneItemToDb(tableName,oneItem,()=>
              --index;
-             @addEachItemsToDb(tableName,index,itemsArray,criteria,onSaved)
+             @addEachItemsToDbRecursive(tableName,index,itemsArray,criteria,onSaved)
        )
      else
         --index;
-        @addEachItemsToDb(tableName,index,itemsArray,criteria,onSaved)
+        @addEachItemsToDbRecursive(tableName,index,itemsArray,criteria,onSaved)
 
     addOneItemToDb:(tableName,oneItem,callback)->
       @db.transaction((tx)=>
@@ -177,9 +202,12 @@ define ['f7','_'],
                return false;
          )
        ,@errorHandler,
-       ()->
-          console.log('set to db-success!')
-          if(callback) then callback()
+       ()=>
+          console.log('addOneItemToDb')
+          @setCachedImage(oneItem.smallImg,()=>
+            console.log('set to db and cache image success!')
+            if(callback) then callback()
+          )
        );
 
     getDataFromTable: (tableName,callback,startLimit) =>
@@ -187,26 +215,26 @@ define ['f7','_'],
         console.error 'get from DB #{tableName} failed'
         @requestDo(false)
         return
-      data=[]
       startLimit=startLimit||0
       endLimit=startLimit+@itemsMaxCount
       @db.transaction((tx)=>
-        tx.executeSql("SELECT * FROM #{tableName} order by #{this.criteria} desc  limit #{startLimit},#{endLimit}", [], (tx,result)->
+        tx.executeSql("SELECT * FROM #{tableName} order by #{this.criteria} desc  limit #{startLimit},#{endLimit}", [], (tx,result)=>
           rowsLength=result.rows.length
           if rowsLength
+            data=[]
             i=0
             while(i<rowsLength)
-#              console.log(result.rows.item(i))
               data.push(result.rows.item(i))
               i++
-
           else data=false
           callback(data)
         ,(error)=>
           console.error('select db error')
           console.error(error)
           @requestDo(false)
-        , @querySuccess(tableName))
+        ,
+        @querySuccess(tableName)
+        )
       ,(error)=>
         console.error('transaction')
         console.error(error)
@@ -220,10 +248,7 @@ define ['f7','_'],
     updateVisitedCommentsCountItem: (tableName, id, commentsCount,callback)=>
         @db.transaction((tx)=>
           sql="UPDATE  #{tableName} SET commentscount=?, visited='true'  WHERE id=?"
-          console.log(commentsCount)
-          console.log(id)
-          console.log(tableName)
-          tx.executeSql(sql, [commentsCount, id]
+          tx.executeSql(sql, [parseInt(commentsCount), id]
                    (tx, resultSet) ->
                      if (!resultSet.rowsAffected)
                        alert('No rows affected!');
@@ -244,6 +269,52 @@ define ['f7','_'],
         );
       )
 
+    getCachedImage:(onlineSrc,onGotCallback)=>
+      if(typeof cordova=='undefined' )
+              onGotCallback(onlineSrc) if typeof onGotCallback!="undefined" #use online src only for non-cordova version!
+              return
+      gotSrc=onlineSrc
+      ImgCache.getCachedFile(onlineSrc,(onlineSrc, file_entry)=>
+        if(file_entry)
+          gotSrc=file_entry.toURL()
+        onGotCallback(gotSrc)
+      )
+
+    setCachedImage:(onlineSrc,onCachedCallback)->
+      if(typeof cordova=='undefined' )
+        onCachedCallback(onlineSrc) if typeof onCachedCallback!="undefined" #use online src only for non-cordova version!
+        return
+      ImgCache.cacheFile(onlineSrc,
+      () =>
+                  console.log('cached!')
+#                  setTimeout(()=>
+#                  onCachedCallback(onlineSrc)
+#                  ,100)
+      ,()=> #on error
+        console.log('cache error!')
+#        setTimeout(()=>
+#        onCachedCallback(onlineSrc)
+#        ,100)
+      )
+      onCachedCallback(onlineSrc)
+
+    prepareCachedImgsRecursive:(start, itemsCount, items, callback)=>
+      i=0
+      @prepareEachImg(i,start,itemsCount,items,callback)
+
+    prepareEachImg:(i,start,itemsCount,items,callback)->
+      index=start+i
+      if(i<itemsCount&&index<items.length)
+        @getCachedImage(items[index].smallImg,(cachedSrc)=>
+          items[index].cachedSrc=cachedSrc
+          i++;
+          @prepareEachImg(i,start,itemsCount,items,callback)
+        )
+
+      else
+        callback()
+
+#
 
   return Cache
 

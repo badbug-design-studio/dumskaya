@@ -17,7 +17,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
             setTimeout(()=>
               #bug #12
               if(@model.cacheClass!='news')
-                @$("#image").attr('src',@model.smallImg).removeClass('none')
+                @$("#image").attr('src',@model.cachedSrc).removeClass('none')
 
               if typeof @model.description=='string'
                 description=JSON.parse(@model.description).__cdata
@@ -32,13 +32,13 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               description=description.replace(/href="([\w:\/\/.-]+)"/g,@openLink())
 
               document.getElementById("contentOneItem").innerHTML=description
-              comentsCount=@model.commentscount
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
-                   if data&&@model.commentscount != data||!@model.visited
+                   console.log(data)
+                   if data&&@model.commentscount != parseInt(data)||!@model.visited
                      @model.commentscount = data
                      @$("#comments_count").text(parseInt(data))
-                     @saveInCacheNewData(comentsCount)
+                     @saveInCacheNewData(data)
                    if +@model.commentscount
                      @$("#comments_count").removeClass("no-comments")
 

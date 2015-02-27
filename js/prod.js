@@ -4,3 +4,6 @@ console.log =function(){
 console.debug =function(){
     return
 }
+console.info =function(){
+    return
+}
