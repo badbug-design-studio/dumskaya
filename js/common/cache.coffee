@@ -203,7 +203,6 @@ define ['f7','_','imgCache'],
          )
        ,@errorHandler,
        ()=>
-          console.log('addOneItemToDb')
           console.log('set to db success!')
           if(callback) then callback()
        );
