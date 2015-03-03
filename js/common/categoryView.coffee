@@ -71,7 +71,6 @@ define ['_','baseView','text!templates/items.html','hammer'],
                 @model.listView.indexes[cacheKey]+=count
                 if(@model.listView.indexes[cacheKey]>=itemLength)
                   baseApplication.cache.getDataFromTable(cacheKey,(data)=>
-                    console.log(data)
                     if(data)
                        Array.prototype.push.apply(baseApplication.cache.data[cacheKey], data); #merge arrays
 #                         console.log(baseApplication.cache.data[cacheKey])
