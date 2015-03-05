@@ -99,18 +99,15 @@ define ['f7','_'],
       ,300)
 
 
-    pullToRefreshSwipe:(domEl, callback,swipeLeft,swipeRight)->
-      parentThis=this
+    pullToRefreshSwipe:(domEl, callback,swipeLeft,swipeRight,dinamicSwipe)->
       callback=callback||false
       touchYStart=0
       touchXStart=0
       touchXEnd=0
       distance=0
       scrollTop=0
-      swipe=false
       preloader=false
       pullInProgress=false
-      isYSwiping=false
       horizontalSwipeCallback =  false
 
 
@@ -150,34 +147,22 @@ define ['f7','_'],
           (event)->
              if(scrollTop)
                 return
-#             distanceX=event.touches[0].pageX-touchXStart
              touchXEnd=event.touches[0].pageX
              touchYEnd=event.touches[0].pageY
              distance=event.touches[0].pageY-touchYStart
 
              xDiff = touchXStart - touchXEnd
              yDiff = touchYStart - touchYEnd
-#             console.log Math.abs(distanceX)
-#             if(!preloader&&Math.abs(distanceX)>=20&&!swipe&&distance<Math.abs(distanceX))
-#                 swipe=true
-#             else
-#                preloader=true
-#             console.log(swipe)
-#             console.log(preloader)
-#             console.log('-------------')
-#             console.log(swipe)
-#             if(swipe)
-#               return
 
-#             console.log(distance)
-             if (!isYSwiping && (Math.abs(xDiff) > Math.abs(yDiff)))
+             if (!pullInProgress && (Math.abs(xDiff) > Math.abs(yDiff)))
                if (xDiff > 0)
                  horizontalSwipeCallback = swipeLeft
                else
                  horizontalSwipeCallback = swipeRight
+               dinamicSwipe(xDiff) if dinamicSwipe
              else
+               horizontalSwipeCallback=false
                if(distance>=0)#only down direction!
-                 isYSwiping = true
                  pullInProgress=true
                  body.classList.add('dragging')
                  this.style.webkitTransform="translate3d(0,"+distance+"px,0)"
@@ -188,17 +173,6 @@ define ['f7','_'],
       , false);
       domEl.addEventListener("touchend",
           (event)->
-#             console.log 'SWIPE!!!!!!!!!!!!!!!!!'
-##             console.log swipe
-#             if(swipe)
-#               if(touchXEnd-touchXStart<0)
-#                 swipeLeft.apply(parentThis)
-#               else
-#                 swipeRight.apply(parentThis)
-#               swipe=false
-#               finish.call(this)
-#             else
-               horizontalSwipeCallback() if horizontalSwipeCallback
                if(pullInProgress)
                   pullInProgress=false
                   if(distance>updateDistance)
@@ -208,7 +182,8 @@ define ['f7','_'],
                   else
                     finish.call(this)
                   preloader=false
-                  isYSwiping = false
+               else
+                 horizontalSwipeCallback() if horizontalSwipeCallback
 
 
       , false);

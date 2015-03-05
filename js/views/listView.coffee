@@ -4,6 +4,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
         class ListView extends BaseView
           template:template
           domTabsObj:[]
+          shift:0
           model:
             currentTab:1
             name:"Думская"
@@ -56,10 +57,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               tabDom=@$('#'+tab.id)
               @handleOnClickItem(tabDom,i)
               baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,()=>
-                  console.log 1
                   @swipeLeft()
                 ,()=>
-                  console.log 2
                   @swipeRight()
               )
               @domTabsObj.push(tabDom)
@@ -128,11 +127,12 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
 
           tabTransition:()->
-            shift=(@model.currentTab-1)*100;
-            @elTabsDom.style.webkitTransform ="translate3d(-#{shift}%, 0, 0)"
-            @ptr.style.webkitTransform ="translate3d(#{shift}%, 0, 0)"
+            @shift=(@model.currentTab-1)*100;
+            @elTabsDom.style.transitionDuration='300ms'
+            @elTabsDom.style.webkitTransform ="translate3d(-#{@shift}%, 0, 0)"
+            @ptr.style.webkitTransform ="translate3d(#{@shift}%, 0, 0)"
             if(navigator.userAgent.indexOf('Windows NT ')!=-1)
-              @ptr.style.transform ="translate3d(#{shift}px, 0, 0)"
+              @ptr.style.transform ="translate3d(#{@shift}px, 0, 0)"
 
 
 
