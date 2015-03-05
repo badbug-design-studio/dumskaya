@@ -9,6 +9,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             name:"Думская"
             tabs:Tabs
           delay: 450
+          xDown: null
+          yDown: null
           items:{}
           isUpdating:false
           indexes:
@@ -34,8 +36,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @cacheTabs()
             @showCurrentTab()
-#            @swipeTabsHandle()
-
 
           handleOnClickItem:(elem,i)->
             cacheClassesArr = ['news','blogs','tv','articles']
@@ -55,18 +55,15 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
               @handleOnClickItem(tabDom,i)
-              baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,@swipeLeft,@swipeRight)
+              baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,()=>
+                  console.log 1
+                  @swipeLeft()
+                ,()=>
+                  console.log 2
+                  @swipeRight()
+              )
               @domTabsObj.push(tabDom)
             )
-
-          swipeTabsHandle:()->
-            Hammer(@elTabsDom,{threshold:0}).on("swipeleft", ()=>
-              console.log 'swipeleft1'
-
-            );
-            Hammer(@elTabsDom,{threshold:0}).on("swiperight", ()=>
-
-            );
 
           swipeLeft:()->
             if(@model.currentTab<@model.tabs.length)

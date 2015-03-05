@@ -110,6 +110,8 @@ define ['f7','_'],
       swipe=false
       preloader=false
       pullInProgress=false
+      isYSwiping=false
+      horizontalSwipeCallback =  false
 
 
       updateDistance=60;
@@ -150,7 +152,11 @@ define ['f7','_'],
                 return
 #             distanceX=event.touches[0].pageX-touchXStart
              touchXEnd=event.touches[0].pageX
+             touchYEnd=event.touches[0].pageY
              distance=event.touches[0].pageY-touchYStart
+
+             xDiff = touchXStart - touchXEnd
+             yDiff = touchYStart - touchYEnd
 #             console.log Math.abs(distanceX)
 #             if(!preloader&&Math.abs(distanceX)>=20&&!swipe&&distance<Math.abs(distanceX))
 #                 swipe=true
@@ -164,15 +170,21 @@ define ['f7','_'],
 #               return
 
 #             console.log(distance)
-             if(distance>=0)#only down direction!
-               pullInProgress=true
-               body.classList.add('dragging')
-               this.style.webkitTransform="translate3d(0,"+distance+"px,0)"
-             if(distance>=updateDistance)
-               body.classList.add('ptr-refresh')
+             if (!isYSwiping && (Math.abs(xDiff) > Math.abs(yDiff)))
+               if (xDiff > 0)
+                 horizontalSwipeCallback = swipeLeft
+               else
+                 horizontalSwipeCallback = swipeRight
              else
-               body.classList.remove('ptr-refresh')
-
+               if(distance>=0)#only down direction!
+                 isYSwiping = true
+                 pullInProgress=true
+                 body.classList.add('dragging')
+                 this.style.webkitTransform="translate3d(0,"+distance+"px,0)"
+               if(distance>=updateDistance)
+                 body.classList.add('ptr-refresh')
+               else
+                 body.classList.remove('ptr-refresh')
       , false);
       domEl.addEventListener("touchend",
           (event)->
@@ -186,6 +198,7 @@ define ['f7','_'],
 #               swipe=false
 #               finish.call(this)
 #             else
+               horizontalSwipeCallback() if horizontalSwipeCallback
                if(pullInProgress)
                   pullInProgress=false
                   if(distance>updateDistance)
@@ -195,6 +208,8 @@ define ['f7','_'],
                   else
                     finish.call(this)
                   preloader=false
+                  isYSwiping = false
+
 
       , false);
 
