@@ -184,7 +184,7 @@ define ['f7','_'],
                     finish.call(this)
                   preloader=false
                else
-                 isTap=touchXStart-event.changedTouches[0].pageX==0
+                 isTap=(touchXStart-event.changedTouches[0].pageX)==0
                  horizontalSwipeCallback() if !isTap&&horizontalSwipeCallback
 
 
