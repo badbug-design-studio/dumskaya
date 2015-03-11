@@ -9,7 +9,7 @@
                      <%listView.previousDate=oneItem.pubDate%>
                 <%}%>
                 <li class="list-wrap without-bg">
-                    <div class="content-block-title"><%=baseApplication.helpers.getShortItemDate(oneItem.pubDate,true)%></div>
+                    <div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>
                 </li>
              <% } %>
                 <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>

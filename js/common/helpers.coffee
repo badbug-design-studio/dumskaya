@@ -51,11 +51,11 @@ define ['f7','_'],
         return
       return @months[index][prop]||""
 
-    getShortItemDate:(dateString,isShort)->
+    getItemDate:(dateString,isShort)->
      date=new Date(dateString)
      day=date.getDate()
      month=date.getMonth()
-     monthName=@getMonthName(date.getMonth(),true)
+     monthName=@getMonthName(date.getMonth())
      year=date.getFullYear()
      minutes = date.getMinutes()
      if (minutes<10)
