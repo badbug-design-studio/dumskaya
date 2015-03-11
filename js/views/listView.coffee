@@ -76,17 +76,17 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                   @showCurrentTab()
 
           showCurrentTab:()->
-                @tabTransition()
-                @changePositionTriagle()
-                @previousDate=false
-                setTimeout(()=>
-                       index=@model.currentTab-1
-                       tab=@model.tabs[index]
-                       if tab
-                         tab.updateItems.apply(@)
-                       else
-                         alert('tab is not defined')
-                ,@delay)
+            @tabTransition()
+            @changePositionTriagle()
+            @previousDate=false
+            setTimeout(()=>
+                   index=@model.currentTab-1
+                   tab=@model.tabs[index]
+                   if tab
+                     tab.updateItems.apply(@)
+                   else
+                     alert('tab is not defined')
+            ,@delay)
 
           updateCurrentTab:()=>
             self=@
@@ -114,15 +114,16 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @triangle.style.webkitTransform ="translate3d(#{shift}px, 0, 0)"
             if(navigator.userAgent.indexOf('Windows NT ')!=-1)
               @triangle.style.transform ="translate3d(#{shift}px, 0, 0)"
+            @tabsLinks.removeClass("active");
+            index=@model.currentTab-1
+            @$('#change-tabs a').eq(index).addClass("active");
 
           changeTab:(event)=>
            event.preventDefault()
            newTabIndex= event.target.getAttribute('href').substr(1)
-           @tabsLinks.removeClass("active");
-           @$(event.target).addClass("active");
-           @model.currentTab=  +newTabIndex
-           console.log(@model.currentTab)
-           @showCurrentTab()
+           if(@model.currentTab!=+newTabIndex)
+             @model.currentTab=  +newTabIndex
+             @showCurrentTab()
 
 
           tabTransition:()->

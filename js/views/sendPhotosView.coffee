@@ -34,7 +34,7 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
           form=this
           formData = new FormData(@)
           xmlHttp=new XMLHttpRequest();
-
+          console.log formData
           xmlHttp.open('POST', @.getAttribute("action"), true);
           xmlHttp.onreadystatechange = ()->
             if (xmlHttp.readyState != 4) then return
@@ -44,7 +44,7 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
               match = xmlHttp.responseText.toString().match(/success:(\d+), error:"(\w*)"/)
               if match && parseInt(match[1])
                  form.reset()
-                 Framework7.$('#imgPreView').hide()
+                 Framework7.$('#imgPreView').html('')
                  baseApplication.f7app.alert('Картика отправлена')
               else
                 baseApplication.f7app.alert("Не удается отправить фото, попробуйте позже")
@@ -54,30 +54,26 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
       )
 
     readURL:(input)->
+      console.log(input.files)
       if (input.files)
          imgStack = document.createDocumentFragment()
          filesArrLength = input.files.length
          @appendImg(input, imgStack, 0, filesArrLength)
 
     appendImg: (input, imgStack, index, filesArrLength)->
-      console.log index
-      console.log filesArrLength
-      console.log input.files
-      console.log reader
       if (index == filesArrLength)
-        alert(1)
+        document.getElementById("imgPreView").innerHTML=""
         document.getElementById("imgPreView").appendChild(imgStack)
         return
-        reader = new FileReader();
-        reader.onload =  (e) =>
-          console.log "here"
-          index++
-          img = document.createElement("img");
-          img.setAttribute('src', e.target.result);
-          imgStack.appendChild(img);
-          img.style.display="block"
-          @appendImg(input,imgStack, index, filesArrLength)
-        reader.readAsDataURL(input.files[index]);
+      reader = new FileReader();
+      reader.onload =  (e) =>
+        index++
+        img = document.createElement("img");
+        img.setAttribute('src', e.target.result);
+        imgStack.appendChild(img);
+        img.style.display="block"
+        @appendImg(input,imgStack, index, filesArrLength)
+      reader.readAsDataURL(input.files[index]);
 
     clicks: ()->
       @$('#file-button').on("touchend", ()=>

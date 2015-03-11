@@ -47,6 +47,9 @@ define ['f7','_','imgCache'],
       else
         console.log('%c GET FROM DB! ', 'background: #222; color: #bada55');
         @getSavedInfo()
+        setTimeout(()=>
+          @requestDo()
+        ,1000)
 
     getSavedInfo:()->
 #      delay=0
@@ -57,18 +60,18 @@ define ['f7','_','imgCache'],
              @data[@cachedTableName]=cachedData
              @listViewCallback(cachedData,@cachedTableName)
              @need2Update() if @need2Update
-             return false #dont do any request
-         #if db is empty
-         console.info('DB is empty')
-         @requestDo()
       )
     requestDo:()->
       url=@getUrl(@cachedTableName)
       console.log('%c REQUEST! ', 'background: #222; color: #bada55');
       baseApplication.sync.request(url,true,(data)=>
         if(data&&data.channel) #if we got info from the server
-            @setTableData(@cachedTableName,data.channel.item,()=>
-              @getSavedInfo()
+            @setTableData(@cachedTableName,data.channel.item,(newSavedItemsCount)=>
+              #callback will call only if something new added to db
+              if newSavedItemsCount
+                @getSavedInfo()
+              else
+                @need2Update() if @need2Update
             )
         else #if we dont have information from internet
             if @need2Update
@@ -144,7 +147,7 @@ define ['f7','_','imgCache'],
         console.error 'set to DB #{tableName} failed'
         return
       @getLastCriteriaUpdate(tableName,(criteria)=>
-        @addEachItemsToDbRecursive(tableName,(data.length-1),data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
+        @addEachItemsToDbRecursive(tableName,(data.length-1),0,data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
       )
 
 
@@ -169,9 +172,9 @@ define ['f7','_','imgCache'],
               )
       )
 
-    addEachItemsToDbRecursive:(tableName,index,itemsArray,criteria,onSaved)->
+    addEachItemsToDbRecursive:(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)->
      if index<0
-       onSaved()
+       onSaved(savedItemsCount)
        return
 #     console.log('index')
 #     console.log(index)
@@ -184,13 +187,14 @@ define ['f7','_','imgCache'],
 #     console.log('---------------------------------')
      if(!criteria||criteria&&new Date(oneItem[this.criteria]).getTime()>criteria) #add in bd only if new items have bigger lastupdate then the newest in db
 #       console.log('add')
+       savedItemsCount++
        @addOneItemToDb(tableName,oneItem,()=>
              --index;
-             @addEachItemsToDbRecursive(tableName,index,itemsArray,criteria,onSaved)
+             @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)
        )
      else
         --index;
-        @addEachItemsToDbRecursive(tableName,index,itemsArray,criteria,onSaved)
+        @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)
 
     addOneItemToDb:(tableName,oneItem,callback)->
       @db.transaction((tx)=>

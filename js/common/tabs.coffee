@@ -4,6 +4,7 @@ define([
       tabs= [
                     {id:'tab1',name:'Новости',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
+                              console.log('RENDER!!!')
                               model={}
                               model.items=[]
                               if data
@@ -20,6 +21,7 @@ define([
                     }
                     {id:'tab2',name:'Блоги',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
+                            console.log('RENDER!!!')
                             model={}
                             model.items=[]
                             if data
@@ -36,6 +38,7 @@ define([
                     }
                     {id:'tab3',name:'ТВ',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
+                          console.log('RENDER!!!')
                           model={}
                           model.items=[]
                           if data
