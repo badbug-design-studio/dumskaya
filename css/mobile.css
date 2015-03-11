@@ -282,10 +282,10 @@ iframe {
      align-self: auto;
 }
 .list-block.news-list .item-title {
-    font-size: 15px;
+    font-size: 16px;
     /*max-height: 30px;*/
     height: auto;
-    line-height: 15px;
+    line-height: 18px;
     white-space: normal;
     color: #8A1020;
     -webkit-box-ordinal-group: 1;
@@ -546,15 +546,16 @@ iframe {
     transition-duration: 300ms;
 }
 .item-page .item-title {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 19px;
+    line-height: 24px;
     padding: 0 7px;
-    margin-bottom: 15px;
+    margin: 10px 0 15px 0;
     color: #8A1020;
+    font-weight: bold;
 }
 .item-page .item-text {
-    font-size: 15px;
-    line-height: 22px;
+    font-size: 17px;
+    line-height: 24px;
     padding: 0 7px 10px;
     color: #000000;
 }
