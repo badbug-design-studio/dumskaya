@@ -125,6 +125,7 @@ define ['f7','_'],
 
       body=document.getElementById('body')
       finish=()->
+        console.log 'finish'
         this.style.transitionDuration='300ms'
         this.style.webkitTransform="translate3d(0,0,0)"
         self=this
@@ -183,7 +184,8 @@ define ['f7','_'],
                     finish.call(this)
                   preloader=false
                else
-                 horizontalSwipeCallback() if horizontalSwipeCallback
+                 isTap=touchXStart-event.changedTouches[0].pageX==0
+                 horizontalSwipeCallback() if !isTap&&horizontalSwipeCallback
 
 
       , false);
