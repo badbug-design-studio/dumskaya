@@ -54,14 +54,31 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
       )
 
     readURL:(input)->
-      if (input.files && input.files[0])
-          reader = new FileReader();
-          reader.onload =  (e) ->
-             img= Framework7.$('#imgPreView')
-             img.attr('src', e.target.result);
-             img.show()
+      if (input.files)
+         imgStack = document.createDocumentFragment()
+         filesArrLength = input.files.length
+         @appendImg(input, imgStack, 0, filesArrLength)
 
-          reader.readAsDataURL(input.files[0]);
+    appendImg: (input, imgStack, index, filesArrLength)->
+      console.log index
+      console.log filesArrLength
+      console.log input.files
+      console.log reader
+      if (index == filesArrLength)
+        alert(1)
+        document.getElementById("imgPreView").appendChild(imgStack)
+        return
+        reader = new FileReader();
+        reader.onload =  (e) =>
+          console.log "here"
+          index++
+          img = document.createElement("img");
+          img.setAttribute('src', e.target.result);
+          imgStack.appendChild(img);
+          img.style.display="block"
+          @appendImg(input,imgStack, index, filesArrLength)
+        reader.readAsDataURL(input.files[index]);
+
     clicks: ()->
       @$('#file-button').on("touchend", ()=>
         @$('#file').click()
