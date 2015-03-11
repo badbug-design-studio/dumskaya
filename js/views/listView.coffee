@@ -65,23 +65,19 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             )
 
           swipeLeft:()->
-            console.log('LEFT!!!!!!!')
             if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 @showCurrentTab()
 
 
           swipeRight:()->
-            console.log('RIGHT!!!!!!!')
             if(@model.currentTab>1)
                   @model.currentTab--
                   @showCurrentTab()
 
           showCurrentTab:()->
-                console.log('CURRENT TAB!')
                 @tabTransition()
                 @changePositionTriagle()
-                console.log('showCurrentTab')
                 @previousDate=false
                 setTimeout(()=>
                        index=@model.currentTab-1
@@ -121,7 +117,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           changeTab:(event)=>
            event.preventDefault()
-           console.log('CHANGE TAB!')
            newTabIndex= event.target.getAttribute('href').substr(1)
            @tabsLinks.removeClass("active");
            @$(event.target).addClass("active");
