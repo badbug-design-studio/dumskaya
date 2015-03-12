@@ -1,18 +1,19 @@
 <% itemLength=items.length%>
 <% renderedCount=listView.indexes[cacheKey]%>
 <%var iteration=0%>
+<%previousDate=false%>
 <% _.each(items,function(oneItem,index){ %>
          <%if (index>=renderedCount&&iteration<limit){%>
-             <% if(index == 0 || (listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate))) { %>
-                <%if(index&&listView.previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, listView.previousDate)){%>
+             <% if(index == 0 || (previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, previousDate))) { %>
+                <%if(index&&previousDate&&!baseApplication.helpers.compareTwoDates(oneItem.pubDate, previousDate)){%>
                      <li class="list-line"></li>
-                     <%listView.previousDate=oneItem.pubDate%>
+                     <%previousDate=oneItem.pubDate%>
                 <%}%>
                 <li class="list-wrap without-bg">
                     <div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>
                 </li>
              <% } %>
-                <%if (!listView.previousDate){listView.previousDate=oneItem.pubDate}%>
+                <%if (!previousDate){previousDate=oneItem.pubDate}%>
                 <li class="list-wrap <%if(oneItem.visited) print('visited')%>" >
                     <!--<div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>-->
                      <div class="item-content"  data-index="<%=index%>">

@@ -8,6 +8,7 @@ define ['f7','_','imgCache'],
     db: null
     criteria:"pubDate" #creteria field on what check for add new items
     itemsMaxCount:40
+    progressFlag:{}
 
     constructor:(onDBinit)->
       @data={}
@@ -47,9 +48,9 @@ define ['f7','_','imgCache'],
       else
         console.log('%c GET FROM DB! ', 'background: #222; color: #bada55');
         @getSavedInfo()
-        setTimeout(()=>
-          @requestDo()
-        ,1000)
+#        setTimeout(()=>
+#          @requestDo()
+#        ,1000)
 
     getSavedInfo:()->
 #      delay=0
@@ -60,15 +61,27 @@ define ['f7','_','imgCache'],
              @data[@cachedTableName]=cachedData
              @listViewCallback(cachedData,@cachedTableName)
              @need2Update() if @need2Update
+             setTimeout(()=>
+               @requestDo(@cachedTableName)
+             ,1000)
+         else
+           @requestDo()
       )
-    requestDo:()->
+    requestDo:(key)->
       url=@getUrl(@cachedTableName)
+      tableKey=key||@cachedTableName
+      console.log(tableKey)
+      callTab=baseApplication.listView.cacheClassesArr[baseApplication.listView.model.currentTab-1]
       console.log('%c REQUEST! ', 'background: #222; color: #bada55');
       baseApplication.sync.request(url,true,(data)=>
         if(data&&data.channel) #if we got info from the server
-            @setTableData(@cachedTableName,data.channel.item,(newSavedItemsCount)=>
+            @setTableData(tableKey,data.channel.item,(newSavedItemsCount)=>
+              @progressFlag[tableKey]=false
               #callback will call only if something new added to db
-              if newSavedItemsCount
+#              console.log(callTab)
+#              console.log(tableKey)
+              if newSavedItemsCount&&callTab==@cachedTableName
+                console.log('@getSavedInfo!!!!!!!!')
                 @getSavedInfo()
               else
                 @need2Update() if @need2Update
@@ -79,7 +92,7 @@ define ['f7','_','imgCache'],
                 @need2Update() #just close pull ro refresh
               ,1000)
             else
-              @listViewCallback(false,@cachedTableName) #just render witout data :(
+              @listViewCallback(false,tableKey) if !key #just render witout data :(
       )
 
     getUrl:(cacheKey)->
@@ -146,12 +159,15 @@ define ['f7','_','imgCache'],
       if !@db
         console.error 'set to DB #{tableName} failed'
         return
+      if(@progressFlag[tableName]) #saving in progress!
+        return
       @getLastCriteriaUpdate(tableName,(criteria)=>
         @addEachItemsToDbRecursive(tableName,(data.length-1),0,data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
       )
 
 
     getLastCriteriaUpdate:(tableName,callback)=>
+      @progressFlag[tableName]=true
       @db.transaction((tx)=>
 #              console.log(tableName)
               sql="SELECT #{this.criteria} FROM #{tableName} order by #{this.criteria} desc limit 1"
@@ -214,7 +230,7 @@ define ['f7','_','imgCache'],
     getDataFromTable: (tableName,callback,startLimit) =>
       if !@db
         console.error 'get from DB #{tableName} failed'
-        @requestDo(false)
+        @requestDo()
         return
       startLimit=startLimit||0
       endLimit=startLimit+@itemsMaxCount
@@ -232,7 +248,7 @@ define ['f7','_','imgCache'],
         ,(error)=>
           console.error('select db error')
           console.error(error)
-          @requestDo(false)
+          @requestDo()
         ,
         @querySuccess(tableName)
         )
@@ -241,7 +257,7 @@ define ['f7','_','imgCache'],
         console.error(error)
         if !error.code
          @initDatabase(()=>
-          @requestDo(false)
+          @requestDo()
          )
 
       )

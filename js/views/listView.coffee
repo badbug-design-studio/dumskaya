@@ -19,6 +19,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             blogs:0
             tv:0
             articles:0
+          cacheClassesArr: ['news','blogs','tv','articles']
 
           events:
 #            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
@@ -39,13 +40,12 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @showCurrentTab()
 
           handleOnClickItem:(elem,i)->
-            cacheClassesArr = ['news','blogs','tv','articles']
-            Hammer(elem[0]).on("tap", (event) ->
+            Hammer(elem[0]).on("tap", (event) =>
               index=event.target.getAttribute('data-index')
               if(!index)
                 return
-              model=baseApplication.cache.data[cacheClassesArr[i]][index]
-              model.cacheClass=cacheClassesArr[i]
+              model=baseApplication.cache.data[@cacheClassesArr[i]][index]
+              model.cacheClass=@cacheClassesArr[i]
               model.index=index
               model.targetDom=event.target
               baseApplication.router.loadPage('oneItem',{model:model})
@@ -78,7 +78,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           showCurrentTab:()->
             @tabTransition()
             @changePositionTriagle()
-            @previousDate=false
+#            @previousDate=false
             setTimeout(()=>
                    index=@model.currentTab-1
                    tab=@model.tabs[index]
@@ -92,7 +92,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             self=@
             index=@model.currentTab-1
             tab=@model.tabs[index]
-            @previousDate=false
+#            @previousDate=false
             domEl=@domTabsObj[index]
             tab.updateItems.call(@,()=>
               domEl[0].style.transitionDuration='300ms'
