@@ -184,7 +184,8 @@ define ['f7','_'],
                     finish.call(this)
                   preloader=false
                else
-                 isTap=(touchXStart-event.changedTouches[0].pageX)==0
+                 console.log touchXStart-event.changedTouches[0].pageX
+                 isTap=Math.abs(touchXStart-event.changedTouches[0].pageX) <= 2
                  horizontalSwipeCallback() if !isTap&&horizontalSwipeCallback
 
 
