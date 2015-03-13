@@ -286,6 +286,13 @@ define ['f7','_','imgCache'],
         );
       )
 
+    deleteRow: (tableName,id) =>
+      @db.transaction((tx) =>
+        tx.executeSql("DELETE FROM #{tableName} where id = ?",[id],(tx,results)->
+          console.log("Successfully Dropped")
+        );
+      )
+
     getCachedImage:(onlineSrc,onGotCallback)=>
       if(typeof cordova=='undefined' )
               onGotCallback(onlineSrc) if typeof onGotCallback!="undefined" #use online src only for non-cordova version!
