@@ -100,6 +100,7 @@ define ['f7','_'],
 
 
     pullToRefreshSwipe:(domEl,tabIndex, callback,swipeLeft,swipeRight,dinamicSwipe)->
+      console.log(domEl)
       callback=callback||false
       touchYStart=0
       touchXStart=0
@@ -109,17 +110,19 @@ define ['f7','_'],
       preloader=false
       pullInProgress=false
       horizontalSwipeCallback =  false
-
+      updateInProgress=false
 
       updateDistance=60;
       update=(callback)->
          self=this;
+         updateInProgress=true
          this.style.transitionDuration='300ms'
          this.style.webkitTransform="translate3d(0,50px,0)"
 #         body.classList.add('disable-touch')
          setTimeout(()->
            self.style.transitionDuration='0ms'
            callback(tabIndex) if(callback)
+           updateInProgress=false
 #           finish.call(self)
          ,1500)
 
@@ -146,8 +149,7 @@ define ['f7','_'],
 
       domEl.addEventListener("touchmove",
           (event)->
-             if(scrollTop)
-                return
+
              touchXEnd=event.touches[0].pageX
              touchYEnd=event.touches[0].pageY
              distance=event.touches[0].pageY-touchYStart
@@ -163,6 +165,8 @@ define ['f7','_'],
                dinamicSwipe(xDiff) if dinamicSwipe
              else
                horizontalSwipeCallback=false
+               if(scrollTop||updateInProgress)
+                    return
                if(distance>=0)#only down direction!
                  pullInProgress=true
                  body.classList.add('dragging')
@@ -184,7 +188,6 @@ define ['f7','_'],
                     finish.call(this)
                   preloader=false
                else
-                 console.log touchXStart-event.changedTouches[0].pageX
                  isTap=Math.abs(touchXStart-event.changedTouches[0].pageX) <= 2
                  horizontalSwipeCallback() if !isTap&&horizontalSwipeCallback
 
