@@ -326,13 +326,8 @@ iframe {
 }
 .list-block.news-list .item-after {
     font-size: 11px;
-    color: #540710;
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-}
-.list-block.news-list .item-media+.item-inner .item-after{
-    bottom: 10px;
+    color: #999;
+    text-align: left;
 }
 .list-block.news-list .item-inner {
     padding: 0 7px 0 0;

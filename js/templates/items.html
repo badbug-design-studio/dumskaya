@@ -23,13 +23,13 @@
                              <% } else { %>
                                 <div class="no-image"></div>
                              <% } %>
-                                <div class="item-after" data-index="<%=index%>"><%if(cacheKey=="news")print(baseApplication.helpers.getTime(oneItem.pubDate))%></div>
+                                <!--<div class="item-after" data-index="<%=index%>"><%if(cacheKey=="news")print(baseApplication.helpers.getTime(oneItem.pubDate))%></div>-->
                          </div>
                          <div class="item-inner" data-index="<%=index%>">
                              <div class="item-title-row">
                                  <div class="item-title" data-index="<%=index%>"><%=oneItem.title%></div>
                              </div>
-                             <div class="item-text" data-index="<%=index%>"></div>
+                             <div class="item-text item-after" data-index="<%=index%>"><%if(cacheKey=="news")print(baseApplication.helpers.getTime(oneItem.pubDate))%></div>
                              <!--<div class="item-text" data-index="<%=index%>"><%=oneItem.shortDescription%></div>-->
                          </div>
                      </div>
