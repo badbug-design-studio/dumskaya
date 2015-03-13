@@ -9,7 +9,7 @@ define ['f7','_','imgCache'],
     criteria:"pubDate" #creteria field on what check for add new items
     itemsMaxCount:40
     progressFlag:{}
-
+    updated:{}
     constructor:(onDBinit)->
       @data={}
       @initImgCache(()=>
@@ -62,7 +62,9 @@ define ['f7','_','imgCache'],
              @listViewCallback(cachedData,@cachedTableName)
              @need2Update() if @need2Update
              setTimeout(()=>
-               @requestDo(@cachedTableName)
+               if(!@updated[@cachedTableName])
+                @updated[@cachedTableName]=true
+                @requestDo(@cachedTableName)
              ,1000)
          else
            @requestDo()
@@ -80,11 +82,9 @@ define ['f7','_','imgCache'],
               #callback will call only if something new added to db
 #              console.log(callTab)
 #              console.log(tableKey)
-              if newSavedItemsCount&&callTab==@cachedTableName
+              if (newSavedItemsCount&&callTab==@cachedTableName)||@need2Update
                 console.log('@getSavedInfo!!!!!!!!')
                 @getSavedInfo()
-              else
-                @need2Update() if @need2Update
             )
         else #if we dont have information from internet
             if @need2Update
