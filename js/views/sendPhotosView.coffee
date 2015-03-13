@@ -14,8 +14,8 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
 #         @clicks()
          self=@
          @inputFile = document.getElementById("file")
-         @inputFile.onchange = ()->
-           self.readURL(this);
+         @inputFile.onchange = (event)->
+           self.readURL(event.target.files);
       ,1000)
 
 
@@ -53,14 +53,14 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
           xmlHttp.send(formData)
       )
 
-    readURL:(input)->
-      console.log(input.files)
-      if (input.files)
+    readURL:(files)->
+      console.log(files)
+      if (files)
          imgStack = document.createDocumentFragment()
-         filesArrLength = input.files.length
-         @appendImg(input, imgStack, 0, filesArrLength)
+         filesArrLength = files.length
+         @appendImg(files, imgStack, 0, filesArrLength)
 
-    appendImg: (input, imgStack, index, filesArrLength)->
+    appendImg: (files, imgStack, index, filesArrLength)->
       if (index == filesArrLength)
         document.getElementById("imgPreView").innerHTML=""
         document.getElementById("imgPreView").appendChild(imgStack)
@@ -72,8 +72,8 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
         img.setAttribute('src', e.target.result);
         imgStack.appendChild(img);
         img.style.display="block"
-        @appendImg(input,imgStack, index, filesArrLength)
-      reader.readAsDataURL(input.files[index]);
+        @appendImg(files,imgStack, index, filesArrLength)
+      reader.readAsDataURL(files[index]);
 
     clicks: ()->
       @$('#file-button').on("touchend", ()=>

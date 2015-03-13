@@ -100,7 +100,6 @@ define ['f7','_'],
 
 
     pullToRefreshSwipe:(domEl,tabIndex, callback,swipeLeft,swipeRight,dinamicSwipe)->
-      console.log(domEl)
       callback=callback||false
       touchYStart=0
       touchXStart=0
