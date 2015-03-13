@@ -56,7 +56,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             _.each(@model.tabs,(tab,i)=>
               tabDom=@$('#'+tab.id)
               @handleOnClickItem(tabDom,i)
-              baseApplication.helpers.pullToRefreshSwipe.call(self,tabDom[0],@updateCurrentTab,()=>
+              baseApplication.helpers.pullToRefreshSwipe.call(self, tabDom[0],i,@updateCurrentTab,()=>
                   @swipeLeft()
                 ,()=>
                   @swipeRight()
@@ -65,12 +65,14 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             )
 
           swipeLeft:()->
+            @resetTabPosition()
             if(@model.currentTab<@model.tabs.length)
                 @model.currentTab++
                 @showCurrentTab()
 
 
           swipeRight:()->
+            @resetTabPosition()
             if(@model.currentTab>1)
                   @model.currentTab--
                   @showCurrentTab()
@@ -88,9 +90,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                      alert('tab is not defined')
             ,@delay)
 
-          updateCurrentTab:()=>
+          updateCurrentTab:(index)=>
             self=@
-            index=@model.currentTab-1
+#            index=currentTab-1
             tab=@model.tabs[index]
 #            @previousDate=false
             domEl=@domTabsObj[index]
@@ -121,6 +123,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           changeTab:(event)=>
            event.preventDefault()
            newTabIndex= event.target.getAttribute('href').substr(1)
+           @resetTabPosition()
            if(@model.currentTab!=+newTabIndex)
              @model.currentTab=  +newTabIndex
              @showCurrentTab()
@@ -135,8 +138,11 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               @ptr.style.transform ="translate3d(#{@shift}px, 0, 0)"
 
 
-
-
+          resetTabPosition:()->
+            tab= @domTabsObj[@model.currentTab-1][0]
+            tab.style.transitionDuration='0ms'
+            tab.style.webkitTransform="translate3d(0,0,0)"
+            @elBody.className=""
 
 
         return ListView

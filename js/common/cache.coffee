@@ -83,7 +83,6 @@ define ['f7','_','imgCache'],
 #              console.log(callTab)
 #              console.log(tableKey)
               if (newSavedItemsCount&&callTab==@cachedTableName)||@need2Update
-                console.log('@getSavedInfo!!!!!!!!')
                 @getSavedInfo()
             )
         else #if we dont have information from internet

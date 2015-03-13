@@ -99,7 +99,7 @@ define ['f7','_'],
       ,300)
 
 
-    pullToRefreshSwipe:(domEl, callback,swipeLeft,swipeRight,dinamicSwipe)->
+    pullToRefreshSwipe:(domEl,tabIndex, callback,swipeLeft,swipeRight,dinamicSwipe)->
       callback=callback||false
       touchYStart=0
       touchXStart=0
@@ -116,10 +116,10 @@ define ['f7','_'],
          self=this;
          this.style.transitionDuration='300ms'
          this.style.webkitTransform="translate3d(0,50px,0)"
-         body.classList.add('disable-touch')
+#         body.classList.add('disable-touch')
          setTimeout(()->
            self.style.transitionDuration='0ms'
-           callback() if(callback)
+           callback(tabIndex) if(callback)
 #           finish.call(self)
          ,1500)
 
