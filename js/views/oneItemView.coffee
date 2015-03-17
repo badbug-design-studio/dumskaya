@@ -34,11 +34,11 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               document.getElementById("contentOneItem").innerHTML=description
               baseApplication.sync.getComments(@model.commentscounturl,
                  (data)=>
-                   console.log(data)
                    if data&&@model.commentscount != parseInt(data)||!@model.visited
-                     @model.commentscount = data
-                     @$("#comments_count").text(parseInt(data))
-                     @saveInCacheNewData(data)
+                     @model.commentscount = data if data
+                     @$("#comments_count").text(parseInt(data)) if data
+                     commentsCount=data||@model.commentscount
+                     @saveInCacheNewData(commentsCount)
                    if +@model.commentscount
                      @$("#comments_count").removeClass("no-comments")
 

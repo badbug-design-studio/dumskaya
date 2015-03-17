@@ -4,6 +4,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
         class ListView extends BaseView
           template:template
           domTabsObj:[]
+          tabInProgress:false
           shift:0
           model:
             currentTab:1
@@ -41,6 +42,10 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           handleOnClickItem:(elem,i)->
             Hammer(elem[0]).on("tap", (event) =>
+              #fix double tap bug!
+              if(@tabInProgress)
+                return
+              @tabInProgress=true
               index=event.target.getAttribute('data-index')
               if(!index)
                 return
@@ -48,7 +53,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               model.cacheClass=@cacheClassesArr[i]
               model.index=index
               model.targetDom=event.target
-              baseApplication.router.loadPage('oneItem',{model:model})
+              baseApplication.router.loadPage('oneItem',{model:model},()=>
+                @tabInProgress=false
+              )
             );
 
           cacheTabs:()->
