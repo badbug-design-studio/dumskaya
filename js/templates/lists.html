@@ -25,7 +25,7 @@
     <div data-page="index" class="page cached" id="overflowvisible">
         <div class="buttons-row theme-bg" id="change-tabs">
                        <span class="triangle" id="triangle"></span>
-                       <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+(i+1)+'" class="my-custom-tab-link '+active+' button ajax" >'+tab.name+'</a>')}) %>
+                       <% _.each(tabs,function(tab,i){ var active=(i+1)==currentTab?'active':'';print('  <a href="#'+(i+1)+'" onclick="javascript:return false" class="my-custom-tab-link '+active+' button ajax" >'+tab.name+'</a>')}) %>
                    </div>
         <!-- Scrollable page content-->
         <div class="page-content">

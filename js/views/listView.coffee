@@ -24,7 +24,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           events:
 #            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"
-            "touchstart #change-tabs a":"changeTab"
+            "touchstart #change-tabs a.my-custom-tab-link":"changeTab"
 
           constructor:(query)->
             super
@@ -48,6 +48,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               @tabInProgress=true
               index=event.target.getAttribute('data-index')
               if(!index)
+                @tabInProgress=false
                 return
               model=baseApplication.cache.data[@cacheClassesArr[i]][index]
               model.cacheClass=@cacheClassesArr[i]
@@ -130,6 +131,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           changeTab:(event)=>
            event.preventDefault()
            newTabIndex= event.target.getAttribute('href').substr(1)
+           console.log newTabIndex
            @resetTabPosition()
            if(@model.currentTab!=+newTabIndex)
              @model.currentTab=  +newTabIndex
