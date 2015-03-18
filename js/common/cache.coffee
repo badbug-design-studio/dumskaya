@@ -138,13 +138,13 @@ define ['f7','_','imgCache'],
 
 
     createDbTables:(tx)=>
-      tx.executeSql("CREATE TABLE IF NOT EXISTS news (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,created REAL)", [], ()->
+      tx.executeSql("CREATE TABLE IF NOT EXISTS news (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,link TEXT, created REAL)", [], ()->
         console.log('table created')
       , @errorHandler)
-      tx.executeSql("CREATE TABLE IF NOT EXISTS blogs (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,created REAL)", [], ()->
+      tx.executeSql("CREATE TABLE IF NOT EXISTS blogs (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,link TEXT,created REAL)", [], ()->
           console.log('table created')
         , @errorHandler)
-      tx.executeSql("CREATE TABLE IF NOT EXISTS tv (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,created REAL)", [], ()->
+      tx.executeSql("CREATE TABLE IF NOT EXISTS tv (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,link TEXT,created REAL)", [], ()->
           console.log('table created')
         , @errorHandler)
 #      tx.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
@@ -214,7 +214,7 @@ define ['f7','_','imgCache'],
     addOneItemToDb:(tableName,oneItem,callback)->
       @db.transaction((tx)=>
          lastUpdate=+oneItem.lastUpdate||+oneItem.lastupdate #server bug!
-         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (title,description,shortDescription,lastUpdate,pubDate,smallImg,commentscount,commentscounturl,comments, created) VALUES (?,?,?,?,?,?,?,?,?,?)", [oneItem.title,JSON.stringify(oneItem.description),oneItem.shortDescription,lastUpdate,parseInt(oneItem.createdUnix+"000"),oneItem.smallImg,+oneItem.commentscount,oneItem.commentscounturl,oneItem.comments, new Date().getTime()]
+         tx.executeSql("INSERT OR REPLACE INTO #{tableName} (title,description,shortDescription,lastUpdate,pubDate,smallImg,commentscount,commentscounturl,comments, link,created) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [oneItem.title,JSON.stringify(oneItem.description),oneItem.shortDescription,lastUpdate,parseInt(oneItem.createdUnix+"000"),oneItem.smallImg,+oneItem.commentscount,oneItem.commentscounturl,oneItem.comments, oneItem.link,new Date().getTime()]
            (tx, resultSet) ->
              if (!resultSet.rowsAffected)
                alert('No rows affected!');
@@ -278,7 +278,7 @@ define ['f7','_','imgCache'],
     querySuccess: (tableName) =>
       console.log "select from db #{tableName} success"
 
-    dropTables: (tableName) =>
+    dropTable: (tableName) =>
       @db.transaction((tx) =>
         tx.executeSql("DROP TABLE #{tableName}",[],(tx,results)->
           console.log("Successfully Dropped")
