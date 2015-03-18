@@ -440,7 +440,7 @@ iframe {
     padding-top: 74px;
 }
 .item-page-wrap {
-    padding: 7px;
+    padding: 8px;
 }
 .item-page-wrap .item-title {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -546,7 +546,7 @@ iframe {
 .item-page .item-title {
     font-size: 19px;
     line-height: 24px;
-    padding: 0 7px;
+    padding: 0;
     margin: 10px 0 15px 0;
     color: #8A1020;
     font-weight: bold;
