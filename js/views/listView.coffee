@@ -39,6 +39,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @tabsLinkWidth = window.innerWidth/@model.tabs.length
             @cacheTabs()
             @showCurrentTab()
+            @onChangeOrientation()
 
           handleOnClickItem:(elem,i)->
             Hammer(elem[0]).on("tap", (event) =>
@@ -153,5 +154,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             tab.style.webkitTransform="translate3d(0,0,0)"
             @elBody.className=""
 
+          onChangeOrientation:()->
+            window.onresize = ()=>
+              @tabsLinkWidth = window.innerWidth/@model.tabs.length
+              @changePositionTriagle()
 
         return ListView
