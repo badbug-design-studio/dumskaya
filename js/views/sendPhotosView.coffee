@@ -141,7 +141,6 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
       img = document.createElement("img");
       img.setAttribute('src', src);
       placeWhere.appendChild(img);
-      img.style.display="block"
 
     clicks: ()->
       @$('#file-button').on("touchend", ()=>
