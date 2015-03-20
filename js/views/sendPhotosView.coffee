@@ -27,32 +27,53 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
       )
       @$('#form').on('submit', (e) =>
         e.preventDefault()
+        if (!@imgs4Upload.length)
+            baseApplication.f7app.alert("Пожалуйста добавьте фото.")
+            return
         @$('#send-button').addClass('in-progress')
-        console.log('ONSUBMIT')
         @setPictureLabel(@imgs4Upload.length)
-
         _.each(@imgs4Upload,(src,index)=>
-          console.log(src)
           @phonegapUpload(src,index)
         )
       )
 
     takePhoneGapPicture:()->
-      options =
-         quality: 50,
-         destinationType: Camera.DestinationType.FILE_URI,
-         sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+      @imgs4Upload=[]
+      if(parseInt(device.version.toString().match(/[1-9]+/))<4)
+        console.log('OLD ANDROID!!!!')
+        options =
+           quality: 50,
+           destinationType: Camera.DestinationType.FILE_URI,
+           sourceType: Camera.PictureSourceType.PHOTOLIBRARY
 
-      navigator.camera.getPicture((imageURI)=>
-              console.log(imageURI)
-              @imgs4Upload.push(imageURI)
-              @addImgPreview(document.getElementById("imgPreView"),imageURI)
-#             upload(imageURI);
-      ,(message)->
-             # We typically get here because the use canceled the photo operation. Fail silently.
-             console.log('cancel')
-      ,options);
-
+        navigator.camera.getPicture((imageURI)=>
+                console.log(imageURI)
+                @imgs4Upload.push(imageURI)
+                @addImgPreview(document.getElementById("imgPreView"),imageURI)
+  #             upload(imageURI);
+        ,(message)->
+               # We typically get here because the use canceled the photo operation. Fail silently.
+               console.log('cancel')
+        ,options);
+      else
+        console.log('ANDROID4')
+        preview=document.getElementById("imgPreView")
+        preview.innerHTML=""
+        imgStack = document.createDocumentFragment()
+        window.imagePicker.getPictures(
+            (results)=>
+               @imgs4Upload=results
+               i=0
+               while(i<results.length)
+                 @addImgPreview(imgStack,results[i])
+                 i++
+               preview.appendChild(imgStack)
+            , (error)->
+                console.log('Error: ' + error);
+            ,{
+                    maximumImagesCount: 4,
+            }
+        );
       return
 
     formEventsInit:()->
@@ -85,19 +106,19 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
               console.log xmlHttp.responseText
               match = xmlHttp.responseText.toString().match(/success:(\d+), error:"(\w*)"/)
               if match && parseInt(match[1])
-                 form.reset()
-                 Framework7.$('#imgPreView').html('')
                  self.showMessage(true)
               else
                 self.showMessage(false)
 
             else
               self.showMessage(false)
+            form.reset()
+            Framework7.$('#imgPreView').html('')
+
           xmlHttp.send(formData)
       )
 
     readURL:(files)->
-      console.log(files)
       if (files)
          imgStack = document.createDocumentFragment()
          filesArrLength = files.length
@@ -135,15 +156,19 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
 
     setPictureLabel:(count)=>
       if(count>1)
-        @pictureLabel="Картинки отправлены."
+        @pictureLabel="Фотографии отправлены."
       else
-        @pictureLabel="Картинка отправлена."
+        @pictureLabel="Фотография отправлена."
 
       console.log('setPictureLabel')
 
+    resetAndroidPicData:()->
+      @imgs4Upload=[]
+      document.getElementById("imgPreView").innerHTML=""
+      @$('#send-button').removeClass('in-progress')
+      @$('#form')[0].reset()
+
     phonegapUpload:(fileURI,index)=>
-     console.log('upload!')
-     console.log(fileURI)
      options = new FileUploadOptions();
      options.fileKey = "picture";
      options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
@@ -157,21 +182,22 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
      ft = new FileTransfer();
      ft.upload(fileURI, encodeURI(@serverUrl), (data)=>
        console.log('GOOOD!')
-       if (index==(@imgs4Upload.length-1))
+       if (index==(@imgs4Upload.length-1)) #if last photo
          console.log data
          match = data.response.match(/success:(\d+)/)
          if match && parseInt(match[1])
-          @showMessage(true)
+            @showMessage(true)
          else
            @showMessage(false)
-         @imgs4Upload=[]
-         document.getElementById("imgPreView").innerHTML=""
-         @$('#send-button').removeClass('in-progress')
-         @$('#form')[0].reset()
+         @resetAndroidPicData()
+
      , (data)=>
          console.log(data)
          console.log('BAD!')
-         @showMessage(false)
+         if (index==(@imgs4Upload.length-1))
+           @resetAndroidPicData()
+           @showMessage(false)
+
      , options);
 
 
