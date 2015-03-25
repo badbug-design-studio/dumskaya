@@ -16,7 +16,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
           onRender:()->
             setTimeout(()=>
               #bug #12
-              if(@model.cacheClass!='news')
+              if(@model.cacheClass=='blogs')
                 @$("#image").attr('src',@model.cachedSrc).removeClass('none')
 
               if typeof @model.description=='string'
