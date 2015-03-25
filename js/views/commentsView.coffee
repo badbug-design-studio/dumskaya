@@ -24,6 +24,7 @@ define ['_','baseView', 'text!templates/comments.html'],
 
                   document.getElementById("commentsOneItem").innerHTML=html
                 )
+              history.pushState({page: 'comments'})
             ,1000)
 
 

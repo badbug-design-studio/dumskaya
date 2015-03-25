@@ -41,8 +41,8 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                      @saveInCacheNewData(commentsCount)
                    if +@model.commentscount
                      @$("#comments_count").removeClass("no-comments")
-
-               )
+              )
+              history.pushState({page: 'oneitem'})
             ,1000) #terrible wait until animation works
 
           shareLink: =>

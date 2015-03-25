@@ -26,6 +26,13 @@ define([
               app.hideIndicator();
             )
       }
+      document.addEventListener("backbutton",  (e)->
+        if history.state.page!='lists'
+          window.stop();
+          baseApplication.mainLayout.router.back()
+        else
+          e.preventDefault()
+      , false);
 
     if(typeof window.cordova=="undefined")
       setTimeout(()->
