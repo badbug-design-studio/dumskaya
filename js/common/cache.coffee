@@ -99,7 +99,7 @@ define ['f7','_','imgCache'],
         when "news" then return baseApplication.sync.getNewsRssUrl()
         when "blogs" then return baseApplication.sync.getBlogsRssUrl()
         when "tv" then return baseApplication.sync.getTVRssUrl()
-        when "articles" then return baseApplication.sync.getArticlesRssUrl()
+        when "sport" then return baseApplication.sync.getSportRssUrl()
         else console.error('URL not found by key')
 
 
@@ -147,6 +147,9 @@ define ['f7','_','imgCache'],
       tx.executeSql("CREATE TABLE IF NOT EXISTS tv (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,link TEXT,created REAL)", [], ()->
           console.log('table created')
         , @errorHandler)
+      tx.executeSql("CREATE TABLE IF NOT EXISTS sport (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT,description TEXT,shortDescription TEXT, lastUpdate REAL, pubDate REAL , smallImg Text, commentscount INTEGER,commentscounturl TEXT,comments TEXT,visited BOOL,link TEXT,created REAL)", [], ()->
+        console.log('table created')
+      , @errorHandler)
 #      tx.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data TEXT, created REAL)", [], null, @errorHandler)
 #      tx.executeSql("CREATE UNIQUE INDEX myindex ON news (id, data, JOB);", [], null, @errorHandler)
 

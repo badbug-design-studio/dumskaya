@@ -1,6 +1,6 @@
 define([
-    'f7','views/newsView','views/blogsView','views/tvView'
-],  (f7,NewsView,BlogsView,TVView) ->
+    'f7','views/newsView','views/blogsView','views/tvView','views/sportView'
+],  (f7,NewsView,BlogsView,TVView,SportView) ->
       tabs= [
                     {id:'tab1',name:'Новости',updateItems:(pullToRefreshCallback)->
                       onDownloaded=(data,cacheKey)=>
@@ -53,20 +53,23 @@ define([
 
                       baseApplication.cache.getList('tv',onDownloaded, pullToRefreshCallback)
                     }
-#                    {id:'tab4',name:'Статьи',updateItems:(pullToRefreshCallback)->
-#                      onDownloaded=(data,cacheKey)=>
-#                        model={}
-#                        model.items=[]
-#                        if data&&data.channel&&data.channel.item
-#                          model.items=data.channel.item
-#                        model.limit=10
-#                        @indexes[cacheKey]=0
-#                        model.listView=@
-#                        model.cacheKey=cacheKey
-#                        new ArticlesView({model:model,tabIndex:2})
-#
-#                      baseApplication.cache.getList('articles',onDownloaded, pullToRefreshCallback)
-#                    }
+                    {id:'tab4',name:'Спорт',updateItems:(pullToRefreshCallback)->
+                      onDownloaded=(data,cacheKey)=>
+                        console.log('RENDER!!!')
+                        model={}
+                        model.items=[]
+                        if data
+                         model.items=data
+                        model.limit=15
+                        @indexes[cacheKey]=0
+                        model.listView=@
+                        model.cacheKey=cacheKey
+                        baseApplication.cache.prepareCachedImgsRecursive(0,model.limit,model.items,()->
+                          new SportView({model:model,tabIndex:3})
+                        )
+
+                      baseApplication.cache.getList('sport',onDownloaded, pullToRefreshCallback)
+                    }
       ]
       return tabs
 );

@@ -19,8 +19,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             news:0
             blogs:0
             tv:0
-            articles:0
-          cacheClassesArr: ['news','blogs','tv','articles']
+            sport:0
+          cacheClassesArr: ['news','blogs','tv','sport']
 
           events:
 #            "refresh #tabs .pull-to-refresh-content":"updateCurrentTab"

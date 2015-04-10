@@ -27,6 +27,12 @@ define ['_','xml2json'],
           ext='.xml'
         return @getRoot()+"rsstv"+ext
 
+    getSportRssUrl:()=>
+        ext='/'
+        if !@isProd
+          ext='.xml'
+        return "http://pobeda.od.ua/rss//ios/"+ext
+
     getArticlesRssUrl:()=>
       ext='/'
       if !@isProd
