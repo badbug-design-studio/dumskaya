@@ -173,6 +173,7 @@ iframe {
     line-height: 27px;
     height: 30px;
     font-size: 18px;
+    padding: 0 5px;
 }
 .navbar-through .page-content, .navbar-fixed .page-content {
     padding-top: 0;
