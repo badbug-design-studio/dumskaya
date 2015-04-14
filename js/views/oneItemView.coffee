@@ -36,6 +36,11 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                  (data)=>
                    if data&&@model.commentscount != parseInt(data)||!@model.visited
                      @model.commentscount = data if data
+                     Object.defineProperty(baseApplication.cache.data[@model.cacheClass][@model.index], 'commentscountLive', {
+                                writable:true,
+                                configurable:true
+                     });
+                     baseApplication.cache.data[@model.cacheClass][@model.index].commentscountLive=parseInt(data)
                      @$("#comments_count").text(parseInt(data)) if data
                      commentsCount=data||@model.commentscount
                      @saveInCacheNewData(commentsCount)
@@ -54,6 +59,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               {
                 text: 'E-Mail',
                 onClick:=>
+                  alert @model.link
                   if(window.plugins)
                     window.plugins.socialsharing.shareViaEmail(
                       @model.link,
