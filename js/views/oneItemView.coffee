@@ -59,7 +59,6 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
               {
                 text: 'E-Mail',
                 onClick:=>
-                  alert @model.link
                   if(window.plugins)
                     window.plugins.socialsharing.shareViaEmail(
                       @model.link,
