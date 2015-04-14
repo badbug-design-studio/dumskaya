@@ -167,6 +167,16 @@ define ['f7','_','imgCache'],
         @addEachItemsToDbRecursive(tableName,(data.length-1),0,data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
       )
 
+    updateTableData:(tableName,id,column,value)->
+      @db.transaction((tx)=>
+            sql="UPDATE #{tableName} SET #{column}=#{value} WHERE id=#{id}"
+            tx.executeSql(sql, [], (tx,result)=>
+              console.log('update ok')
+            ,(err)->
+              console.log(err)
+            )
+      )
+
 
     getLastCriteriaUpdate:(tableName,callback)=>
       @progressFlag[tableName]=true

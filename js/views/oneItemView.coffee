@@ -44,7 +44,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                      @$("#comments_count").text(parseInt(data)) if data
                      commentsCount=data||@model.commentscount
                      @saveInCacheNewData(commentsCount)
-                   if +@model.commentscount
+                   if +@model.commentscount||data&&parseInt(data)>0
                      @$("#comments_count").removeClass("no-comments")
               )
               history.pushState({page: 'oneitem'})
