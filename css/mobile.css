@@ -711,10 +711,13 @@ iframe {
     display: inline-block;
 }
 .comments-page  .comtd5 {
-    float: right;
+    text-align: right;
     color: #540710;
+    min-width: 27px;
 }
-
+.comans, .nobo {
+    display: none;
+}
 
 .comments-page>.item-page-wrap>div>.comansd {
     padding-left: 20px;
