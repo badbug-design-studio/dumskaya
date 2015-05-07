@@ -12,8 +12,8 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
 
     onRender:()->
       setTimeout(()=>
+        @$('#send-form-wrapper').removeClass('block-fast-touch')
         isAndroid=window.cordova&&device.platform=='Android'
-        console.log isAndroid
         if(isAndroid)
           @androidFileInit()
         else
@@ -21,7 +21,6 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
         history.pushState({page: 'sendPhotos'})
       ,1000)
     androidFileInit:()->
-      @$('#file').hide()
       @$('#file-button').on("touchend", ()=>
         @takePhoneGapPicture()
       )

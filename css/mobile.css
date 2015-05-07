@@ -1086,4 +1086,6 @@ body.dragging .infinite-custom-preloader{
     -ms-flex-align: center;
     align-items: center;
 }
-
+.block-fast-touch{
+    pointer-events:none
+}

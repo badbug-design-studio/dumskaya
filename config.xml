@@ -8,6 +8,8 @@
         developers
     </author>
     <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="android-installLocation"    value="preferExternal" />
+    <!--<preference name="Orientation" value="landscape" />-->
 
     <platform name="android">
         <icon src="res/drawable/icon.png" />

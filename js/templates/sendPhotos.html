@@ -13,7 +13,7 @@
         <div class="page-content standard">
             <div class="content-block">
                 <div class="content-block-title">Отправить фотографию в редакцию</div>
-                <div class="list-block send-photo-form inset">
+                <div class="list-block send-photo-form inset block-fast-touch" id="send-form-wrapper">
                     <form action="http://dumskaya.net/mobilesendphoto//send/?app=1" enctype="multipart/form-data" method="post" id="form">
                         <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
                         <ul>
@@ -37,7 +37,7 @@
                                 <div class="item-inner">
                                     <a href="#" class="button button-fill color-green file-button" id="file-button">
                                         Выбрать фотографию
-                                        <input class="send-photo" type="file" name="pictures[]" accept="image/*" id="file" multiple />
+                                        <input class="send-photo" type="file" name="pictures[]" accept="image/*" id="file" multiple <% if(window.cordova&&device.platform=='Android'){print("style='display:none'")}%>/>
                                     </a>
                                     <!--<input class="send-photo" type="file" name="picture" accept="image/jpeg,image/png,image/gif" id="file" capture="camera">-->
                                     <!--<input class="send-photo" type="file" name="img" accept="image/jpeg,image/png,image/gif" />-->
