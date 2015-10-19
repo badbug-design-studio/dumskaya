@@ -163,8 +163,8 @@ define ['f7','_','imgCache'],
         return
       if(@progressFlag[tableName]) #saving in progress!
         return
-      @getLastCriteriaUpdate(tableName,(criteria)=>
-        @addEachItemsToDbRecursive(tableName,(data.length-1),0,data,criteria,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
+      @getLastCriteriaUpdate(tableName,(lastFreshNewsCriteriaValue)=>
+        @addEachItemsToDbRecursive(tableName,(data.length-1),0,data,lastFreshNewsCriteriaValue,onSaved) #data.length-1 - first save item index. We're saving to db from old to the latest
       )
 
     updateTableData:(tableName,id,column,value)->
@@ -185,44 +185,51 @@ define ['f7','_','imgCache'],
               sql="SELECT #{this.criteria} FROM #{tableName} order by #{this.criteria} desc limit 1"
 #              console.log(sql)
               tx.executeSql(sql, [], (tx,result)=>
-                criteriaValue=false
+                lastFreshNewsCriteriaValue=false
                 if(result.rows.length)
-#                  console.log('YESS')
                   row=result.rows.item(0)
-#                  console.log(row)
                   if(row&&row.hasOwnProperty(this.criteria))
-                    criteriaValue=row[this.criteria]
-#                    console.log(criteriaValue)
-#                    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-                if callback then  callback(criteriaValue)
+                    lastFreshNewsCriteriaValue=row[this.criteria]
+                if callback then  callback(lastFreshNewsCriteriaValue)
               ,(err)->
                 console.log(err)
               )
       )
 
-    addEachItemsToDbRecursive:(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)->
+    addEachItemsToDbRecursive:(tableName,index,savedItemsCount,itemsArray,freshNewsCriteriaValue,onSaved)->
      if index<0
        onSaved(savedItemsCount)
        return
-#     console.log('index')
-#     console.log(index)
      oneItem=itemsArray[index]
-#     console.log(oneItem)
-#     console.log(itemsArray)
-#     console.log(lastUpdate)
-#     console.log(criteria)
-#     console.log(new Date(oneItem[this.criteria]).getTime())
-#     console.log('---------------------------------')
-     if(!criteria||criteria&&new Date(oneItem[this.criteria]).getTime()>criteria) #add in bd only if new items have bigger lastupdate then the newest in db
-#       console.log('add')
+     newItemCriteriaFromServer=new Date(oneItem[this.criteria]).getTime()
+     if(!freshNewsCriteriaValue||freshNewsCriteriaValue&&newItemCriteriaFromServer>freshNewsCriteriaValue) #add in bd only if new items have bigger createTime then the newest in db
+#       console.info('add')
        savedItemsCount++
        @addOneItemToDb(tableName,oneItem,()=>
              --index;
-             @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)
+             @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,newItemCriteriaFromServer,onSaved)
        )
      else
-        --index;
-        @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,criteria,onSaved)
+        @checkIfNeedUpdate(tableName,oneItem,()=>
+#           console.warn('no add')
+           --index;
+           @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,freshNewsCriteriaValue,onSaved)
+        )
+
+    checkIfNeedUpdate:(tableName,itemFromServer,callback)=>
+#      console.warn('updating...')
+      @db.transaction((tx)=>
+        sql="UPDATE  #{tableName} SET title=?, description=?, lastUpdate=?, smallImg=?, commentscount=?,commentscounturl=?, link=?  WHERE pubDate=?"
+        tx.executeSql(sql, [itemFromServer.title,JSON.stringify(itemFromServer.description), itemFromServer.lastUpdate, itemFromServer.smallImg, itemFromServer.commentscount,itemFromServer.commentscounturl,itemFromServer.link, parseInt(itemFromServer.createdUnix+"000")]
+                (tx, resultSet) ->
+                  if (!resultSet.rowsAffected)
+                    alert('No rows affected!');
+                    return false;
+        )
+      ,@errorHandler,
+        ()->
+        if(callback) then callback()
+      );
 
     addOneItemToDb:(tableName,oneItem,callback)->
       @db.transaction((tx)=>
@@ -235,7 +242,7 @@ define ['f7','_','imgCache'],
          )
        ,@errorHandler,
        ()=>
-          console.log('set to db success!')
+#          console.log('set to db success!')
           if(callback) then callback()
        );
 
