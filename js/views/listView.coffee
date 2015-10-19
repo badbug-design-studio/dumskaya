@@ -40,7 +40,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             @cacheTabs()
             @showCurrentTab()
             @onChangeOrientation()
-            history.pushState({page: 'lists'})
+            history.pushState({page: 'lists'}, "list")
 
           handleOnClickItem:(elem,i)->
             Hammer(elem[0]).on("tap", (event) =>

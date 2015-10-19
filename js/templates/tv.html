@@ -1,8 +1,9 @@
+<div class="live-video" onTouchStart="baseApplication.router.loadPage('liveVideo',{viewParams:{swipeBackPage:true}})">Смотреть эфир</div>
 <div class="list-block media-list news-list">
     <ul>
         <% var lastIndex = items.length - 1; %>
         <%if (!items.length){%>
-            <li class="no-info">Нет информации</li>
+            <li class="no-info">Идет загрузка</li>
         <%} else {print(renderList())}%>
     </ul>
 </div>

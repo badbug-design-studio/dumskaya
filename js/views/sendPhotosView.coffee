@@ -18,7 +18,7 @@ define ['_','f7','baseView','text!templates/sendPhotos.html'],
           @androidFileInit()
         else
           @formEventsInit()
-        history.pushState({page: 'sendPhotos'})
+        history.pushState({page: 'sendPhotos'}, "sendPhotos")
       ,1000)
     androidFileInit:()->
       @$('#file-button').on("touchend", ()=>

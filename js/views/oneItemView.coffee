@@ -47,7 +47,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                    if +@model.commentscount||data&&parseInt(data)>0
                      @$("#comments_count").removeClass("no-comments")
               )
-              history.pushState({page: 'oneitem'})
+              history.pushState({page: 'oneitem'}, "oneitem")
             ,1000) #terrible wait until animation works
 
           shareLink: =>
