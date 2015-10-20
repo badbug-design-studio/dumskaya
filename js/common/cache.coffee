@@ -210,13 +210,13 @@ define ['f7','_','imgCache'],
              @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,newItemCriteriaFromServer,onSaved)
        )
      else
-        @checkIfNeedUpdate(tableName,oneItem,()=>
+        @updatePreviousRSSItems(tableName,oneItem,()=>
 #           console.warn('no add')
            --index;
            @addEachItemsToDbRecursive(tableName,index,savedItemsCount,itemsArray,freshNewsCriteriaValue,onSaved)
         )
 
-    checkIfNeedUpdate:(tableName,itemFromServer,callback)=>
+    updatePreviousRSSItems:(tableName,itemFromServer,callback)=>
 #      console.warn('updating...')
       @db.transaction((tx)=>
         sql="UPDATE  #{tableName} SET title=?, description=?, lastUpdate=?, smallImg=?, commentscount=?,commentscounturl=?, link=?  WHERE pubDate=?"

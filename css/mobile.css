@@ -747,11 +747,20 @@ iframe {
     width: 100%;
     max-width: 600px;
 }
-#contentOneItem .preloader,#commentsOneItem .preloader{
+#contentOneItem .preloader,#commentsOneItem .preloader, .live-video-preloader-wrapper .preloader{
     margin: 15px auto 0 auto;
     display: block;
     width: 30px;
     height: 30px;
+}
+#live-video-wrapper.live-video-preloader-wrapper .preloader{
+    display: block;
+}
+#live-video-wrapper .preloader{
+    display: none;
+}
+.live-video-preloader-wrapper  #live-video{
+    display: none;
 }
 .disable-touch{
     pointer-events: none;

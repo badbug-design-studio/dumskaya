@@ -20,8 +20,15 @@
     <!-- Page, data-page contains page name-->
     <div data-page="liveVideo" class="page cached">
         <!-- Scrollable page content-->
-        <div class="page-content">
-            <iframe style="margin-top: 60px;" name="dumvideo" src="<%= frameParams.src %>" width="<%= frameParams.width %>" height="<%= frameParams.height %>"></iframe>
+        <div class="page-content item-page live-video-preloader-wrapper" id="live-video-wrapper">
+            <div class="item-page-wrap">
+                          <div class="item-wrap">
+                              <div class="item-inner">
+                                  <span class="preloader"></span>
+                                    <iframe id="live-video"  name="dumvideo"  width="<%= frameParams.width %>" height="<%= frameParams.height %>"></iframe>
+                              </div>
+                          </div>
+            </div>
         </div>
 
     </div>
