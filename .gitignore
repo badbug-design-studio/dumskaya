@@ -39,3 +39,5 @@ js/common/*.js
 js/views/*.js
 js/bootstrap.js
 js/main.js
+
+node_modules/*
