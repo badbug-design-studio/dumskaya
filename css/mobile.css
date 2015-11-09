@@ -895,6 +895,7 @@ body.dragging .list-block{
 }
 body.dragging .infinite-custom-preloader{
     height: 0;
+
 }
 .custom-tabs{
     position: relative;
