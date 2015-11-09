@@ -20,10 +20,6 @@ define ['_', 'baseView','text!templates/liveVideo.html'],
         super
 
       onRender:()->
-        setTimeout(()=>
-          document.getElementById('live-video').setAttribute('src',@model.frameParams.src)
-          @$("#live-video-wrapper").removeClass('live-video-preloader-wrapper')
-        ,1200)
 
 
 

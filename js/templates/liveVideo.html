@@ -24,8 +24,13 @@
             <div class="item-page-wrap">
                           <div class="item-wrap">
                               <div class="item-inner">
-                                  <span class="preloader"></span>
-                                    <iframe id="live-video"  name="dumvideo"  width="<%= frameParams.width %>" height="<%= frameParams.height %>"></iframe>
+                                  <video width="100%" height="198" controls>
+                                      <source src="http://cdn2.live-tv.od.ua:8081/tv/dumska-abr-lq/playlist.m3u8" type='video/mp4' />
+
+                                      <source src="http://cdn2.live-tv.od.ua:8081/tv/dumska-abr-lq/playlist.m3u8" type='application/vnd.apple.mpegurl' />
+
+                                      <source src="http://cdn2.live-tv.od.ua:8081/tv/dumska-abr-lq/playlist.m3u8" type='application/x-mpegURL' />
+                                  </video>
                               </div>
                           </div>
             </div>
