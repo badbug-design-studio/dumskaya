@@ -319,6 +319,7 @@ iframe {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     display: -webkit-box;
+    margin-top: -4px;
 }
 .list-block.news-list .item-text {
     font-size: 13px;
