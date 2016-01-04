@@ -223,7 +223,7 @@ define ['f7','_','imgCache'],
         tx.executeSql(sql, [itemFromServer.title,JSON.stringify(itemFromServer.description), itemFromServer.lastUpdate, itemFromServer.smallImg, itemFromServer.commentscount,itemFromServer.commentscounturl,itemFromServer.link, parseInt(itemFromServer.createdUnix+"000")]
                 (tx, resultSet) ->
                   if (!resultSet.rowsAffected)
-                    alert('No rows affected!');
+#                    alert('No rows affected!');
                     return false;
         )
       ,@errorHandler,
@@ -237,7 +237,7 @@ define ['f7','_','imgCache'],
          tx.executeSql("INSERT OR REPLACE INTO #{tableName} (title,description,shortDescription,lastUpdate,pubDate,smallImg,commentscount,commentscounturl,comments, link,created) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [oneItem.title,JSON.stringify(oneItem.description),oneItem.shortDescription,lastUpdate,parseInt(oneItem.createdUnix+"000"),oneItem.smallImg,+oneItem.commentscount,oneItem.commentscounturl,oneItem.comments, oneItem.link,new Date().getTime()]
            (tx, resultSet) ->
              if (!resultSet.rowsAffected)
-               alert('No rows affected!');
+#               alert('No rows affected!');
                return false;
          )
        ,@errorHandler,
@@ -287,7 +287,7 @@ define ['f7','_','imgCache'],
           tx.executeSql(sql, [parseInt(commentsCount), id]
                    (tx, resultSet) ->
                      if (!resultSet.rowsAffected)
-                       alert('No rows affected!');
+#                       alert('No rows affected!');
                        return false;
                  )
         ,@errorHandler,
