@@ -8,7 +8,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           shift:0
           model:
             currentTab:1
-            name:"Думская"
+            name:"Первый городской"
             tabs:Tabs
           delay: 450
           xDown: null
@@ -32,7 +32,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           onRender:()->
             @elTabsDom = document.getElementById('tabs')
-            @triangle=  document.getElementById('triangle')
             @elBody=document.getElementById('body')
             @ptr=document.getElementById('ptr')
             @tabsLinks = @$("#change-tabs a");
@@ -89,7 +88,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           showCurrentTab:()->
             @tabTransition()
-            @changePositionTriagle()
 #            @previousDate=false
             setTimeout(()=>
                    index=@model.currentTab-1
@@ -121,14 +119,6 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           onPageBeforeAnimation:()->
             console.log("onPageBeforeAnimation")
 
-          changePositionTriagle:()->
-            shift = @model.currentTab*@tabsLinkWidth - @tabsLinkWidth/2;
-            @triangle.style.webkitTransform ="translate3d(#{shift}px, 0, 0)"
-            if(navigator.userAgent.indexOf('Windows NT ')!=-1)
-              @triangle.style.transform ="translate3d(#{shift}px, 0, 0)"
-            @tabsLinks.removeClass("active");
-            index=@model.currentTab-1
-            @$('#change-tabs a').eq(index).addClass("active");
 
           changeTab:(event)=>
            event.preventDefault()
@@ -158,6 +148,5 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
           onChangeOrientation:()->
             window.onresize = ()=>
               @tabsLinkWidth = window.innerWidth/@model.tabs.length
-              @changePositionTriagle()
 
         return ListView

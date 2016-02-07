@@ -18,7 +18,7 @@
                     <!--<div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>-->
                      <div class="item-content"  data-index="<%=index%>">
                          <div class="item-media with-img">
-                             <% if(oneItem.smallImg){ %>
+                             <% console.log(oneItem); if(oneItem.smallImg){ %>
                                 <img src="<%=oneItem.cachedSrc %>" data-index="<%=index%>" />
                              <% } else { %>
                                 <div class="no-image"></div>

@@ -62,9 +62,9 @@ define ['f7','_'],
         minutes = "0" + minutes
      time=if isShort then '' else date.getHours()+":"+ minutes
      if((day==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
-       return "Сегодня "+time
+       return "Сегодня"+time
      else if(((day+1)==@date.getDate())&&(month==@date.getMonth())&&(year==@date.getFullYear()))
-       return "Вчера "+time
+       return "Вчера"+time
      else
        return day+" "+monthName+" "+year
 

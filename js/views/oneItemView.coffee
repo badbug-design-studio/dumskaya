@@ -41,7 +41,7 @@ define ['_','baseView','app', 'text!templates/oneItem.html'],
                                 configurable:true
                      });
                      baseApplication.cache.data[@model.cacheClass][@model.index].commentscountLive=parseInt(data)
-                     @$("#comments_count").text(parseInt(data)) if data
+                     @$("#comments_count span").text(parseInt(data)) if data
                      commentsCount=data||@model.commentscount
                      @saveInCacheNewData(commentsCount)
                    if +@model.commentscount||data&&parseInt(data)>0

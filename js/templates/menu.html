@@ -1,66 +1,15 @@
-    <div class="navbar theme-bg theme-white">
-        <div class="navbar-inner">
-            <div class="left">
-            </div>
-            <!-- We have home navbar without left link-->
-            <div class="center sliding">
-                <div class="webkitbox title-time">
-                    <span class="title">Настройки</span>
-                </div>
-            </div>
-            <div class="right">
-            </div>
-        </div>
-    </div>
-    <div class="content-block">
-        <!--<div class="list-block accordion-list">-->
-            <!--<ul>-->
-                <!--<li class="accordion-item">-->
-                    <!--<a href="#" class="item-link">-->
-                        <!--<div class="item-content">-->
-                            <!--<div class="item-media language">-->
-                                <!--<i class="icon fa fa-language"></i>-->
-                            <!--</div>-->
-                            <!--<div class="item-inner">-->
-                                <!--<div class="item-title">Language</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</a>-->
-                    <!--<div class="accordion-item-content">-->
-                        <!--<div class="content-block">-->
-                            <!--<label class="label-radio item-content">-->
-                                <!--&lt;!&ndash; Checked by default &ndash;&gt;-->
-                                <!--<input type="radio" name="my-radio" value="ukr" checked="checked">-->
-                                <!--<div class="item-inner">-->
-                                    <!--<div class="item-title">Українська</div>-->
-                                <!--</div>-->
-                            <!--</label>-->
-                            <!--<label class="label-radio item-content">-->
-                                <!--&lt;!&ndash; Checked by default &ndash;&gt;-->
-                                <!--<input type="radio" name="my-radio" value="ru">-->
-                                <!--<div class="item-inner">-->
-                                    <!--<div class="item-title">Русский</div>-->
-                                <!--</div>-->
-                            <!--</label>-->
-                            <!--<label class="label-radio item-content">-->
-                                <!--&lt;!&ndash; Checked by default &ndash;&gt;-->
-                                <!--<input type="radio" name="my-radio" value="en">-->
-                                <!--<div class="item-inner">-->
-                                    <!--<div class="item-title">English</div>-->
-                                <!--</div>-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <div class="content-block-title">О Приложении</div>
+<div class="content-block" xmlns="http://www.w3.org/1999/html">
+        <div class="logo"></div>
         <div class="content-block tablet-inset">
             <div class="content-block-inner about-block">
-                <p class="">© 2008-<% print(new Date().getFullYear()); %> Думская.net</p>
-                <p class="">Редакция сайта: </br>(048) 795-45-45</p>
-                <p class="">Телеканал Думская ТВ: </br>(048) 788-00-75</p>
-                <p class=""> E-mail редакции:  </br><a href="mailto:info@dumskaya.net" class="external">info@dumskaya.net</a></br><a href="mailto:info@dumskaya.tv" class="external">info@dumskaya.tv</a></p>
+                <ul class="menu-list" id="change-tabs">
+                    <li ontouchstart="baseApplication.router.loadPage('liveVideo',{viewParams:{swipeBackPage:true}});  javascript:baseApplication.f7app.closePanel();">Прямой эфир</li>
+                    <li>Новости</li>
+                    <li>Блоги</li>
+                    <li>ТВ</li>
+                    <li>Спорт</li>
+                    <li onTouchStart="baseApplication.router.loadPage('sendPhotos',{model:{},viewParams:{swipeBackPage:true}}); javascript:baseApplication.f7app.closePanel();">Отправить фото </br> в редакцию</li>
+                </ul>
             </div>
         </div>
     </div>
