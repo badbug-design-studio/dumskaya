@@ -33,13 +33,13 @@
                 <div class="overflow">
                     <div class="custom-tabs" id="tabs">
                         <div id="ptr">
-                                                    <span class="genericon genericon-next"></span>
-                                                    <div class="loading">
-                                                        <span id="l1"></span>
-                                                        <span id="l2"></span>
-                                                        <span id="l3"></span>
-                                                    </div>
-                                                </div>
+                            <span class="genericon genericon-next"></span>
+                            <div class="loading">
+                                <span id="l1"></span>
+                                <span id="l2"></span>
+                                <span id="l3"></span>
+                            </div>
+                        </div>
                         <% _.each(tabs,function(tab,i){ %>
                         <%var active=(i+1)==currentTab?'active':'';%>
                         <div id="<%=tab.id%>" class="custom-tab">

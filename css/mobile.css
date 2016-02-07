@@ -927,8 +927,8 @@ iframe {
     text-align: center;
     height: 35px;
     position: relative;
-    transform: translate3d(0,-35px,0);
-    -webkit-transform: translate3d(0,-35px,0);
+    transform: translate3d(0,-57px,0);
+    -webkit-transform: translate3d(0,-57px,0);
 }
 .youtube-play{
     width: 300px;
@@ -982,7 +982,7 @@ body.dragging .list-block{
     margin: 0;
 }
 .list-block .list-wrap.visited{
-    opacity: 0.75;
+    opacity: 1;
 }
 body.dragging .infinite-custom-preloader{
     height: 0;
@@ -993,7 +993,7 @@ body.dragging .infinite-custom-preloader{
     margin-top: 89px;
 }
 .custom-tabs .list-block{
-    margin: 0 0 35px 0;
+    margin: 0 0 60px 0;
     overflow: hidden;
 
 }
@@ -1211,4 +1211,78 @@ body.dragging .infinite-custom-preloader{
 }
 .content-block-title {
     color: #000;
+}
+.news-list ul .list-wrap[data-index="0"] {
+    margin: 0 0 5px 0;
+    padding: 0;
+    border: none;
+}
+.news-list ul .list-wrap[data-index="0"]:before {
+    content: "";
+    height: 70px;
+    width: 100%;
+    background: #2977c8;
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: 0;
+}
+.news-list ul .list-wrap[data-index="0"]:after {
+    content: "";
+    height: 30px;
+    width: 100%;
+    background: #003471;
+    display: block;
+    left: 0;
+    top: 70px;
+    position: absolute;
+    z-index: 0;
+}
+
+.news-list ul .list-wrap[data-index="0"] .item-content {
+    position: relative;
+    padding: 0 15px;
+    z-index: 1;
+}
+.news-list ul .list-wrap[data-index="0"] .item-media.with-img {
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+}
+.news-list ul .list-wrap[data-index="0"] .item-media.with-img img {
+    width: 100%;
+    height: auto;
+}
+.news-list ul .list-wrap[data-index="0"] .item-inner {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: auto;
+}
+
+.news-list ul .list-wrap[data-index="0"] .item-title-row {
+    position: absolute;
+    bottom: 5px;
+    margin: 0;
+    background: rgba(0,52,113, 0.5);
+}
+.news-list ul .list-wrap[data-index="0"] .item-title-row .item-title {
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 17px;
+    font-weight: normal;
+}
+.news-list ul .list-wrap[data-index="0"] .item-after {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: #fff;
+    background: #003471;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 3px 5px;
 }

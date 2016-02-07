@@ -9,16 +9,16 @@
                      <li class="list-line"></li>
                      <%previousDate=oneItem.pubDate%>
                 <%}%>
-                <li class="list-wrap without-bg">
+                <li class="list-wrap without-bg none">
                     <div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>
                 </li>
              <% } %>
                 <%if (!previousDate){previousDate=oneItem.pubDate}%>
-                <li class="list-wrap <%if(oneItem.visited) print('visited')%>" >
+                <li class="list-wrap <%if(oneItem.visited) print('visited')%>" data-index="<%=index%>">
                     <!--<div class="content-block-title"><%=baseApplication.helpers.getItemDate(oneItem.pubDate,true)%></div>-->
                      <div class="item-content"  data-index="<%=index%>">
                          <div class="item-media with-img">
-                             <% console.log(oneItem); if(oneItem.smallImg){ %>
+                             <% if(oneItem.smallImg){ %>
                                 <img src="<%=oneItem.cachedSrc %>" data-index="<%=index%>" />
                              <% } else { %>
                                 <div class="no-image"></div>
