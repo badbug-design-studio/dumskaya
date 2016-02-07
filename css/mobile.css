@@ -462,6 +462,9 @@ iframe {
     margin: 15px 0;
 }
 
+.list-wrap .content-block-title {
+    margin: 35px 15px 10px 0;
+}
 .list-wrap:first-child .content-block-title {
     margin: 20px 15px 10px 0;
 }
