@@ -519,8 +519,11 @@ iframe {
     box-sizing: border-box;
     padding-left: 20px;
 }
-.settings-page .content-block ul li:hover {
+.settings-page .content-block ul li.selected {
     background: #2b78c8;
+}
+.content-block ul li.selected{
+    pointer-events:none;
 }
 .content-block {
     /*margin: 35px 0;*/

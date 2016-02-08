@@ -66,9 +66,9 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
               tabDom=@$('#'+tab.id)
               @handleOnClickItem(tabDom,i)
               baseApplication.helpers.pullToRefreshSwipe.call(self, tabDom[0],i,@updateCurrentTab,()=>
-                  @swipeLeft()
-                ,()=>
-                  @swipeRight()
+                console.log()
+              ,()=>
+                console.log()
               )
               @domTabsObj.push(tabDom)
             )
@@ -92,6 +92,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
             setTimeout(()=>
                    index=@model.currentTab-1
                    tab=@model.tabs[index]
+                   @$('#currentTabName').html(tab.name)
                    if tab
                      tab.updateItems.apply(@)
                    else
@@ -105,7 +106,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 #            @previousDate=false
             domEl=@domTabsObj[index]
             tab.updateItems.call(@,()=>
-              domEl[0].style.transitionDuration='300ms'
+              domEl[0].style.transitionDuration='0ms'
               domEl[0].style.webkitTransform="translate3d(0,0,0)"
               setTimeout(()=>
                domEl[0].style.transitionDuration='0ms'
@@ -122,9 +123,8 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           changeTab:(event)=>
            event.preventDefault()
-           newTabIndex= event.target.getAttribute('href').substr(1)
-           console.log newTabIndex
-           @resetTabPosition()
+           newTabIndex= @$(event.target).data('index')
+#           @resetTabPosition()
            if(@model.currentTab!=+newTabIndex)
              @model.currentTab=  +newTabIndex
              @showCurrentTab()
@@ -132,7 +132,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
 
           tabTransition:()->
             @shift=(@model.currentTab-1)*100;
-            @elTabsDom.style.transitionDuration='300ms'
+            @elTabsDom.style.transitionDuration='0ms'
             @elTabsDom.style.webkitTransform ="translate3d(-#{@shift}%, 0, 0)"
             @ptr.style.webkitTransform ="translate3d(#{@shift}%, 0, 0)"
             if(navigator.userAgent.indexOf('Windows NT ')!=-1)

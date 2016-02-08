@@ -4,10 +4,10 @@
             <div class="content-block-inner about-block">
                 <ul class="menu-list" id="change-tabs">
                     <li ontouchstart="baseApplication.router.loadPage('liveVideo',{viewParams:{swipeBackPage:true}});  javascript:baseApplication.f7app.closePanel();">Прямой эфир</li>
-                    <li>Новости</li>
-                    <li>Блоги</li>
-                    <li>ТВ</li>
-                    <li>Спорт</li>
+                    <li class="selected" data-index="1">Новости</li>
+                    <li data-index="2">Блоги</li>
+                    <li data-index="3">ТВ</li>
+                    <li data-index="4">Спорт</li>
                     <li onTouchStart="baseApplication.router.loadPage('sendPhotos',{model:{},viewParams:{swipeBackPage:true}}); javascript:baseApplication.f7app.closePanel();">Отправить фото </br> в редакцию</li>
                 </ul>
             </div>
