@@ -47,8 +47,8 @@ define ['f7','_'],
     getMonthName:(index,isShort)->
       prop='name'
       prop='shortName' if isShort
-      if typeof index=="undefined"
-        return ""
+      if typeof index != "number"
+        return
       return @months[index][prop]||""
 
     getItemDate:(dateString,isShort)->

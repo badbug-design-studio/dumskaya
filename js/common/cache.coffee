@@ -224,6 +224,7 @@ define ['f7','_','imgCache'],
                 (tx, resultSet) ->
                   if (!resultSet.rowsAffected)
 #                    alert('No rows affected!');
+                    console.error('No rows affected!');
                     return false;
         )
       ,@errorHandler,
@@ -238,6 +239,7 @@ define ['f7','_','imgCache'],
            (tx, resultSet) ->
              if (!resultSet.rowsAffected)
 #               alert('No rows affected!');
+               console.error('No rows affected!');
                return false;
          )
        ,@errorHandler,
@@ -288,6 +290,7 @@ define ['f7','_','imgCache'],
                    (tx, resultSet) ->
                      if (!resultSet.rowsAffected)
 #                       alert('No rows affected!');
+                       console.error('No rows affected!');
                        return false;
                  )
         ,@errorHandler,
