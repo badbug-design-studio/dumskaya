@@ -23,7 +23,8 @@ module.exports = function(grunt) {
                 {expand: false, src: ['js/libs/require.js'], dest: 'build/'},
                 {expand: false, src: ['js/templates/**'], dest: 'build/'},
                 {expand: false, src: ['js/views/**.js'], dest: 'build/'},
-                {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'}
+                {expand: false, flatten: true, src: ['index.html'], dest: 'build/index.html',filter: 'isFile'},
+                {expand: false, flatten: true, src: ['ga.js'], dest: 'build/ga.js',filter: 'isFile'}
             ]
        },
        copyToDir:{
