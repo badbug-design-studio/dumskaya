@@ -97,7 +97,7 @@ define ['_','baseView','app','text!templates/lists.html','mainTabs', 'hammer'],
                    if tab
                      tab.updateItems.apply(@)
                    else
-                     alert('tab is not defined')
+                     console.error('tab is not defined')
             ,@delay)
 
           updateCurrentTab:(index)=>
