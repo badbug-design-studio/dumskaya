@@ -1272,10 +1272,12 @@ body.dragging .infinite-custom-preloader{
     bottom: 5px;
     margin: 0;
     background: rgba(0,52,113, 0.5);
+    left: 0;
+    right: 0;
+    padding: 5px 15px;
 }
 .news-list ul .list-wrap[data-index="0"] .item-title-row .item-title {
     color: #fff;
-    padding: 5px 15px;
     font-size: 17px;
     font-weight: normal;
 }
