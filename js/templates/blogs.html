@@ -11,4 +11,5 @@
     <div class="preloader infinite"></div>
 </div>
 <%}%>
-<%_gaq.push(['_trackPageview', 'Dumskaya mobile app: blogs page'])%>
+<%   try{
+    ga_storage._trackPageview('Dumskaya mobile app: blogs page');}catch(e){}%>
